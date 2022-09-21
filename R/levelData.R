@@ -1,21 +1,13 @@
-#' Apply levels to values in variables according external file
-#' 
+#' @title Agregar facturacio.
+#' @description Apply levels to values in variables according external file
 #' @param data data.frame
-#'
 #' @param taulavariables excel file with description field
-#'
 #' @param fulla sheet in excel file with description field
-#'
 #' @param camp_etiqueta field with value and label in excel file
-#'
 #' @return Data.frame or tibble with leveled variables
-#'
-#' @import dplyr
-#'
 #' @export
-
-##  Retorna Data frame etiquetat en funció d'un conductor ##
-## dataframe dades, conductor_variables     
+#' @import dplyr
+#' @importFrom dplyr "%>%"    
 levelData<-function(data,taulavariables,fulla,camp_etiqueta){
   
   # data=dades

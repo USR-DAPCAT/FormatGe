@@ -1,34 +1,20 @@
-#' To generate a formula with variables according external file
-#
-#' Open a external file and became a formula in text format: "y ~ x1 + x2 + x3"
-#
+#' @title Formula Text.
+#' @description Retorna Data.frame or tibble with labeled variables
 #' @param x String indicator of field from external file with indicator the position of of formula (1,2....). 
-
 #' @param y string indicator of response (default "."): ". ~ x1 +x2 + x3 "
-#'
 #' @param eliminar character that indicate if some variable has to be clean
-#' 
 #' @param a character that indicate if some variable has to be add in the first position
-#'
 #' @param taulavariables excel file with number indicator field (discrete number 1:Inf)
-#' 
 #' @param dt data.frame
-#'
 #' @return Data.frame or tibble with labeled variables
-#'
-#' @import dplyr
-#'
+#' @export
+#' @importFrom dplyr "%>%"
 #' @examples
 #' 
 #' Hmisc::label(iris)
-#' 
 #' conductor_iris<-data.frame(camp=names(iris),formu=c(1,2,3,4,5))
-#' 
 #' formula_iris<-formula_text("formu",taulavariables = conductor_iris)
-#' 
 #' formula_iris
-#' 
-#' @export
 
 formula_text=function(x="taula1",y="resposta",eliminar=c("IDP"), a="",taulavariables,dt=NA) {
   

@@ -1,18 +1,13 @@
-#' Label variables according external file
-#
-#' Open a excel file and apply label to variables frome data base
-#
+#' @title  Label variables according external file
+#' @description Retorna 
 #' @param data data.frame
-#'
 #' @param taulavariables excel file with description field
-#'
 #' @param camp_descripcio Field with label in excel file
-#'
 #' @return Data.frame or tibble with labeled variables
-#'
-#' @import dplyr
-#'
+#' @export
+#' @importFrom dplyr "%>%"
 #' @examples
+#'
 #' Hmisc::label(iris)
 #' 
 #' labels_data<-data.frame(camp=names(iris),
@@ -22,14 +17,9 @@
 #'             "amplada del sepal",
 #'             "Especies varies"))
 #' labels_data
-#'                         
 #' iris_labeled<-labelData(iris,labels_data,"description")
-#' 
 #' Hmisc::label(iris)
-#'             
 #' Hmisc::label(iris_labeled)
-#'
-#' @export
 
 labelData<-function(data,taulavariables,camp_descripcio) {
 

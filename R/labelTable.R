@@ -1,24 +1,12 @@
-#' Exchange label for name of variable according external file
-#
-#' Open a excel file and apply label to variables from table
-#
+#' @title labelTable
+#' @description Exchange label for name of variable according external file
 #' @param data data.frame
-#'
 #' @param taulavariables excel file with description field
-#'
 #' @param camp_descripcio Field with label in excel file
-#' 
 #' @param camp character name field
-#'
 #' @return Data.frame or tibble with labeled variables
-#'
-#' @import dplyr
-#' 
-#' @import rlang
-#'
 #' @export
-#' 
-
+#' @importFrom dplyr "%>%"
 labelTable<-function(data,taulavariables,camp_descripcio,camp="camp") {
 
   # data=T3.MI
