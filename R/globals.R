@@ -1,2 +1,2 @@
 #' @import utils
-utils::globalVariables(c("valor",":=",".","value","camp","conductor_iris","..."))
+utils::globalVariables(c("valor",":=",".","value","camp","conductor_iris","...","fitxer"))
