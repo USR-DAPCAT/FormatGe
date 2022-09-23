@@ -326,3 +326,186 @@ recodificar2<-function(dt=dt_plana,
   # fi de la funció!
 }  
 
+
+# Recodificar rangs de valors que cauen fora interva a missings  -----------------
+recode_to_missings<-function(dt=dades,taulavariables=conductor_variables,rang="rang_valid", data_long=F,...) {
+  
+  # dt,taulavariables = conductor_variables,rang="rang_valid")
+  # dt=dt
+  # taulavariables=conductor_variables
+  # rang="rang_valid"
+  # data_long=F
+  
+  # Llegir dades
+  variables<-read_conductor(taulavariables,
+                            col_types = "text",...) %>% tidyr::as_tibble()
+  
+  temp<-variables %>% select(c("camp","rang_valid")) %>% filter(!is.na(rang_valid))
+  
+  # Elimino () i [ ]
+  temp <- temp %>% mutate(rang_valid=stringr::str_replace_all(rang_valid,"\\(",""),
+                          rang_valid=stringr::str_replace_all(rang_valid,"\\)",""),
+                          rang_valid=stringr::str_replace_all(rang_valid,"\\[",""),
+                          rang_valid=stringr::str_replace_all(rang_valid,"\\]","")
+  )
+  
+  # Separo limit inferior i limit superior
+  rangs<-temp$rang_valid %>% stringr::str_split_fixed("-",2) %>% as_tibble()
+  temp<-temp %>% cbind(rangs)
+  
+  # Inicio blucle
+  num_recodes<-length(temp[,1])
+  # Assignar a primer element (A partir d'aquÃ? fer un for)
+  
+  if (data_long==F) {
+    
+    for (i in 1:num_recodes) {
+      # i<-15
+      camp<-temp[i,]$camp
+      linf<-temp[i,]$V1 %>% as.numeric()
+      lsup<-temp[i,]$V2%>% as.numeric()
+      
+      # Recode missings fora de rang 
+      dt<-dt %>% mutate_at(camp,~ifelse(.<linf | .>lsup,NA_real_,.))
+    }
+    
+  }
+  
+  # En cas de taula long 
+  if (data_long) {
+    
+    for (i in 1:num_recodes) {
+      # i<-1
+      camp<-temp[i,]$camp
+      linf<-temp[i,]$V1 %>% as.numeric()
+      lsup<-temp[i,]$V2%>% as.numeric()
+      # recodifico/filtro en missings els que estan fora de rang 
+      dt<-dt %>% 
+        mutate(valor=ifelse((valor<linf | valor>lsup) & cod==camp ,NA,valor)) %>% 
+        filter(!is.na(valor))
+    }
+  }
+  
+  dt
+  
+}
+
+# Genera dummis (0/1) a partir d'una variable del data frame   -----------------
+# Retorna la variable 
+
+make_dummies <- function(dt,variable, prefix = '') {
+  
+  # dt<-dades
+  # variable<-"grup"
+  # prefix<-"grup_"
+  
+  v<-dt %>% dplyr::pull(variable)
+  s <- sort(unique(v))
+  d <- outer(v, s, function(v, s) 1L * (v == s))
+  colnames(d) <- paste0(prefix, s)
+  d<-d %>% as_tibble()
+  
+  dt<-cbind(dt,d)
+}
+
+
+
+#  Comptar_valors(dt, vector_variables, valor)  ##################
+# en funció de vector de variables, i un valor("Yes")
+
+comptar_valors<-function(dt=dadesevents,variables=c("EV.TER.ARTER_PERIF","EV.TER.AVC"),valor="Yes"){
+  
+  # dt=dades
+  # variables=c("EV1_ULCERES", "EV2_ULCERES", "EV3_ULCERES", "EV4_ULCERES")
+  # valor="Yes"
+  
+  # Concateno valors
+  pepito<-paste0("paste0(",paste0(variables,collapse = ","),")")
+  
+  dt<-dt %>% 
+    mutate_("combi_vars"=pepito) %>% 
+    mutate(
+      num_valors=str_count(combi_vars,valor)) %>% 
+    dplyr::select(-combi_vars)
+  
+}
+
+
+
+missings_to_level<-function(dades,variable="popes") {
+  
+  # dades=temp
+  # variable="val_CKDEPI.cat5"
+  
+  # Subset columnes de d
+  d_temp<-dades %>% select_("temp"=variable)
+  
+  # names(dt)[names(dt)==variable]<-"variable_temporal"
+  # dt<-dt %>% rename_("variable_temporal_provisional"=variable)
+  
+  levels_nous <- levels(d_temp$temp)
+  levels_nous[length(levels_nous) + 1] <- "None"
+  
+  d_temp$temp<-factor(d_temp$temp,levels = levels_nous)
+  d_temp$temp[is.na(d_temp$temp)]<-"None"
+  
+  #
+  dades <- dades %>% select_(paste0("-",variable))
+  
+  # Canviar el nom al origen 
+  names(d_temp)[names(d_temp) == "temp"] <- variable
+  
+  dades <-cbind(dades,d_temp)
+  
+}
+
+# Generar intervals de valors amb variables continues
+
+# 1. Llegir variables d'ajust + variables que entren en joc (O tota la base de dades)
+# 2. Categoritzar variables en grups (g quantils a escollir)
+# 3. Assignar valor missing i factoritzar-ho tot 
+
+# Opcio: es pot generar recodificacions predefinides
+# Per defecte sobrescriu per shauria de poder generar variables noves
+
+generar_intervals<-function(dt=dades,vars="ajust4",taulavariables=conductor,missing="Unkown",g=3) {
+  
+  # dt=dades
+  # vars="ajust4"
+  # taulavariables=conductor
+  # missing="Unkown"
+  # g=3
+  
+  # Actualitzar variables amb dades de quantis a categoritzar (Missings com a categoria)
+  if (missing(vars)) {
+    vars_fix<-names(dt)
+    vars_fix_num<-dt %>% select_if(is.numeric) %>% names()
+  } else {
+    vars_fix<-extreure.variables("ajust4", taulavariables)
+    vars_fix_num<-dt %>% select(vars_fix) %>% select_if(is.numeric) %>% names()
+  }
+  
+  # Generar intervals en categoriques 
+  dt_temp<-dt %>% 
+    mutate_at(vars_fix_num, ~cut2(.,g=g))
+  
+  # # Falta opcio de recode en funcio de criteris manuals
+  # dt %>% select(vars_fix_num) %>% recodificar2(taulavariables = conductor,criteris = "recode",prefix="popetes",missings = F) %>% 
+  #   select(ends_with(".popetes")) %>% rename()
+  
+  # Reemplaçar missings si cal
+  if (!missing(missing)) {
+    dt_temp<- dt_temp %>% mutate_at(vars_fix,~replace(as.character(.), is.na(.), missing)) %>% 
+      mutate_at(vars_fix,as.factor)}
+  # Etiquetar
+  dt_temp %>% etiquetar(taulavariables = taulavariables) 
+  
+}
+
+
+#      FI GENERAR FUNCIONs  
+
+
+
+
+
