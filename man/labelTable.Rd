@@ -2,8 +2,7 @@
 % Please edit documentation in R/labelTable.R
 \name{labelTable}
 \alias{labelTable}
-\title{Exchange label for name of variable according external file
-Open a excel file and apply label to variables from table}
+\title{labelTable}
 \usage{
 labelTable(data, taulavariables, camp_descripcio, camp = "camp")
 }
@@ -21,5 +20,4 @@ Data.frame or tibble with labeled variables
 }
 \description{
 Exchange label for name of variable according external file
-Open a excel file and apply label to variables from table
 }

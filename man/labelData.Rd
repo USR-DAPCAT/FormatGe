@@ -2,8 +2,7 @@
 % Please edit documentation in R/labelData.R
 \name{labelData}
 \alias{labelData}
-\title{Label variables according external file
-Open a excel file and apply label to variables frome data base}
+\title{Label variables according external file}
 \usage{
 labelData(data, taulavariables, camp_descripcio)
 }
@@ -18,10 +17,10 @@ labelData(data, taulavariables, camp_descripcio)
 Data.frame or tibble with labeled variables
 }
 \description{
-Label variables according external file
-Open a excel file and apply label to variables frome data base
+Retorna
 }
 \examples{
+
 Hmisc::label(iris)
 
 labels_data<-data.frame(camp=names(iris),
@@ -31,11 +30,7 @@ description=c("Longitud de sepal",
             "amplada del sepal",
             "Especies varies"))
 labels_data
-                        
 iris_labeled<-labelData(iris,labels_data,"description")
-
 Hmisc::label(iris)
-            
 Hmisc::label(iris_labeled)
-
 }

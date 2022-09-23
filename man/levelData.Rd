@@ -2,7 +2,7 @@
 % Please edit documentation in R/levelData.R
 \name{levelData}
 \alias{levelData}
-\title{Apply levels to values in variables according external file}
+\title{Agregar facturacio.}
 \usage{
 levelData(data, taulavariables, fulla, camp_etiqueta)
 }

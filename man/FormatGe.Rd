@@ -5,8 +5,8 @@
 \alias{FormatGe}
 \title{FormatGe Package}
 \description{
-FormatGe contain functions to format and generate variables to data table through structural external file (Conductor)
+FormatGe conté funcions per formatar i generar variables a la taula de dades mitjancant un sitema de CONDUCTORS.
 }
 \author{
-Jordi Real, Ray Puig \email{jordireal@gmail.com}
+Jordi Real, Ray Puig \email{-jordireal@gmail.com-}
 }

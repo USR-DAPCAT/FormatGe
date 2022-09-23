@@ -2,13 +2,18 @@
 % Please edit documentation in R/read_conductor.R
 \name{read_conductor}
 \alias{read_conductor}
-\title{Read conductor file different formats txt o rds o xls xlsx o data_frame tibble}
+\title{read_conductor}
 \usage{
-read_conductor(fitxer)
+read_conductor(fitxer, ...)
 }
 \arguments{
-\item{fitxer}{Character as a file name and path or data.frame}
+\item{fitxer}{fitxer que el convertirem a tibble.}
+
+\item{...}{altres funcions}
+}
+\value{
+una taula tibble
 }
 \description{
-Read conductor file different formats txt o rds o xls xlsx o data_frame tibble
+Llegir el fitxer conductor de diferents formats txt o rds o xls xlsx o data_frame tibble
 }
