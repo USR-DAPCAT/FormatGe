@@ -1,4 +1,4 @@
-#' @title Formula Text.
+#' @title Formula FormatGe.
 #' @description Retorna Data.frame or tibble with labeled variables
 #' @param x String indicator of field from external file with indicator the position of of formula (1,2....). 
 #' @param y string indicator of response (default "."): ". ~ x1 +x2 + x3 "
