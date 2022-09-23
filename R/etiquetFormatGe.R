@@ -1,7 +1,12 @@
-#
-#  Etiquetar les variables de les dades      #####
-###
-
+#' @title Etiquetar
+#' @description Etiquetar les variables de les dades 
+#' @param d               xxx
+#' @param taulavariables  xxx
+#' @param camp_descripcio xxx
+#' @param ... altres funcions
+#' @return Etiquetar
+#' @export etiquetar
+#' @importFrom dplyr "%>%"
 etiquetar<-function(d=dadestotal,taulavariables="variables_R.xls",camp_descripcio="descripcio",...) {
   
   # d=dades
@@ -35,12 +40,29 @@ etiquetar<-function(d=dadestotal,taulavariables="variables_R.xls",camp_descripci
 
 
 
-#  Etiquetar valors        ------------------------------------------
 
-##    Retorna Data frame etiquetat en funció d'un conductor ##
-## dataframe dades, conductor_variables     
-etiquetar_valors<-function(dt=dades,variables_factors=conductor_variables,fulla="etiquetes",
-                           camp_etiqueta="etiqueta",missings=F, new_vars=F,sufix=".2") {
+
+
+#' @title Etiquetar valors
+#' @description Retorna Data frame etiquetat en funció d'un conductor
+#' @param dt                 xxx
+#' @param variables_factors  xxx
+#' @param fulla              xxx
+#' @param camp_etiqueta      xxx
+#' @param missings           xxx
+#' @param new_vars           xxx
+#' @param sufix              xxx 
+#' @param ... altres funcions
+#' @return dataframe dades, conductor_variables
+#' @export etiquetar_valors
+#' @importFrom dplyr "%>%"
+etiquetar_valors<-function(dt=dades,
+                           variables_factors=conductor_variables,
+                           fulla="etiquetes",
+                           camp_etiqueta="etiqueta",
+                           missings=F, 
+                           new_vars=F,
+                           sufix=".2") {
   
   # dt=dades
   # variables_factors=conductor_variables
@@ -114,11 +136,22 @@ etiquetar_valors<-function(dt=dades,variables_factors=conductor_variables,fulla=
 
 
 
-#  Etiquetar Taula   ------------------
-
-# Llanço taula i camp que vull etiquetar i cambia nom del camp en funció d'etiqueta
-
-etiquetar_taula<-function(taula=resumtotal,camp="variable",taulavariables="variables_R.xls",camp_descripcio="descripcio",idcamp="camp") {
+#' @title etiquetar_taula
+#' @description etiquetar_taula
+#' @param taula             xxx
+#' @param camp              xxx
+#' @param taulavariables    xxx
+#' @param camp_descripcioa  xxx
+#' @param idcamp            xxx
+#' @param ... altres funcions
+#' @return taula
+#' @export etiquetar_taula
+#' @importFrom dplyr "%>%"
+etiquetar_taula<-function(taula=resumtotal,
+                          camp="variable",
+                          taulavariables="variables_R.xls",
+                          camp_descripcio="descripcio",
+                          idcamp="camp") {
   
   # taula=dt_temp
   # taulavariables=conductor
@@ -149,9 +182,21 @@ etiquetar_taula<-function(taula=resumtotal,camp="variable",taulavariables="varia
 }
 
 
-# Cambia nom dels elements d'un vector 
-
-etiquetar_vector<-function(vector=vector_variables,camp="camp",taulavariables="variables_R.xls",camp_descripcio="descripcio",...) {
+ 
+#' @title etiquetar_vector
+#' @description etiquetar_vector
+#' @param vector            xxx
+#' @param camp              xxx
+#' @param taulavariables    xxx
+#' @param camp_descripcioa  xxx
+#' @param ... altres funcions
+#' @return etiquetar_vector
+#' @export etiquetar_vector
+#' @importFrom dplyr "%>%"
+etiquetar_vector<-function(vector=vector_variables,
+                           camp="camp",
+                           taulavariables="variables_R.xls",
+                           camp_descripcio="descripcio",...) {
   
   # vector=v1
   # taulavariables=conductor_variables
@@ -179,8 +224,13 @@ etiquetar_vector<-function(vector=vector_variables,camp="camp",taulavariables="v
 
 
 
-# Retorna llista nomenada amb els mateixos noms dels objectes que inclou
-# PEr exemple fer una llista de data frames que tinguin el mateix noms que el contenen
+
+#' @title llistaNomenada
+#' @description Retorna llista nomenada amb els mateixos noms dels objectes que inclou
+#' @param ... altres funcions
+#' @return llistaNomenada
+#' @export llistaNomenada
+#' @importFrom dplyr "%>%"
 llistaNomenada <- function(...) {
   v1 <- as.list(substitute(list(...)))[-1L]  
   inputs <- list(...)

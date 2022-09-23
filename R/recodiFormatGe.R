@@ -1,5 +1,14 @@
-#  Recodifico EN FUNCIÓ DE de llista de camps  -------------------
-### RETORNA DADES AMB RECODIFICACIÓ 
+#' @title recodificar
+#' @description Recodifico EN FUNCIÓ DE de llista de camps
+#' @param dt              xxx
+#' @param taulavariables  xxx
+#' @param criteris        xxx
+#' @param missings        xxx
+#' @param prefix          xxx
+#' @param ... altres funcions
+#' @return RETORNA DADES AMB RECODIFICACIÓ 
+#' @export recodificar
+#' @importFrom dplyr "%>%"
 recodificar<-function(dt=dades,taulavariables="VARIABLES.xls",criteris="recode1",missings=F,prefix=NA,...){
   
   # dt=iris
@@ -67,11 +76,20 @@ recodificar<-function(dt=dades,taulavariables="VARIABLES.xls",criteris="recode1"
 
 
 
-#08.05.2020
 
-#############################################################################################
-##R E C O D I F I C A C I Ó: # Recodificacions automatiques!
 
+#' @title recodificar
+#' @description Recodifico EN FUNCIÓ DE de llista de camps
+#' @param dt              xxx
+#' @param taulavariables  xxx
+#' @param criteris        xxx
+#' @param missings        xxx
+#' @param prefix          xxx
+#' @param criteris_labels xxx
+#' @param ... altres funcions
+#' @return RETORNA DADES AMB RECODIFICACIÓ 
+#' @export recodificar2
+#' @importFrom dplyr "%>%"
 recodificar2<-function(dt=dt_plana,
                        taulavariables =conductor,
                        criteris = "recode",
@@ -327,7 +345,16 @@ recodificar2<-function(dt=dt_plana,
 }  
 
 
-# Recodificar rangs de valors que cauen fora interva a missings  -----------------
+#' @title recodificar missings
+#' @description Recodificar rangs de valors que cauen fora interva a missingss
+#' @param dt              xxx
+#' @param taulavariables  xxx
+#' @param rang            xxx
+#' @param data_long       xxx
+#' @param ... altres funcions
+#' @return RETORNA DADES AMB RECODIFICACIÓ 
+#' @export recode_to_missings
+#' @importFrom dplyr "%>%"
 recode_to_missings<-function(dt=dades,taulavariables=conductor_variables,rang="rang_valid", data_long=F,...) {
   
   # dt,taulavariables = conductor_variables,rang="rang_valid")
@@ -390,9 +417,18 @@ recode_to_missings<-function(dt=dades,taulavariables=conductor_variables,rang="r
   
 }
 
-# Genera dummis (0/1) a partir d'una variable del data frame   -----------------
-# Retorna la variable 
 
+
+#' @title Genera dummis
+#' @description Recodificar Genera dummis (0/1) a partir d'una variable del data frame
+#' @param dt              xxx
+#' @param variable        xxx
+#' @param prefix          xxx
+#' @param data_long       xxx
+#' @param ... altres funcions
+#' @return  Retorna dummis
+#' @export  make_dummies
+#' @importFrom dplyr "%>%"
 make_dummies <- function(dt,variable, prefix = '') {
   
   # dt<-dades
@@ -409,10 +445,14 @@ make_dummies <- function(dt,variable, prefix = '') {
 }
 
 
-
-#  Comptar_valors(dt, vector_variables, valor)  ##################
-# en funció de vector de variables, i un valor("Yes")
-
+#' @title  Comptar_valors
+#' @description Recodificar  Comptar_valors
+#' @param dt              xxx
+#' @param variables       xxx
+#' @param valor           xxx
+#' @return  Retorna valors
+#' @export comptar_valors
+#' @importFrom dplyr "%>%"
 comptar_valors<-function(dt=dadesevents,variables=c("EV.TER.ARTER_PERIF","EV.TER.AVC"),valor="Yes"){
   
   # dt=dades
@@ -431,7 +471,13 @@ comptar_valors<-function(dt=dadesevents,variables=c("EV.TER.ARTER_PERIF","EV.TER
 }
 
 
-
+#' @title  missings_to_level
+#' @description Recodificar  missings_to_level
+#' @param dades          xxx
+#' @param variable       xxx
+#' @return  Retorna missings
+#' @export missings_to_level
+#' @importFrom dplyr "%>%"
 missings_to_level<-function(dades,variable="popes") {
   
   # dades=temp
@@ -459,15 +505,19 @@ missings_to_level<-function(dades,variable="popes") {
   
 }
 
-# Generar intervals de valors amb variables continues
+# 
 
-# 1. Llegir variables d'ajust + variables que entren en joc (O tota la base de dades)
-# 2. Categoritzar variables en grups (g quantils a escollir)
-# 3. Assignar valor missing i factoritzar-ho tot 
 
-# Opcio: es pot generar recodificacions predefinides
-# Per defecte sobrescriu per shauria de poder generar variables noves
-
+#' @title  Generar intervals
+#' @description Recodificar Generar intervals de valors amb variables continues
+#' @param dt                    xxx
+#' @param vars                  xxx
+#' @param taulavariables        xxx 
+#' @param missing               xxx 
+#' @param g                     xxx 
+#' @return  Retorna intervals
+#' @export  generar_intervals
+#' @importFrom dplyr "%>%"
 generar_intervals<-function(dt=dades,vars="ajust4",taulavariables=conductor,missing="Unkown",g=3) {
   
   # dt=dades
@@ -502,8 +552,6 @@ generar_intervals<-function(dt=dades,vars="ajust4",taulavariables=conductor,miss
   
 }
 
-
-#      FI GENERAR FUNCIONs  
 
 
 

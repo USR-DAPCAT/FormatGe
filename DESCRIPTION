@@ -22,4 +22,6 @@ Imports:
       stringr,
       foreign,
       tibble,
-      data.table
+      data.table,
+      lubridate,
+      purrr

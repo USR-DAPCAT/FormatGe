@@ -49,12 +49,23 @@ formula_text<-function(x="taula1",y="resposta",eliminar=c("IDP"), a="",taulavari
 
 
 
-# Retorna formula per table1::table1 segons llista de varibles
-# Columna de variables amb que vull generar la formula 
-
-# x= variables / y = grups (opcional) / eliminar /  a = Avaluar (primera posició no inclosa en condutor)
-
-formula_table1<-function(x="taula1",y="",eliminar=c("IDP"), a="",taulavariables='variables.xls',dt=NA,...) {
+#' @title formula_table1.
+#' @description Retorna formula per table1::table1 segons llista de varibles
+#' @param x String indicator of field from external file with indicator the position of of formula (1,2....). 
+#' @param y string indicator of response (default "."): ". ~ x1 +x2 + x3 "
+#' @param eliminar character that indicate if some variable has to be clean
+#' @param a character that indicate if some variable has to be add in the first position
+#' @param taulavariables excel file with number indicator field (discrete number 1:Inf)
+#' @param dt data.frame
+#' @return formula_table1
+#' @export formula_table1 
+#' @importFrom dplyr "%>%"
+formula_table1<-function(x="taula1",
+                         y="",
+                         eliminar=c("IDP"), 
+                         a="",
+                         taulavariables='variables.xls',
+                         dt=NA,...) {
   
   # x="taula_basal"
   # y="Species"

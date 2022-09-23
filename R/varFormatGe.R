@@ -1,6 +1,14 @@
-#  Selector de Variables      -------
-#
-selectorvariables=function(taula="table1",taulavariables="variables_R.xls",dt=dadestotal) {
+#' @title selectorvariables
+#' @description selectorvariables 
+#' @param  taula           xxx
+#' @param  taulavariables  xxx
+#' @param  dt              xxx
+#' @return variables
+#' @export selectorvariables
+#' @importFrom dplyr "%>%"
+selectorvariables<-function(taula="table1",
+                            taulavariables="variables_R.xls",
+                            dt=dadestotal) {
   
   # taula = "dades_imputacio2" 
   # taulavariables="variables_v2.xls"
@@ -22,9 +30,21 @@ selectorvariables=function(taula="table1",taulavariables="variables_R.xls",dt=da
   
 }
 
-#  Extreure.Variables: Selector de variables TAULA DE--------
-#
-extreure.variables=function(taula="table1",taulavariables="variables_R.xls",variable_camp="camp",dt=NA,...) {
+
+#' @title Extreure.Variables
+#' @description Extreure.Variables: Selector de variables TAULA 
+#' @param  taula           xxx
+#' @param  taulavariables  xxx
+#' @param  variable_camp   xxx
+#' @param  dt              xxx 
+#' @param ... altres funcions
+#' @return extreure variable
+#' @export extreure.variables
+#' @importFrom dplyr "%>%"
+extreure.variables=function(taula="table1",
+                            taulavariables="variables_R.xls",
+                            variable_camp="camp",
+                            dt=NA,...) {
   
   # taula="dates_excel"
   # taulavariables = conductor_variables
@@ -52,11 +72,22 @@ extreure.variables=function(taula="table1",taulavariables="variables_R.xls",vari
 }
 
 
-## Funcio per canviar noms de variables del data frame
 
-## Entra data frame i cambia nom de variable
-
-canvi_noms_variables<-function(dt=dt_temp,variable="ajust2", nou_nom="descripcio",conductor=conductor_variables,...) {
+#' @title Funcio per canviar noms de variables del data frame
+#' @description Funcio per canviar noms de variables del data frame
+#' @param  dt              xxx
+#' @param  variable        xxx
+#' @param  nou_nom         xxx
+#' @param  conductor       xxx 
+#' @param ...              altres funcions
+#' @return extreure variable
+#' @export extreure.variables
+#' @importFrom dplyr "%>%"
+canvi_noms_variables<-function(dt=dt_temp,
+                               variable="ajust2", 
+                               nou_nom="descripcio",
+                               conductor=conductor_variables,
+                               ...) {
   
   # dt=dades_TAI
   # variable="camp"
@@ -81,11 +112,4 @@ canvi_noms_variables<-function(dt=dt_temp,variable="ajust2", nou_nom="descripcio
   
 }
 
-# Retorna taula plana a partir d'un fitxer amb la data index, el fitxer del cataleg i el fitxer de parametres
-# Els parametres contenen els seguens camps: 
-#     fitxer (nom) ,
-#     domini (refereix al tipus d'agregació i codis del cataleg
-#     Finestra1 Finestra2 (Periode)
-#     camp (Quin camp s'utilitza com agregació)
-#     prefix (o suffix de les variables generades)
-#     funcio (Funció d'agregacio en variables )
+
