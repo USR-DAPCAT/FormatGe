@@ -14,6 +14,7 @@ labelTable<-function(data,taulavariables,camp_descripcio,camp="camp") {
   # camp="variables_taula"
   # camp_descripcio="descripcio"
 
+  
   # Llegir etiquetes i variables a analitzar ####
   # variables <- readxl::read_excel(taulavariables) %>% tidyr::as_tibble()
   variables <- read_conductor(taulavariables)

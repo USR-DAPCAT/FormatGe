@@ -23,7 +23,7 @@
 
 labelData<-function(data,taulavariables,camp_descripcio) {
 
-  # data=iris
+  # data=iris#
   # taulavariables = label_data
   # camp_descripcio="description"
   

@@ -6,6 +6,7 @@
 #' @export
 #' @importFrom dplyr "%>%"
 
+
 read_conductor<-function(fitxer,...) {
   # fitxer<-here::here(fitxer_cataleg)
   # Si el fitxer es un data_frame saltar

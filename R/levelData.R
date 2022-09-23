@@ -14,7 +14,7 @@ levelData<-function(data,taulavariables,fulla,camp_etiqueta){
   # taulavariables=conductor_variables
   # fulla="etiquetes_valors"
   # camp_etiqueta="etiqueta"
-  
+  #
   # Llegir conductor#
   taulavariables<-readxl::read_excel(taulavariables,sheet=fulla) %>% tidyr::as_tibble()
   

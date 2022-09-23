@@ -4,7 +4,7 @@
 #'
 #' @docType package
 #'
-#' @author Jordi Real, Ray Puig \email{-jordireal@gmail.com-}
+#' @author Jordi Real,Ray Puig \email{-jordireal@gmail.com-}
 #'
 #' @name FormatGe
 #'
