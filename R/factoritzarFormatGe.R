@@ -1,9 +1,11 @@
-
-
-
-# factoritzar vector ------------
-# factoritzar una llista de variables donades unes dades i un vector de variables 
-
+#' @title factoritzar FormatGe.
+#' @description factoritzar una llista de variables donades unes dades i un vector de variables 
+#' @param dt xxxxxxxxxx 
+#' @param variables xxxxxxxxxx 
+#' @return llista de variables
+#' @export factoritzar 
+#' @importFrom dplyr "%>%"
+#
 factoritzar<-function(dt=dades,variables=c("grup","situacio")) {
   
   # dt=dades
@@ -18,8 +20,15 @@ factoritzar<-function(dt=dades,variables=c("grup","situacio")) {
 }
 
 
-#  factoritzar NO.Yes  ------------------
-##########      factoritzar NO.Yes llista de variables "factor" situades a la taulavariables camp=factor
+#' @title factoritzar FormatGe.
+#' @description factoritzar NO.Yes llista de variables "factor" situades a la taulavariables camp=factor 
+#' @param dt xxxxxxxxxx 
+#' @param columna xxxxxxxxxx 
+#' @param taulavariables xxxxxxxxxx
+#' @return NO.YES  
+#' @export factoritzar.NO.YES 
+#' @importFrom dplyr "%>%"
+#
 factoritzar.NO.YES<-function(dt=dadesDF,columna="factor",taulavariables="variables_FELIPE.xls",...){
   
   # dt=dades
@@ -41,6 +50,16 @@ factoritzar.NO.YES<-function(dt=dadesDF,columna="factor",taulavariables="variabl
   
 }
 
+
+#' @title factoritzar FormatGe.
+#' @description factoritzar NO.SI llista de variables "factor" situades a la taulavariables camp=factor 
+#' @param dt xxxxxxxxxx 
+#' @param columna xxxxxxxxxx 
+#' @param taulavariables xxxxxxxxxx
+#' @return NO.YES  
+#' @export factoritzar.NO.SI
+#' @importFrom dplyr "%>%"
+#
 factoritzar.NO.SI<-function(dt=dadesDF,columna="factor",taulavariables="variables_FELIPE.xls"){
   
   #dt=dt_plana
