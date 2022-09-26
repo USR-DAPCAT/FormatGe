@@ -1,5 +1,10 @@
-#  DATA RANDOM ENTRE DUES DATES (dataini i datafi) ---------------
-
+#' @title  DATA RANDOM ENTRE DUES DATES (dataini i datafi)
+#' @description selectorvariables 
+#' @param  dataini           xxx
+#' @param  datafi            xxx
+#' @return variables
+#' @export data.random
+#' @importFrom dplyr "%>%"
 data.random <- function(dataini=20120101, datafi=20121231) {
   
   # dataini=20120101
@@ -23,9 +28,15 @@ data.to.string<-function(data) {
   
 }
 
-#  Data R Lubridate a partir de data UTC  -----------
-# Dades i x=Variable o vector de variables
 
+
+#' @title   Data R Lubridate a partir de data UTC
+#' @description selectorvariables 
+#' @param  x            xxx
+#' @param  dt            xxx
+#' @return variables
+#' @export dataUTC_to_Rdata
+#' @importFrom dplyr "%>%"
 dataUTC_to_Rdata<-function(x,dt) {
   
   # dt<-dades
@@ -59,6 +70,11 @@ dataUTC_to_Rdata<-function(x,dt) {
   dt
   
 }
+
+
+
+###acabar-ho!!!
+
 
 # Funcio que converteix data caracter ("37712") a date ymd () "2003-04-01"
 data_convert_text<-function(x){
