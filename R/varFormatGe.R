@@ -8,7 +8,7 @@
 #' @importFrom dplyr "%>%"
 selectorvariables<-function(taula="table1",
                             taulavariables="variables_R.xls",
-                            dt=dadestotal) {
+                            dt="dadestotal") {
   
   # taula = "dades_imputacio2" 
   # taulavariables="variables_v2.xls"
@@ -59,8 +59,8 @@ extreure.variables=function(taula="table1",
   
   # Verificar si columnes del conductor estan en dt
   if (is.data.frame(dt)) {
-    vars_not_dt<-variables %>% anti_join(names(dt) %>% as_tibble(camp=value),by=c("camp"="value")) %>% pull("camp")
-    variables<-variables %>% semi_join(names(dt) %>% as_tibble(camp=value),by=c("camp"="value"))
+    vars_not_dt<-variables %>% dplyr::anti_join(names(dt) %>% tibble::as_tibble(camp=value),by=c("camp"="value")) %>% dplyr::pull("camp")
+    variables<-variables %>%dplyr:: semi_join(names(dt) %>%tibble:: as_tibble(camp=value),by=c("camp"="value"))
     paste0("Variables not in data: ",paste0(vars_not_dt,collapse = ", "), ". So, it is not included in formula") %>% warning()
   }
   
@@ -83,10 +83,10 @@ extreure.variables=function(taula="table1",
 #' @return extreure variable
 #' @export extreure.variables
 #' @importFrom dplyr "%>%"
-canvi_noms_variables<-function(dt=dt_temp,
+canvi_noms_variables<-function(dt="dt_temp",
                                variable="ajust2", 
                                nou_nom="descripcio",
-                               conductor=conductor_variables,
+                               conductor="conductor_variables",
                                ...) {
   
   # dt=dades_TAI
@@ -108,7 +108,7 @@ canvi_noms_variables<-function(dt=dt_temp,
   
   # Canviar noms per etiqueta descripcio
   # setnames(dt, old = vars, new = etiquetes_noves)
-  dt<-dt %>% rename_at(vars(vars), ~ etiquetes_noves)
+  dt<-dt %>%dplyr:: rename_at(vars(vars), ~ etiquetes_noves)
   
 }
 

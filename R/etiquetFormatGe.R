@@ -7,7 +7,7 @@
 #' @return Etiquetar
 #' @export etiquetar
 #' @importFrom dplyr "%>%"
-etiquetar<-function(d=dadestotal,taulavariables="variables_R.xls",camp_descripcio="descripcio",...) {
+etiquetar<-function(d="dadestotal",taulavariables="variables_R.xls",camp_descripcio="descripcio",...) {
   
   # d=dades
   # taulavariables = conductor
@@ -15,7 +15,7 @@ etiquetar<-function(d=dadestotal,taulavariables="variables_R.xls",camp_descripci
   
   
   # Symbol
-  camp_descripcio<-sym(camp_descripcio)
+  camp_descripcio<-dplyr::sym(camp_descripcio)
   
   #  Llegir etiquetes i variables a analitzar ####
   variables<-read_conductor(taulavariables,...)
@@ -26,8 +26,8 @@ etiquetar<-function(d=dadestotal,taulavariables="variables_R.xls",camp_descripci
     dplyr::select(camp,descripcio=!!camp_descripcio) # selecciono els camps necessaris (camp i descripcio) i amb etiqueta
   
   # Els que no tenen etiqueta assignar el mateix nom del camp (Eliminats previament)
-  variables<-variables %>% mutate(descripcio=as.character(descripcio))
-  variables<-variables %>% mutate(descripcio=ifelse(descripcio=="0" | is.na(descripcio),camp,descripcio)) 
+  variables<-variables %>% dplyr::mutate(descripcio=as.character(descripcio))
+  variables<-variables %>% dplyr::mutate(descripcio=ifelse(descripcio=="0" | is.na(descripcio),camp,descripcio)) 
   
   # Etiquetar variables         
   seleccio<-variables
@@ -52,12 +52,11 @@ etiquetar<-function(d=dadestotal,taulavariables="variables_R.xls",camp_descripci
 #' @param missings           xxx
 #' @param new_vars           xxx
 #' @param sufix              xxx 
-#' @param ... altres funcions
 #' @return dataframe dades, conductor_variables
 #' @export etiquetar_valors
 #' @importFrom dplyr "%>%"
-etiquetar_valors<-function(dt=dades,
-                           variables_factors=conductor_variables,
+etiquetar_valors<-function(dt="dades",
+                           variables_factors="conductor_variables",
                            fulla="etiquetes",
                            camp_etiqueta="etiqueta",
                            missings=F, 
@@ -75,10 +74,10 @@ etiquetar_valors<-function(dt=dades,
   
   # Llegir conductor#
   variables_factors<-read_conductor(variables_factors,sheet=fulla) %>% 
-    filter(!is.na(!!sym(camp_etiqueta))) # Selecciono només variables segons existeix camp etiqueta
+    dplyr::filter(!is.na(!!dplyr::sym(camp_etiqueta))) # Selecciono només variables segons existeix camp etiqueta
   
   # Verifico si alguna variable ja existeix en la base de dades i si existeix comunico que es sobrescriura
-  vars_generades<-variables_factors %>% distinct(camp) %>% mutate(camp=paste0(camp,sufix)) %>% pull(camp)
+  vars_generades<-variables_factors %>% dplyr::distinct(camp) %>% dplyr::mutate(camp=paste0(camp,sufix)) %>%dplyr:: pull(camp)
   
   # Llisto la llista de variables que es generara si no sobrescriu
   if (new_vars) message(paste0("Variables generated: ",  paste0(vars_generades,collapse = ", ")))
@@ -88,10 +87,10 @@ etiquetar_valors<-function(dt=dades,
   if (vars_sobresescrites %>% length()>0) {message(paste0("Variables overwritten: ",paste0(vars_sobresescrites,collapse = ", ")))}
   
   # Les elimino de la base de dades abans de sobreescriurles si nova variable es creada
-  if (new_vars) dt<-dt %>% select(-vars_sobresescrites)  #Tinc dubtes si cal eliminar-la
+  if (new_vars) dt<-dt %>% dplyr::select(-vars_sobresescrites)  #Tinc dubtes si cal eliminar-la
   
   # Split
-  camp_etiqueta<-sym(camp_etiqueta)
+  camp_etiqueta<-dplyr::sym(camp_etiqueta)
   
   k<-variables_factors%>%dplyr::select(camp, valor,!!camp_etiqueta)
   pepe<-k %>% base::split(list(.$camp))
@@ -101,7 +100,7 @@ etiquetar_valors<-function(dt=dades,
   num_vars<-length(noms_variables)
   
   # Elimina espais en blanc de les variables factor / character (treu nivells) nomes variables nomenades
-  # dt<-dt %>% mutate_at(noms_variables,~ifelse(is.factor(.),trimws(.),.))
+  # dt<-dt %>% dplyr::mutate_at(noms_variables,~ifelse(is.factor(.),trimws(.),.))
   
   dt_original<-dt # Faig copia original
   
@@ -109,11 +108,11 @@ etiquetar_valors<-function(dt=dades,
     # i<-1
     if (noms_variables[i] %in% colnames(dt)) {
       
-      etiquetes_valors<-pepe[[i]] %>% pull(!!camp_etiqueta)
+      etiquetes_valors<-pepe[[i]] %>% dplyr::pull(!!camp_etiqueta)
       
       # Transformar a caracter i treure espais en blanc
       if (is.factor(dt[[noms_variables[i]]])) {
-        dt<-dt %>% mutate_at(noms_variables[i],~stringr::str_trim(as.factor(.)))}
+        dt<-dt %>% dplyr::mutate_at(noms_variables[i],~stringr::str_trim(as.factor(.)))}
       
       dt[noms_variables[i]]<-lapply(dt[noms_variables[i]],
                                     function(y) factor(y,levels=pepe[[i]]$valor,labels=etiquetes_valors))
@@ -126,8 +125,8 @@ etiquetar_valors<-function(dt=dades,
   # Si new_vars, selecciono renombro i fusiono a dt original 
   
   if (new_vars) {
-    dt_recode<-dt %>% as_tibble() %>% select(noms_variables) %>% rename_at(noms_variables,function(x) paste0(x,sufix)) 
-    dt<-cbind(dt_original,dt_recode) %>% as_tibble()}
+    dt_recode<-dt %>%tibble:: as_tibble() %>% dplyr::select(noms_variables) %>% dplyr::rename_at(noms_variables,function(x) paste0(x,sufix)) 
+    dt<-cbind(dt_original,dt_recode) %>% tibble::as_tibble()}
   
   dt
   
@@ -141,13 +140,12 @@ etiquetar_valors<-function(dt=dades,
 #' @param taula             xxx
 #' @param camp              xxx
 #' @param taulavariables    xxx
-#' @param camp_descripcioa  xxx
+#' @param camp_descripcio   xxx
 #' @param idcamp            xxx
-#' @param ... altres funcions
 #' @return taula
 #' @export etiquetar_taula
 #' @importFrom dplyr "%>%"
-etiquetar_taula<-function(taula=resumtotal,
+etiquetar_taula<-function(taula="resumtotal",
                           camp="variable",
                           taulavariables="variables_R.xls",
                           camp_descripcio="descripcio",
@@ -161,21 +159,21 @@ etiquetar_taula<-function(taula=resumtotal,
   
   ####  Llegir etiquetes i variables a analitzar ####
   variables <- read_conductor(taulavariables)
-  camp_sym<-sym(camp)
-  idcamp_sym<-sym(camp_sym)
+  camp_sym<-dplyr::sym(camp)
+  idcamp_sym<-dplyr::sym(camp_sym)
   
   # Canviar nom de camp de variables al de la taula 
   # colnames(variables)[colnames(variables)=="camp"] <- camp
   colnames(variables)[colnames(variables)==idcamp] <- camp
   
   # Canviar arguments per ser evaluats
-  camp_eval<-sym(camp)
-  camp_descripcio_eval<-sym(camp_descripcio)
+  camp_eval<-dplyr::sym(camp)
+  camp_descripcio_eval<-dplyr::sym(camp_descripcio)
   # Canviar el format de la taula 
-  taula %>% left_join(dplyr::select(variables,c(!!camp_eval,camp_descripcio)),by=quo_name(camp_eval)) %>% 
+  taula %>% dplyr::left_join(dplyr::select(variables,c(!!camp_eval,camp_descripcio)),by=dplyr::quo_name(camp_eval)) %>% 
     dplyr::mutate(!!camp_descripcio_eval:=ifelse(is.na(!!camp_descripcio_eval),!!camp_eval,!!camp_descripcio_eval)) %>% 
     dplyr::rename(descripcio:=!!camp_descripcio) %>% 
-    mutate(!!camp_eval:=descripcio) %>% 
+    dplyr::mutate(!!camp_eval:=descripcio) %>% 
     dplyr::select(-descripcio)
   
   
@@ -188,12 +186,12 @@ etiquetar_taula<-function(taula=resumtotal,
 #' @param vector            xxx
 #' @param camp              xxx
 #' @param taulavariables    xxx
-#' @param camp_descripcioa  xxx
+#' @param camp_descripcio  xxx
 #' @param ... altres funcions
 #' @return etiquetar_vector
 #' @export etiquetar_vector
 #' @importFrom dplyr "%>%"
-etiquetar_vector<-function(vector=vector_variables,
+etiquetar_vector<-function(vector="vector_variables",
                            camp="camp",
                            taulavariables="variables_R.xls",
                            camp_descripcio="descripcio",...) {
@@ -205,19 +203,19 @@ etiquetar_vector<-function(vector=vector_variables,
   
   ####  Llegir etiquetes i variables a analitzar ####
   variables <- read_conductor(taulavariables,...) 
-  camp_sym<-sym(camp)
+  camp_sym<-dplyr::sym(camp)
   variables<-variables %>% dplyr::filter(!is.na(!!camp_sym))
   
   # Canviar nom de camp de variables al de la taula 
   colnames(variables)[colnames(variables)=="camp"] <- camp
   # Canviar arguments per ser evaluats
-  camp_eval<-sym(camp)
-  camp_descripcio_eval<-sym(camp_descripcio)
+  camp_eval<-dplyr::sym(camp)
+  camp_descripcio_eval<-dplyr::sym(camp_descripcio)
   
-  vectorX<-vector %>% tibble(value=.)  # Convertir vector a tibble i filtrar
-  variablesX<-variables %>% semi_join(vectorX, by=c("camp"="value")) # Filtrar només variables vector
+  vectorX<-vector %>%tibble:: tibble(value=.)  # Convertir vector a tibble i filtrar
+  variablesX<-variables %>% dplyr::semi_join(vectorX, by=c("camp"="value")) # Filtrar només variables vector
   
-  stats::setNames(object=pull(variablesX,!!camp_descripcio_eval),variablesX$camp)
+  stats::setNames(object=dplyr::pull(variablesX,!!camp_descripcio_eval),variablesX$camp)
   
 }
 

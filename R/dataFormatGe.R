@@ -1,5 +1,5 @@
 #' @title  DATA RANDOM ENTRE DUES DATES (dataini i datafi)
-#' @description selectorvariables 
+#' @description DATA RANDOM ENTRE DUES DATES 
 #' @param  dataini           xxx
 #' @param  datafi            xxx
 #' @return variables
@@ -12,27 +12,32 @@ data.random <- function(dataini=20120101, datafi=20121231) {
   
   dataini <- as.POSIXct(lubridate::ymd(dataini))
   datafi <- as.POSIXct(lubridate::ymd(datafi))
-  temps <- as.numeric(difftime(datafi,dataini,unit="sec"))
+  temps <- as.numeric(difftime(datafi,dataini,units ="secs"))
   
   # Genera Data sumant temps random a dataini
-  rt <- dataini + runif(1, 0, temps)
+  rt <- dataini + stats::runif(1, 0, temps)
 }
 
-#  RETORNA UNA DATA A STRING  ------------------
 
+#' @title   RETORNA UNA DATA A STRING
+#' @description RETORNA UNA DATA A STRING 
+#' @param  data           xxx
+#' @return RETORNA UNA DATA A STRING 
+#' @export data.to.string
+#' @importFrom dplyr "%>%"
 data.to.string<-function(data) {
   
-  data.string=paste0(year(data),
-                     str_pad(lubridate::month(data),2,"left","0"),
-                     str_pad(lubridate::day(data),2,"left","0"))
+  data.string=paste0(lubridate::year(data),
+                     stringr::str_pad(lubridate::month(data),2,"left","0"),
+                     stringr::str_pad(lubridate::day(data),2,"left","0"))
   
 }
 
 
 
 #' @title   Data R Lubridate a partir de data UTC
-#' @description selectorvariables 
-#' @param  x            xxx
+#' @description Data R Lubridate a partir de data UTC 
+#' @param  x             xxx
 #' @param  dt            xxx
 #' @return variables
 #' @export dataUTC_to_Rdata
@@ -73,40 +78,58 @@ dataUTC_to_Rdata<-function(x,dt) {
 
 
 
-###acabar-ho!!!
 
-
-# Funcio que converteix data caracter ("37712") a date ymd () "2003-04-01"
+#' @title   converteix data caracter ("37712") a date ymd
+#' @description Funcio que converteix data caracter ("37712") a date ymd () "2003-04-01"
+#' @param  x            xxx
+#' @return variables
+#' @export data_convert_text
+#' @importFrom dplyr "%>%"
 data_convert_text<-function(x){
   x<-as.Date(as.numeric(x), origin = "1899-12-30") %>% 
     lubridate::ymd()}
 
-# Funcio que converteix de numeric (15784) a Date "2013-03-20"
+ 
+
+#' @title   Funcio que converteix de numeric (15784) a Date
+#' @description Funcio que converteix de numeric (15784) a Date "2013-03-20" 
+#' @param  x            xxx
+#' @return data
+#' @export data_convert_numeric
+#' @importFrom dplyr "%>%"
 data_convert_numeric<-function(x){ x<-as.Date(x, origin = "1970-01-01")}
 
-# Funcio que converteix UTC data a date ymd
+
+
+#' @title   Funcio que converteix UTC data a date ymd
+#' @description Funcio que converteix UTC data a date ymd 
+#' @param  x            xxx
+#' @return data
+#' @export data_convert_UTC
+#' @importFrom dplyr "%>%"
 data_convert_UTC<-function(x){
   x<-format(as.POSIXct(x, origin='1970-01-01'), format='%Y/%m/%d')
   x<-lubridate::ymd(x)}
 
 
-#  CONVERTEIX FORMAT TEXT A DATA                     -------------
-#
-#          Format YYYYMMDD (Format text -> data)          
-# Input : dades, conductorvariables, campdata (com a indicadora (0/1))
-
-convertir_dates<-function(d=dadestotal,taulavariables="variables_R.xls",campdata="dates")
+#' @title   CONVERTEIX FORMAT TEXT A DATA 
+#' @description Format YYYYMMDD (Format text -> data)   
+#' @param  d                         xxx
+#' @param  taulavariables            xxx
+#' @param  campdata                  xxx
+#' @return data
+#' @export convertir_dates
+#' @importFrom dplyr "%>%"
+convertir_dates<-function(d="dadestotal",taulavariables="variables_R.xls",campdata="dates")
   
 {
   ####  Llegir etiquetes i variables a analitzar  ##
   variables <- readxl::read_excel(taulavariables) %>% tidyr::as_tibble() 
+  
   # variables[is.na(variables)]<- 0
-  campdata_sym<-sym(campdata)
+  campdata_sym<-dplyr::sym(campdata)
   variables<-variables %>% dplyr::filter(!is.na(!!campdata_sym))
   
-  
-  #
-  #
   # etiquetar variables         
   seleccio<-variables
   camp<- as.vector(seleccio$camp) #
@@ -124,10 +147,14 @@ convertir_dates<-function(d=dadestotal,taulavariables="variables_R.xls",campdata
 }
 
 
-#  Passa data de SPSS a Rdata  ----------------------------
 
 # 13481683200 --> 2010-01-01
-
+#' @title   Passa data de SPSS a Rdata
+#' @description Passa data de SPSS a Rdata 
+#' @param  x            xxx
+#' @return data
+#' @export dataUTC_to_Rdata
+#' @importFrom dplyr "%>%"
 dataSPSS_to_Rdata <- function(x) {
   y<-as.Date(x/86400, origin = "1582-10-14") %>% 
     lubridate::ymd() }

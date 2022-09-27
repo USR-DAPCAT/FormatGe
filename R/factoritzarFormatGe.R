@@ -6,7 +6,7 @@
 #' @export factoritzar 
 #' @importFrom dplyr "%>%"
 #
-factoritzar<-function(dt=dades,variables=c("grup","situacio")) {
+factoritzar<-function(dt="dades",variables=c("grup","situacio")) {
   
   # dt=dades
   # variables=c("grup","situacio","kk","sexe")
@@ -16,7 +16,7 @@ factoritzar<-function(dt=dades,variables=c("grup","situacio")) {
   
   factoritzacio<-function(x) {if (!is.factor(x)) x<-as.factor(x) else x<-x}
   
-  dt<-dt %>% mutate_at(variables,factoritzacio)
+  dt<-dt %>% dplyr::mutate_at(variables,factoritzacio)
 }
 
 
@@ -25,11 +25,12 @@ factoritzar<-function(dt=dades,variables=c("grup","situacio")) {
 #' @param dt xxxxxxxxxx 
 #' @param columna xxxxxxxxxx 
 #' @param taulavariables xxxxxxxxxx
+#' @param ... altres funcions
 #' @return NO.YES  
 #' @export factoritzar.NO.YES 
 #' @importFrom dplyr "%>%"
 #
-factoritzar.NO.YES<-function(dt=dadesDF,columna="factor",taulavariables="variables_FELIPE.xls",...){
+factoritzar.NO.YES<-function(dt="dadesDF",columna="factor",taulavariables="variables_FELIPE.xls",...){
   
   # dt=dades
   # columna="factor.YESNO"
@@ -60,7 +61,7 @@ factoritzar.NO.YES<-function(dt=dadesDF,columna="factor",taulavariables="variabl
 #' @export factoritzar.NO.SI
 #' @importFrom dplyr "%>%"
 #
-factoritzar.NO.SI<-function(dt=dadesDF,columna="factor",taulavariables="variables_FELIPE.xls"){
+factoritzar.NO.SI<-function(dt="dadesDF",columna="factor",taulavariables="variables_FELIPE.xls"){
   
   #dt=dt_plana
   #columna="factor"
