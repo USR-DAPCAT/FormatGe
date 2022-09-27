@@ -5,7 +5,20 @@
 #' @return llista de variables
 #' @export factoritzar 
 #' @importFrom dplyr "%>%"
-#
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#'
+#' idp=c(1,2,3,4,5)
+#' sexe=c("H","H","D","D","H")
+#' dnaix=c(19200801,19250201,19370401,19340701,19400101)
+#' entrada=c(20060101,20060101,20060101,20060101,20060101)
+#' sortida=c(20181029,20090102,20181231,20150911,20181231)
+#' situacio=c("A","A","A","D","T")
+#' dt_poblacio<-data.frame(idp,sexe,dnaix,situacio,entrada,sortida)
+
 factoritzar<-function(dt="dades",variables=c("grup","situacio")) {
   
   # dt=dades
@@ -29,7 +42,12 @@ factoritzar<-function(dt="dades",variables=c("grup","situacio")) {
 #' @return NO.YES  
 #' @export factoritzar.NO.YES 
 #' @importFrom dplyr "%>%"
-#
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+
 factoritzar.NO.YES<-function(dt="dadesDF",columna="factor",taulavariables="variables_FELIPE.xls",...){
   
   # dt=dades
@@ -60,7 +78,12 @@ factoritzar.NO.YES<-function(dt="dadesDF",columna="factor",taulavariables="varia
 #' @return NO.YES  
 #' @export factoritzar.NO.SI
 #' @importFrom dplyr "%>%"
-#
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+
 factoritzar.NO.SI<-function(dt="dadesDF",columna="factor",taulavariables="variables_FELIPE.xls"){
   
   #dt=dt_plana

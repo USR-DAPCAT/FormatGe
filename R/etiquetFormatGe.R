@@ -7,6 +7,12 @@
 #' @return Etiquetar
 #' @export etiquetar
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#' dt_diagnostics
 etiquetar<-function(d="dadestotal",taulavariables="variables_R.xls",camp_descripcio="descripcio",...) {
   
   # d=dades
@@ -55,6 +61,11 @@ etiquetar<-function(d="dadestotal",taulavariables="variables_R.xls",camp_descrip
 #' @return dataframe dades, conductor_variables
 #' @export etiquetar_valors
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 etiquetar_valors<-function(dt="dades",
                            variables_factors="conductor_variables",
                            fulla="etiquetes",
@@ -145,6 +156,11 @@ etiquetar_valors<-function(dt="dades",
 #' @return taula
 #' @export etiquetar_taula
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 etiquetar_taula<-function(taula="resumtotal",
                           camp="variable",
                           taulavariables="variables_R.xls",
@@ -191,6 +207,11 @@ etiquetar_taula<-function(taula="resumtotal",
 #' @return etiquetar_vector
 #' @export etiquetar_vector
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 etiquetar_vector<-function(vector="vector_variables",
                            camp="camp",
                            taulavariables="variables_R.xls",
@@ -229,6 +250,11 @@ etiquetar_vector<-function(vector="vector_variables",
 #' @return llistaNomenada
 #' @export llistaNomenada
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 llistaNomenada <- function(...) {
   v1 <- as.list(substitute(list(...)))[-1L]  
   inputs <- list(...)

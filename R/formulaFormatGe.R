@@ -61,6 +61,11 @@ formula_text<-function(x="taula1",y="resposta",eliminar=c("IDP"), a="",taulavari
 #' @return formula_table1
 #' @export formula_table1 
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 formula_table1<-function(x="taula1",
                          y="",
                          eliminar=c("IDP"), 
@@ -105,8 +110,21 @@ formula_table1<-function(x="taula1",
 }
 
 
-#  formula_vector(vector,y, vector caracter a elimina) ##########
 
+#' @title  formula_vector.
+#' @description (vector,y, vector caracter a elimina)
+#' @param vector xxxxxx 
+#' @param y xxxxx
+#' @param logit xxxxxx
+#' @param eliminar xxxxxx
+#' @return formula_vector
+#' @export formula_vector 
+#' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 formula_vector<-function(vector=c("sex","age","age"),y="y",logit=F,eliminar=NA){
   
   vector<-vector [!vector %in% eliminar] %>% unique()

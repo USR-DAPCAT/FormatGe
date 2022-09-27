@@ -4,6 +4,11 @@
 #' @return NETEJA NOMS DE VARIABLES 
 #' @export netejar.noms.variables
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 netejar.noms.variables<-function(dt="LIPOS_EORTEGA"){
   
   paco<-names(dt) %>% 
@@ -36,6 +41,11 @@ netejar.noms.variables<-function(dt="LIPOS_EORTEGA"){
 #' @return dt sense accents 
 #' @export netejar.accents.variables
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 netejar.accents.variables <- function(dt="LIPOS_EORTEGA"){
   paco<-names(dt) %>%
     iconv(to="ASCII//TRANSLIT")
@@ -50,6 +60,11 @@ netejar.accents.variables <- function(dt="LIPOS_EORTEGA"){
 #' @return dt  elimina espais
 #' @export netejar_espais
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 netejar_espais<-function(dt="dades") {
   # dt=dt_total
   dt<-dt %>% dplyr::mutate_if(is.character,stringr::str_trim)

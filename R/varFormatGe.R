@@ -6,6 +6,12 @@
 #' @return variables
 #' @export selectorvariables
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#' 
 selectorvariables<-function(taula="table1",
                             taulavariables="variables_R.xls",
                             dt="dadestotal") {
@@ -41,6 +47,12 @@ selectorvariables<-function(taula="table1",
 #' @return extreure variable
 #' @export extreure.variables
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#' 
 extreure.variables=function(taula="table1",
                             taulavariables="variables_R.xls",
                             variable_camp="camp",
@@ -83,6 +95,11 @@ extreure.variables=function(taula="table1",
 #' @return extreure variable
 #' @export extreure.variables
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 canvi_noms_variables<-function(dt="dt_temp",
                                variable="ajust2", 
                                nou_nom="descripcio",

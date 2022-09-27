@@ -9,6 +9,11 @@
 #' @return RETORNA DADES AMB RECODIFICACIÓ 
 #' @export recodificar
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 recodificar<-function(dt="dades",taulavariables="VARIABLES.xls",criteris="recode1",missings=F,prefix=NA,...){
   
   # dt=iris
@@ -90,6 +95,11 @@ recodificar<-function(dt="dades",taulavariables="VARIABLES.xls",criteris="recode
 #' @return RETORNA DADES AMB RECODIFICACIÓ 
 #' @export recodificar2
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 recodificar2<-function(dt="dt_plana",
                        taulavariables ="conductor",
                        criteris = "recode",
@@ -355,6 +365,11 @@ recodificar2<-function(dt="dt_plana",
 #' @return RETORNA DADES AMB RECODIFICACIÓ 
 #' @export recode_to_missings
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 recode_to_missings<-function(dt="dades",taulavariables="conductor_variables",rang="rang_valid", data_long=F,...) {
   
   # dt,taulavariables = conductor_variables,rang="rang_valid")
@@ -427,6 +442,11 @@ recode_to_missings<-function(dt="dades",taulavariables="conductor_variables",ran
 #' @return  Retorna dummis
 #' @export  make_dummies
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 make_dummies <- function(dt,variable, prefix=" ") {
   
   # dt<-dades
@@ -451,6 +471,11 @@ make_dummies <- function(dt,variable, prefix=" ") {
 #' @return  Retorna valors
 #' @export comptar_valors
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 comptar_valors<-function(dt="dadesevents",variables=c("EV.TER.ARTER_PERIF","EV.TER.AVC"),valor="Yes"){
   
   # dt=dades
@@ -476,6 +501,11 @@ comptar_valors<-function(dt="dadesevents",variables=c("EV.TER.ARTER_PERIF","EV.T
 #' @return  Retorna missings
 #' @export missings_to_level
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 missings_to_level<-function(dades,variable="popes") {
   
   # dades=temp
@@ -516,6 +546,11 @@ missings_to_level<-function(dades,variable="popes") {
 #' @return  Retorna intervals
 #' @export  generar_intervals
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 generar_intervals<-function(dt="dades",vars="ajust4",taulavariables="conductor",missing="Unkown",g=3) {
   
   # dt=dades

@@ -5,6 +5,11 @@
 #' @return variables
 #' @export data.random
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 data.random <- function(dataini=20120101, datafi=20121231) {
   
   # dataini=20120101
@@ -25,6 +30,10 @@ data.random <- function(dataini=20120101, datafi=20121231) {
 #' @return RETORNA UNA DATA A STRING 
 #' @export data.to.string
 #' @importFrom dplyr "%>%"
+#' @examples
+#' A<-"27-09-2022"
+#' B<-data.to.string(A)
+#' B
 data.to.string<-function(data) {
   
   data.string=paste0(lubridate::year(data),
@@ -42,6 +51,12 @@ data.to.string<-function(data) {
 #' @return variables
 #' @export dataUTC_to_Rdata
 #' @importFrom dplyr "%>%"
+#' @examples
+#'
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 dataUTC_to_Rdata<-function(x,dt) {
   
   # dt<-dades
@@ -85,6 +100,11 @@ dataUTC_to_Rdata<-function(x,dt) {
 #' @return variables
 #' @export data_convert_text
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 data_convert_text<-function(x){
   x<-as.Date(as.numeric(x), origin = "1899-12-30") %>% 
     lubridate::ymd()}
@@ -97,6 +117,11 @@ data_convert_text<-function(x){
 #' @return data
 #' @export data_convert_numeric
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 data_convert_numeric<-function(x){ x<-as.Date(x, origin = "1970-01-01")}
 
 
@@ -107,6 +132,11 @@ data_convert_numeric<-function(x){ x<-as.Date(x, origin = "1970-01-01")}
 #' @return data
 #' @export data_convert_UTC
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 data_convert_UTC<-function(x){
   x<-format(as.POSIXct(x, origin='1970-01-01'), format='%Y/%m/%d')
   x<-lubridate::ymd(x)}
@@ -120,6 +150,11 @@ data_convert_UTC<-function(x){
 #' @return data
 #' @export convertir_dates
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 convertir_dates<-function(d="dadestotal",taulavariables="variables_R.xls",campdata="dates")
   
 {
@@ -155,6 +190,11 @@ convertir_dates<-function(d="dadestotal",taulavariables="variables_R.xls",campda
 #' @return data
 #' @export dataUTC_to_Rdata
 #' @importFrom dplyr "%>%"
+#' @examples
+#' domini="farmacs_prescrits"
+#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
+#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
+#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 dataSPSS_to_Rdata <- function(x) {
   y<-as.Date(x/86400, origin = "1582-10-14") %>% 
     lubridate::ymd() }
