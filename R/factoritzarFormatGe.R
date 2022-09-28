@@ -1,24 +1,16 @@
-#' @title factoritzar FormatGe.
-#' @description factoritzar una llista de variables donades unes dades i un vector de variables 
-#' @param dt xxxxxxxxxx 
-#' @param variables xxxxxxxxxx 
-#' @return llista de variables
+#' @title Factoritzar FormatGe
+#' @description factoritza una llista de variables donades a la teva base de dades
+#' @param dt Base de dades plan
+#' @param variables vector  a on posem les variables a factoritzar
+#' @return la base de dades amb les variables factoritzades 
 #' @export factoritzar 
 #' @importFrom dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
-#'
-#' idp=c(1,2,3,4,5)
-#' sexe=c("H","H","D","D","H")
-#' dnaix=c(19200801,19250201,19370401,19340701,19400101)
-#' entrada=c(20060101,20060101,20060101,20060101,20060101)
-#' sortida=c(20181029,20090102,20181231,20150911,20181231)
-#' situacio=c("A","A","A","D","T")
-#' dt_poblacio<-data.frame(idp,sexe,dnaix,situacio,entrada,sortida)
-
+#' 
+#' class(dt_plana$situacio)
+#' dt_plana2<-factoritzar(dt_plana,variables=c("grup","situacio"))
+#' class(dt_plana2$situacio)
+#' 
 factoritzar<-function(dt="dades",variables=c("grup","situacio")) {
   
   # dt=dades
@@ -33,21 +25,30 @@ factoritzar<-function(dt="dades",variables=c("grup","situacio")) {
 }
 
 
-#' @title factoritzar FormatGe.
-#' @description factoritzar NO.Yes llista de variables "factor" situades a la taulavariables camp=factor 
-#' @param dt xxxxxxxxxx 
-#' @param columna xxxxxxxxxx 
-#' @param taulavariables xxxxxxxxxx
+#' @title Factoritzar (No/Yes).FormatGe
+#' @description A tots aquells valors dummis, el "0"-->"No" i "1"-->"Yes"  
+#' @param dt base de dades 
+#' @param columna La columna del conductor a on farem la factoritzacio    
+#' @param taulavariables Conductor
 #' @param ... altres funcions
 #' @return NO.YES  
 #' @export factoritzar.NO.YES 
 #' @importFrom dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
-
+#' camp=c("idp","dtindex","sexe","dnaix","situacio","entrada",
+#' "sortida", "INCLUSIO.DM2","DG.HTA","DG.IC",
+#' "cHDL.valor","cLDL.valor","cT.valor","GLICADA.valor","IMC.valor")
+#' factor=c("","","","","","","",1,1,1,"","","","","")
+#' dates=c("",1,"",1,"",1,1,"","","","","","","","")
+#' conductor<-data.frame(camp,factor,dates)
+#'dt_plana2<-dplyr::mutate_at(dt_plana, dplyr::vars(  dplyr::starts_with("DG.") ),  
+#'dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
+#'dt_plana2<-dplyr::mutate_at(dt_plana2, dplyr::vars(  dplyr::starts_with("INCLUSIO.") ),
+#'dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
+#'dt_plana2
+#'dt_plana2<-factoritzar.NO.YES(dt_plana2,"factor",conductor)
+#'dt_plana2
+#' 
 factoritzar.NO.YES<-function(dt="dadesDF",columna="factor",taulavariables="variables_FELIPE.xls",...){
   
   # dt=dades
@@ -70,21 +71,33 @@ factoritzar.NO.YES<-function(dt="dadesDF",columna="factor",taulavariables="varia
 }
 
 
-#' @title factoritzar FormatGe.
-#' @description factoritzar NO.SI llista de variables "factor" situades a la taulavariables camp=factor 
-#' @param dt xxxxxxxxxx 
-#' @param columna xxxxxxxxxx 
-#' @param taulavariables xxxxxxxxxx
-#' @return NO.YES  
-#' @export factoritzar.NO.SI
+#' @title Factoritzar (No/Si).FormatGe
+#' @description A tots aquells valors dummis, el "0"-->"No" i "1"-->"Si"  
+#' @param dt base de dades 
+#' @param columna La columna del conductor a on farem la factoritzacio  
+#' @param taulavariables Conductor
+#' @param ... altres funcions
+#' @return NO.Si  
+#' @export factoritzar.NO.SI 
 #' @importFrom dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
-
-factoritzar.NO.SI<-function(dt="dadesDF",columna="factor",taulavariables="variables_FELIPE.xls"){
+#' 
+#' camp=c("idp","dtindex","sexe","dnaix","situacio","entrada","sortida", 
+#' "INCLUSIO.DM2","DG.HTA","DG.IC",
+#' "cHDL.valor","cLDL.valor","cT.valor",
+#' "GLICADA.valor","IMC.valor")
+#' factor=c("","","","","","","",1,1,1,"","","","","")
+#' dates=c("",1,"",1,"",1,1,"","","","","","","","")
+#' conductor<-data.frame(camp,factor,dates)
+#'dt_plana2<-dplyr::mutate_at(dt_plana, dplyr::vars(  dplyr::starts_with("DG.") ),  
+#'dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
+#'dt_plana2<-dplyr::mutate_at(dt_plana2, dplyr::vars(  dplyr::starts_with("INCLUSIO.") ), 
+#' dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
+#'dt_plana2
+#'dt_plana2<-factoritzar.NO.SI(dt_plana2,"factor",conductor)
+#'dt_plana2
+#' 
+factoritzar.NO.SI<-function(dt="dadesDF",columna="factor",taulavariables="variables_FELIPE.xls",...){
   
   #dt=dt_plana
   #columna="factor"
