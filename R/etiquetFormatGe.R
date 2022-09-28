@@ -12,7 +12,6 @@
 #' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
 #' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
 #' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
-#' dt_diagnostics
 etiquetar<-function(d="dadestotal",taulavariables="variables_R.xls",camp_descripcio="descripcio",...) {
   
   # d=dades
