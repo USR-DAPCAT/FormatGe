@@ -1,15 +1,13 @@
-#' @title formula_table1.
-#' @description NETEJA NOMS DE VARIABLES DE CARACTERS EXTRANYS 
-#' @param dt xxxxx
-#' @return NETEJA NOMS DE VARIABLES 
+#' @title Netejar els noms de les variables
+#' @description Netejar els noms de les variables
+#' @param dt base de dades
+#' @return base de dades amb la neteja de noms
 #' @export netejar.noms.variables
 #' @importFrom dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
-netejar.noms.variables<-function(dt="LIPOS_EORTEGA"){
+#' kk<-netejar.noms.variables(dt_plana)
+#' kk
+netejar.noms.variables<-function(dt="hoolywod"){
   
   paco<-names(dt) %>% 
     iconv("UTF-8","ASCII","") %>% 
@@ -26,8 +24,7 @@ netejar.noms.variables<-function(dt="LIPOS_EORTEGA"){
     stringr::str_replace_all("\\<","Inf") %>% 
     stringr::str_replace_all("\\>","Sup") %>% 
     stringr::str_replace_all("\\[","") %>% 
-    stringr::str_replace_all("\\]","") 
-  
+    stringr::str_replace_all("\\]","")
   names(dt)<-paco
   dt
   
@@ -35,17 +32,15 @@ netejar.noms.variables<-function(dt="LIPOS_EORTEGA"){
 
 
 
-#' @title elimina accents dels noms de les variables.
-#' @description Funció que elimina accents dels noms de les variables
-#' @param dt xxxxx
-#' @return dt sense accents 
+#' @title Elimina accents dels noms de les variables.
+#' @description Elimina accents dels noms de les variables
+#' @param dt base de dades
+#' @return base de dades  sense accents 
 #' @export netejar.accents.variables
 #' @importFrom dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#' kk<-netejar.accents.variables(dt_plana)
+#' kk
 netejar.accents.variables <- function(dt="LIPOS_EORTEGA"){
   paco<-names(dt) %>%
     iconv(to="ASCII//TRANSLIT")
@@ -54,17 +49,15 @@ netejar.accents.variables <- function(dt="LIPOS_EORTEGA"){
 }
 
 
-#' @title elimina espais dels noms de les variables.
-#' @description elimina espais dels noms de les variables
-#' @param dt xxxxx
-#' @return dt  elimina espais
+#' @title Elimina espais dels noms de les variables.
+#' @description Elimina espais dels noms de les variables
+#' @param dt base de dades
+#' @return base de dades elimina espais
 #' @export netejar_espais
 #' @importFrom dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#' kk<-netejar_espais(dt_plana)
+#' kk
 netejar_espais<-function(dt="dades") {
   # dt=dt_total
   dt<-dt %>% dplyr::mutate_if(is.character,stringr::str_trim)

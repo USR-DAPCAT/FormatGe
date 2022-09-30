@@ -1,20 +1,20 @@
 #' @title Formula FormatGe.
 #' @description Retorna Data.frame or tibble with labeled variables
-#' @param x String indicator of field from external file with indicator the position of of formula (1,2....). 
-#' @param y string indicator of response (default "."): ". ~ x1 +x2 + x3 "
-#' @param eliminar character that indicate if some variable has to be clean
-#' @param a character that indicate if some variable has to be add in the first position
-#' @param taulavariables excel file with number indicator field (discrete number 1:Inf)
-#' @param dt data.frame
-#' @return Data.frame or tibble with labeled variables
+#' @param x Indicador de cadena del camp del fitxer extern amb indicador de la posició de la fórmula (1,2....) 
+#' @param y indicador de resposta de cadena (default "."): ". ~ x1 +x2 + x3 "
+#' @param eliminar caracter que indica si alguna variable ha de ser eliminada
+#' @param a caracter , indica si cal afegir alguna variable en la primera posició
+#' @param taulavariables conductor , a on triem l'orde de les variables de la formula
+#' @param dt data.frame o base de dades
+#' @return formula
 #' @export formula_text 
 #' @importFrom dplyr "%>%"
 #' @examples
 #' 
 #' Hmisc::label(iris)
 #' conductor_iris<-data.frame(camp=names(iris),formu=c(1,2,3,4,5))
-#' formula_iris<-formula_text("formu",taulavariables = conductor_iris)
-#' formula_iris
+#' formula_iris1<-formula_text("formu",taulavariables = conductor_iris)
+#' formula_iris1
 
 formula_text<-function(x="taula1",y="resposta",eliminar=c("IDP"), a="",taulavariables,dt=NA) {
   
@@ -51,21 +51,21 @@ formula_text<-function(x="taula1",y="resposta",eliminar=c("IDP"), a="",taulavari
 
 #' @title formula_table1.
 #' @description Retorna formula per table1::table1 segons llista de varibles
-#' @param x String indicator of field from external file with indicator the position of of formula (1,2....). 
-#' @param y string indicator of response (default "."): ". ~ x1 +x2 + x3 "
-#' @param eliminar character that indicate if some variable has to be clean
-#' @param a character that indicate if some variable has to be add in the first position
-#' @param taulavariables excel file with number indicator field (discrete number 1:Inf)
-#' @param dt data.frame
+#' @param x Indicador de cadena del camp del fitxer extern amb indicador de la posició de la fórmula (1,2....) 
+#' @param y indicador de resposta de cadena (default "."): ". ~ x1 +x2 + x3 "
+#' @param eliminar caracter que indica si alguna variable ha de ser eliminada
+#' @param a caracter , indica si cal afegir alguna variable en la primera posició
+#' @param taulavariables conductor , a on triem l'orde de les variables de la formula
+#' @param dt data.frame o base de dades
 #' @param ... altres funcions
 #' @return formula_table1
 #' @export formula_table1 
 #' @importFrom dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#' Hmisc::label(iris)
+#' conductor_iris<-data.frame(camp=names(iris),formu=c(1,2,3,4,5))
+#' formula_iris2<-formula_table1("formu",taulavariables = conductor_iris)
+#' formula_iris2
 formula_table1<-function(x="taula1",
                          y="",
                          eliminar=c("IDP"), 
@@ -112,19 +112,18 @@ formula_table1<-function(x="taula1",
 
 
 #' @title  formula_vector.
-#' @description (vector,y, vector caracter a elimina)
-#' @param vector xxxxxx 
-#' @param y xxxxx
-#' @param logit xxxxxx
-#' @param eliminar xxxxxx
+#' @description formula_vector, vector amb les variables ,y, vector caracter a elimina)
+#' @param vector vector amb les variables
+#' @param y variable dependents
+#' @param logit logit
+#' @param eliminar aquelles variables per eliminar
 #' @return formula_vector
 #' @export formula_vector 
 #' @importFrom dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#' vector=c("sex","age","age")
+#' formula_iris3<-formula_vector(vector,y="y")
+#' formula_iris3
 formula_vector<-function(vector=c("sex","age","age"),y="y",logit=F,eliminar=NA){
   
   vector<-vector [!vector %in% eliminar] %>% unique()

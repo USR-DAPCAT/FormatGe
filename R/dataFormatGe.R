@@ -140,11 +140,23 @@ data_convert_UTC<-function(x){
 #' @return data
 #' @export convertir_dates
 #' @importFrom dplyr "%>%"
-convertir_dates<-function(d="dadestotal",taulavariables="variables_R.xls",campdata="dates")
+#' @examples
+#'camp=c("idp","dtindex","sexe","dnaix","situacio","entrada",
+#'       "sortida", "INCLUSIO.DM2","DG.HTA","DG.IC",
+#'       "cHDL.valor","cLDL.valor","cT.valor","GLICADA.valor","IMC.valor","data2")
+#'factor=c("","","","","","","",1,1,1,"","","","","",1)
+#'dates=c("","","","","","","","","","","","","","","",1)
+#'conductor<-data.frame(camp,factor,dates)
+#'dt_plana$data2<-"19722202"
+#'K<-convertir_dates(d=dt_plana,taulavariables=conductor,campdata="dates")
+#'K
+convertir_dates<-function(d="dt_plana",taulavariables="conductor",campdata="dates")
+
   
 {
   ####  Llegir etiquetes i variables a analitzar  ##
-  variables <- readxl::read_excel(taulavariables) %>% tidyr::as_tibble() 
+  #variables <- readxl::read_excel(taulavariables) %>% tidyr::as_tibble() 
+  variables <- read_conductor(taulavariables) %>% tidyr::as_tibble()
   
   # variables[is.na(variables)]<- 0
   campdata_sym<-dplyr::sym(campdata)
