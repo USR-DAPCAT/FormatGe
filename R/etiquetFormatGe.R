@@ -1,18 +1,71 @@
-#' @title Etiquetar
+#' @title Etiquetar els noms de les variables
 #' @description Etiquetar les variables de les dades 
-#' @param d               xxx
-#' @param taulavariables  xxx
-#' @param camp_descripcio xxx
+#' @param d     Base de dades
+#' @param taulavariables  conductor
+#' @param camp_descripcio  camp del conductor
 #' @param ... altres funcions
 #' @return Etiquetar
 #' @export etiquetar
 #' @importFrom dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
-etiquetar<-function(d="dadestotal",taulavariables="variables_R.xls",camp_descripcio="descripcio",...) {
+#'camp=c("idp",
+#'       "dtindex",
+#'       "sexe",
+#'       "dnaix",
+#'       "situacio",
+#'       "entrada",
+#'       "sortida", 
+#'       "INCLUSIO.DM2",
+#'       "DG.HTA",
+#'       "DG.IC",
+#'       "cHDL.valor",
+#'       "cLDL.valor",
+#'       "cT.valor",
+#'       "GLICADA.valor",
+#'       "IMC.valor")
+#'descripcio=c("Identificacio Pacient",
+#'             "data Index",
+#'             "Sexe",
+#'             "data Naixament",
+#'             "Situacio",
+#'             "Entrada",
+#'             "Sortida",
+#'             "Inclusio Diabetes Tipus 2",
+#'             "Hipertensió arterial",
+#'             "Insuficiencia Cardiaca",
+#'             "Colesterol HDL(mg/dL)",
+#'             "Colesterol LDL(mg/dL)",
+#'             "Colesterol Total(mg/dL)",
+#'             "HbA1c",
+#'             "IMC" )
+#'descripcio2=c("Identificacion Paciente",
+#'              "data Indice",
+#'              "Sexo",
+#'              "data Naicimiento",
+#'              "Situacion",
+#'              "Entrada",
+#'              "Salida",
+#'              "Inclusion Diabetes Tipus 2",
+#'              "Hipertensión arterial",
+#'              "Insuficiencia Cardiaca",
+#'              "Colesterol HDL(mg/dL)",
+#'              "Colesterol LDL(mg/dL)",
+#'              "Colesterol Total(mg/dL)",
+#'              "HbA1c",
+#'              "IMC" )
+#'factor=c("","","","","","","",1,1,1,"","","","","")
+#'dates=c("",1,"",1,"",1,1,"","","","","","","","")
+#'
+#'
+#'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates)
+#' 
+#' dades_etiquet<-etiquetar(dt_plana,conductor1, "descripcio")
+#' Hmisc::label(dt_plana)
+#' Hmisc::label(dades_etiquet)
+
+etiquetar<-function(d="dadestotal",
+                    taulavariables="variables_R.xls",
+                    camp_descripcio="descripcio",...) {
   
   # d=dades
   # taulavariables = conductor
@@ -48,23 +101,39 @@ etiquetar<-function(d="dadestotal",taulavariables="variables_R.xls",camp_descrip
 
 
 
-#' @title Etiquetar valors
-#' @description Retorna Data frame etiquetat en funció d'un conductor
-#' @param dt                 xxx
-#' @param variables_factors  xxx
-#' @param fulla              xxx
-#' @param camp_etiqueta      xxx
-#' @param missings           xxx
-#' @param new_vars           xxx
-#' @param sufix              xxx 
+#' @title                    Etiquetar valors de les variables
+#' @description              Retorna Data frame etiquetat en funció d'un conductor
+#' @param dt                 Base de dades
+#' @param variables_factors  Conductor
+#' @param fulla              Si tenim el conductor a una pestanya
+#' @param camp_etiqueta      Camp de les etiquetes
+#' @param missings           Missing
+#' @param new_vars           Nova variable
+#' @param sufix              Sufix 
 #' @return dataframe dades, conductor_variables
 #' @export etiquetar_valors
 #' @importFrom dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#' camp=c("sexe","sexe","situacio","situacio","situacio")
+#' valor=c("H","D","A","D","T")
+#' etiqueta1=c("1.Dona","2.Home","1.Actiu","2.Difunt","3.Trasllat")
+#' etiqueta2=c("1.Mujer","2.Hombre","1.Activo","2.Difunto","3.Traslado")
+#' conductor2<-data.frame(camp,valor,etiqueta1,etiqueta2)
+#'
+#' 
+#'table(dt_plana$sexe) 
+#'dades_valors_etiquet<-etiquetar_valors(
+#'dt=dt_plana,
+#'variables_factors=conductor2,
+#'fulla="etiquetes",
+#'camp_etiqueta="etiqueta1",
+#'missings=FALSE, 
+#'new_vars=FALSE,
+#'sufix=".2")
+#'
+#'
+#'table(dades_valors_etiquet$sexe) 
+#'
 etiquetar_valors<-function(dt="dades",
                            variables_factors="conductor_variables",
                            fulla="etiquetes",
@@ -145,21 +214,16 @@ etiquetar_valors<-function(dt="dades",
 
 
 
-#' @title etiquetar_taula
-#' @description etiquetar_taula
-#' @param taula             xxx
-#' @param camp              xxx
+#' @title                   Etiquetar una Taula
+#' @description             Etiquetar una Taula
+#' @param taula             Taula
+#' @param camp              Camp
 #' @param taulavariables    xxx
 #' @param camp_descripcio   xxx
 #' @param idcamp            xxx
-#' @return taula
-#' @export etiquetar_taula
+#' @return                  Nova Taula
+#' @export                  etiquetar_taula
 #' @importFrom dplyr "%>%"
-#' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
 etiquetar_taula<-function(taula="resumtotal",
                           camp="variable",
                           taulavariables="variables_R.xls",
@@ -195,22 +259,77 @@ etiquetar_taula<-function(taula="resumtotal",
 }
 
 
+
  
-#' @title etiquetar_vector
-#' @description etiquetar_vector
-#' @param vector            xxx
-#' @param camp              xxx
-#' @param taulavariables    xxx
-#' @param camp_descripcio  xxx
-#' @param ... altres funcions
-#' @return etiquetar_vector
-#' @export etiquetar_vector
-#' @importFrom dplyr "%>%"
+#' @title                   Etiquetar un vector
+#' @description             Etiquetar un vector a partir d'un conductor
+#' @param vector            Vector
+#' @param camp              Camp
+#' @param taulavariables    Conductor
+#' @param camp_descripcio   Descripcio del camp
+#' @param ...               altres funcions
+#' @return                  etiquetar_vector
+#' @export                  etiquetar_vector
+#' @importFrom              dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#'camp=c("idp",
+#'       "dtindex",
+#'       "sexe",
+#'       "dnaix",
+#'       "situacio",
+#'       "entrada",
+#'       "sortida", 
+#'       "INCLUSIO.DM2",
+#'       "DG.HTA",
+#'       "DG.IC",
+#'       "cHDL.valor",
+#'       "cLDL.valor",
+#'       "cT.valor",
+#'       "GLICADA.valor",
+#'       "IMC.valor")
+#'descripcio=c("Identificacio Pacient",
+#'             "data Index",
+#'             "Sexe",
+#'             "data Naixament",
+#'             "Situacio",
+#'             "Entrada",
+#'             "Sortida",
+#'             "Inclusio Diabetes Tipus 2",
+#'             "Hipertensió arterial",
+#'             "Insuficiencia Cardiaca",
+#'             "Colesterol HDL(mg/dL)",
+#'             "Colesterol LDL(mg/dL)",
+#'             "Colesterol Total(mg/dL)",
+#'             "HbA1c",
+#'             "IMC" )
+#'descripcio2=c("Identificacion Paciente",
+#'              "data Indice",
+#'              "Sexo",
+#'              "data Naicimiento",
+#'              "Situacion",
+#'              "Entrada",
+#'              "Salida",
+#'              "Inclusion Diabetes Tipus 2",
+#'              "Hipertensión arterial",
+#'              "Insuficiencia Cardiaca",
+#'              "Colesterol HDL(mg/dL)",
+#'              "Colesterol LDL(mg/dL)",
+#'              "Colesterol Total(mg/dL)",
+#'              "HbA1c",
+#'              "IMC" )
+#'factor=c("","","","","","","",1,1,1,"","","","","")
+#'dates=c("",1,"",1,"",1,1,"","","","","","","","")
+#'
+#'
+#'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates)
+#'v1<-c("idp","dtindex","sexe","dnaix","situacio","entrada")
+#'v1_etiq<-etiquetar_vector(vector=v1,
+#'                          taulavariables=conductor1,
+#'                          camp="camp",
+#'                          camp_descripcio="descripcio")
+#'
+#'v1_etiq
+#'
 etiquetar_vector<-function(vector="vector_variables",
                            camp="camp",
                            taulavariables="variables_R.xls",
@@ -243,17 +362,14 @@ etiquetar_vector<-function(vector="vector_variables",
 
 
 
-#' @title llistaNomenada
+#' @title Llista Nomenada
 #' @description Retorna llista nomenada amb els mateixos noms dels objectes que inclou
 #' @param ... altres funcions
-#' @return llistaNomenada
+#' @return Llista Nomenada
 #' @export llistaNomenada
 #' @importFrom dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+
 llistaNomenada <- function(...) {
   v1 <- as.list(substitute(list(...)))[-1L]  
   inputs <- list(...)

@@ -1,20 +1,76 @@
-#' @title recodificar
-#' @description Recodifico EN FUNCIÓ DE de llista de camps
-#' @param dt              xxx
-#' @param taulavariables  xxx
-#' @param criteris        xxx
-#' @param missings        xxx
-#' @param prefix          xxx
+#' @title                       Recodificar les variables que escollim
+#' @description                 Recodifico en funció d'un Conductor
+#' @param dt                    Base de dades
+#' @param taulavariables        Conductor
+#' @param criteris              Criteris
+#' @param missings              Missing
+#' @param prefix                Prefix
 #' @param ... altres funcions
-#' @return RETORNA DADES AMB RECODIFICACIÓ 
-#' @export recodificar
+#' @return                      Retorna les dades amb la recodificacio 
+#' @export                      recodificar
 #' @importFrom dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
-recodificar<-function(dt="dades",taulavariables="VARIABLES.xls",criteris="recode1",missings=F,prefix=NA,...){
+#'camp=c("idp",
+#'       "dtindex",
+#'       "sexe",
+#'       "dnaix",
+#'       "situacio",
+#'       "entrada",
+#'       "sortida", 
+#'       "INCLUSIO.DM2",
+#'       "DG.HTA",
+#'       "DG.IC",
+#'       "cHDL.valor",
+#'       "cLDL.valor",
+#'       "cT.valor",
+#'       "GLICADA.valor",
+#'       "IMC.valor")
+#'descripcio=c("Identificacio Pacient",
+#'             "data Index",
+#'             "Sexe",
+#'             "data Naixament",
+#'             "Situacio",
+#'             "Entrada",
+#'             "Sortida",
+#'             "Inclusio Diabetes Tipus 2",
+#'             "Hipertensió arterial",
+#'             "Insuficiencia Cardiaca",
+#'             "Colesterol HDL(mg/dL)",
+#'             "Colesterol LDL(mg/dL)",
+#'             "Colesterol Total(mg/dL)",
+#'             "HbA1c",
+#'             "IMC" )
+#'descripcio2=c("Identificacion Paciente",
+#'              "data Indice",
+#'              "Sexo",
+#'              "data Naicimiento",
+#'              "Situacion",
+#'              "Entrada",
+#'              "Salida",
+#'              "Inclusion Diabetes Tipus 2",
+#'              "Hipertensión arterial",
+#'              "Insuficiencia Cardiaca",
+#'              "Colesterol HDL(mg/dL)",
+#'              "Colesterol LDL(mg/dL)",
+#'              "Colesterol Total(mg/dL)",
+#'              "HbA1c",
+#'              "IMC" )
+#'factor=c("","","","","","","",1,1,1,"","","","","")
+#'dates=c("",1,"",1,"",1,1,"","","","","","","","")
+#'recode=c("","","","","","","","","","","","","","7.0","")
+#'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates,recode)
+#'k<-recodificar(dt=dt_plana, 
+#'               taulavariables=conductor1,
+#'               criteris="recode",
+#'               missings=FALSE,
+#'               prefix="_recode_")
+#'               
+#'k
+recodificar<-function(dt="dades",
+                      taulavariables="VARIABLES.xls",
+                      criteris="recode1",
+                      missings=F, 
+                      prefix=NA,...){
   
   # dt=iris
   # taulavariables = etiquetes_iris
@@ -71,8 +127,11 @@ recodificar<-function(dt="dades",taulavariables="VARIABLES.xls",criteris="recode
     
     print(paste0("Generada: ",nomrecode))
     # Validació
-    dt %>%dplyr:: group_by_at(dplyr::vars(!!nomrecode)) %>% dplyr::summarise_at(dplyr::vars(!!nomcamp),list(min=~min(.,na.rm=T),max=~max(.,na.rm=T),freq=~n())) %>%dplyr:: ungroup() %>% 
-      print()
+    dt %>%dplyr:: group_by_at(dplyr::vars(!!nomrecode)) %>% 
+      dplyr::summarise_at(
+        dplyr::vars(!!nomcamp),list(min=~min(.,na.rm=T),max=~max(.,na.rm=T),freq=~dplyr::n())) %>%
+           dplyr:: ungroup() %>% 
+              print()
   }
   
   dt
@@ -81,25 +140,75 @@ recodificar<-function(dt="dades",taulavariables="VARIABLES.xls",criteris="recode
 
 
 
-
-
-#' @title recodificar
-#' @description Recodifico EN FUNCIÓ DE de llista de camps
-#' @param dt              xxx
-#' @param taulavariables  xxx
-#' @param criteris        xxx
-#' @param missings        xxx
-#' @param prefix          xxx
-#' @param criteris_labels xxx
-#' @param ... altres funcions
-#' @return RETORNA DADES AMB RECODIFICACIÓ 
-#' @export recodificar2
-#' @importFrom dplyr "%>%"
+#' @title                       Recodificar les variables que escollim
+#' @description                 Recodifico en funció d'un Conductor
+#' @param dt                    Base de dades
+#' @param taulavariables        Conductor
+#' @param criteris              Criteris
+#' @param missings              Missing
+#' @param prefix                Prefix
+#' @param criteris_labels       Criteris labels
+#' @param ...                   Altres funcions
+#' @return                      Retorna les dades amb la recodificacio
+#' @export                      recodificar2
+#' @importFrom                  dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#'camp=c("idp",
+#'       "dtindex",
+#'       "sexe",
+#'       "dnaix",
+#'       "situacio",
+#'       "entrada",
+#'       "sortida", 
+#'       "INCLUSIO.DM2",
+#'       "DG.HTA",
+#'       "DG.IC",
+#'       "cHDL.valor",
+#'       "cLDL.valor",
+#'       "cT.valor",
+#'       "GLICADA.valor",
+#'       "IMC.valor")
+#'descripcio=c("Identificacio Pacient",
+#'             "data Index",
+#'             "Sexe",
+#'             "data Naixament",
+#'             "Situacio",
+#'             "Entrada",
+#'             "Sortida",
+#'             "Inclusio Diabetes Tipus 2",
+#'             "Hipertensió arterial",
+#'             "Insuficiencia Cardiaca",
+#'             "Colesterol HDL(mg/dL)",
+#'             "Colesterol LDL(mg/dL)",
+#'             "Colesterol Total(mg/dL)",
+#'             "HbA1c",
+#'             "IMC" )
+#'descripcio2=c("Identificacion Paciente",
+#'              "data Indice",
+#'              "Sexo",
+#'              "data Naicimiento",
+#'              "Situacion",
+#'              "Entrada",
+#'              "Salida",
+#'              "Inclusion Diabetes Tipus 2",
+#'              "Hipertensión arterial",
+#'              "Insuficiencia Cardiaca",
+#'              "Colesterol HDL(mg/dL)",
+#'              "Colesterol LDL(mg/dL)",
+#'              "Colesterol Total(mg/dL)",
+#'              "HbA1c",
+#'              "IMC" )
+#'factor=c("","","","","","","",1,1,1,"","","","","")
+#'dates=c("",1,"",1,"",1,1,"","","","","","","","")
+#'recode=c("","","","","","","","","","","","","","7.0","")
+#'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates,recode)
+#'k2<-recodificar(dt=dt_plana, 
+#'               taulavariables=conductor1,
+#'               criteris="recode",
+#'               missings=FALSE,
+#'               prefix="_recode_")
+#'               
+#'k2
 recodificar2<-function(dt="dt_plana",
                        taulavariables ="conductor",
                        criteris = "recode",
@@ -123,28 +232,19 @@ recodificar2<-function(dt="dt_plana",
   
   #cut:...
   
-  #-------------------------------------------------------------------------------------------------------------------------------------------------------#
   #        [x]              :   a numeric vector which is to be converted to a factor by cutting.
-  
   #        [breaks]         :   either a numeric vector of two or more unique cut points or a single number
   #                             (greater than or equal to 2) giving the number 
   #                             of intervals into which x is to be cut.
-  
   #        [labels]         :   labels for the levels of the resulting category. By default, labels are constructed using "(a,b]" interval notation.
   #                             If labels = FALSE, simple integer codes are returned instead of a factor.  
-  
   #        [include.lowest] :   logical, indicating if an ‘x[i]’ equal to the lowest 
   #                             (or highest, for right = FALSE) ‘breaks’ value should be included.
-  
   #        [right]          :   logical, indicating if the intervals should be closed on the right 
   #                             (and open on the left) or vice versa.
-  
   #        [dig.lab]        :   integer which is used when labels are not given. 
   #                             It determines the number of digits used in formatting the break numbers.
-  
   #        [ordered_result] :   logical: should the result be an ordered factor?
-  #--------------------------------------------------------------------------------------------------------------------------------------------------------#  
-  
   #------------------------------#  
   #dt=dt_plana
   #taulavariables =conductor
@@ -355,32 +455,94 @@ recodificar2<-function(dt="dt_plana",
 }  
 
 
-#' @title recodificar missings
-#' @description Recodificar rangs de valors que cauen fora interva a missingss
-#' @param dt              xxx
-#' @param taulavariables  xxx
-#' @param rang            xxx
-#' @param data_long       xxx
-#' @param ... altres funcions
-#' @return RETORNA DADES AMB RECODIFICACIÓ 
-#' @export recode_to_missings
-#' @importFrom dplyr "%>%"
+
+
+
+#' @title                       Recodificar missings
+#' @description                 Recodificar rangs de valors que cauen fora interva a missingss
+#' @param dt                    Base de dades
+#' @param taulavariables        Conductor
+#' @param rang                  Rang
+#' @param data_long             Data
+#' @param ...                   Altres funcions
+#' @return                      Retorna dades amb la recodificacio 
+#' @export                      recode_to_missings
+#' @importFrom                  dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
-recode_to_missings<-function(dt="dades",taulavariables="conductor_variables",rang="rang_valid", data_long=F,...) {
+#'camp=c("idp",
+#'       "dtindex",
+#'       "sexe",
+#'       "dnaix",
+#'       "situacio",
+#'       "entrada",
+#'       "sortida", 
+#'       "INCLUSIO.DM2",
+#'       "DG.HTA",
+#'       "DG.IC",
+#'       "cHDL.valor",
+#'       "cLDL.valor",
+#'       "cT.valor",
+#'       "GLICADA.valor",
+#'       "IMC.valor")
+#'descripcio=c("Identificacio Pacient",
+#'             "data Index",
+#'             "Sexe",
+#'             "data Naixament",
+#'             "Situacio",
+#'             "Entrada",
+#'             "Sortida",
+#'             "Inclusio Diabetes Tipus 2",
+#'             "Hipertensió arterial",
+#'             "Insuficiencia Cardiaca",
+#'             "Colesterol HDL(mg/dL)",
+#'             "Colesterol LDL(mg/dL)",
+#'             "Colesterol Total(mg/dL)",
+#'             "HbA1c",
+#'             "IMC" )
+#'descripcio2=c("Identificacion Paciente",
+#'              "data Indice",
+#'              "Sexo",
+#'              "data Naicimiento",
+#'              "Situacion",
+#'              "Entrada",
+#'              "Salida",
+#'              "Inclusion Diabetes Tipus 2",
+#'              "Hipertensión arterial",
+#'              "Insuficiencia Cardiaca",
+#'              "Colesterol HDL(mg/dL)",
+#'              "Colesterol LDL(mg/dL)",
+#'              "Colesterol Total(mg/dL)",
+#'              "HbA1c",
+#'              "IMC" )
+#'factor= c("","","","","","","",1,1,1,"","","","","")
+#'dates=  c("",1,"",1,"",1,1,"","","","","","","","")
+#'recode=c("","","","","","","","","","","","","","7.0","")
+#'rang_valid=   c("","","","","","","","","","","","","","","15.00/25.00/30.00")
+#'conductor1<-data.frame(camp,
+#'descripcio,
+#'descripcio2,
+#'factor,
+#'dates,
+#'recode,
+#'rang_valid)
+#'
+#'conductor1
+#'
+recode_to_missings<-function(dt="dades",
+                             taulavariables="conductor_variables",
+                             rang="rang_valid", 
+                             data_long=F,...) {
   
-  # dt,taulavariables = conductor_variables,rang="rang_valid")
+  
   # dt=dt
   # taulavariables=conductor_variables
   # rang="rang_valid"
   # data_long=F
   
   # Llegir dades
-  variables<-read_conductor(taulavariables,
-                            col_types = "text",...) %>%tibble::as_tibble()
+  
+  #variables<-read_conductor(taulavariables,col_types = "text",...) %>%tibble::as_tibble()
+  variables<-read_conductor(taulavariables,...) %>%tibble::as_tibble()
   
   temp<-variables %>% dplyr::select(c("camp","rang_valid")) %>% dplyr::filter(!is.na(rang_valid))
   
