@@ -1,14 +1,14 @@
 #' @title                       Recodificar les variables que escollim
-#' @description                 Recodifico en funció d'un Conductor
+#' @description                 Recodificar en funció d'un Conductor
 #' @param dt                    Base de dades
 #' @param taulavariables        Conductor
 #' @param criteris              Criteris
 #' @param missings              Missing
 #' @param prefix                Prefix
-#' @param ... altres funcions
+#' @param ...                   Altres funcions
 #' @return                      Retorna les dades amb la recodificacio 
 #' @export                      recodificar
-#' @importFrom dplyr "%>%"
+#' @importFrom                  dplyr "%>%"
 #' @examples
 #'camp=c("idp",
 #'       "dtindex",
@@ -459,7 +459,7 @@ recodificar2<-function(dt="dt_plana",
 
 
 #' @title                       Recodificar missings
-#' @description                 Recodificar rangs de valors que cauen fora interva a missingss
+#' @description                 Recodificar rangs de valors que cauen fora interva a missings
 #' @param dt                    Base de dades
 #' @param taulavariables        Conductor
 #' @param rang                  Rang
@@ -517,7 +517,8 @@ recodificar2<-function(dt="dt_plana",
 #'factor= c("","","","","","","",1,1,1,"","","","","")
 #'dates=  c("",1,"",1,"",1,1,"","","","","","","","")
 #'recode=c("","","","","","","","","","","","","","7.0","")
-#'rang_valid=   c("","","","","","","","","","","","","","","15.00/25.00/30.00")
+#'rang_valid=   c("","","","","","","","","","","","","","","15-100")
+#'
 #'conductor1<-data.frame(camp,
 #'descripcio,
 #'descripcio2,
@@ -527,11 +528,13 @@ recodificar2<-function(dt="dt_plana",
 #'rang_valid)
 #'
 #'conductor1
-#'
+#'dt_plana
+#'kk<-recode_to_missings(dt=dt_plana,taulavariables=conductor1,rang="rang_valid")
+#'kk
 recode_to_missings<-function(dt="dades",
                              taulavariables="conductor_variables",
                              rang="rang_valid", 
-                             data_long=F,...) {
+                             data_long=FALSE,...) {
   
   
   # dt=dt
@@ -541,8 +544,8 @@ recode_to_missings<-function(dt="dades",
   
   # Llegir dades
   
-  #variables<-read_conductor(taulavariables,col_types = "text",...) %>%tibble::as_tibble()
-  variables<-read_conductor(taulavariables,...) %>%tibble::as_tibble()
+  variables<-read_conductor(taulavariables,col_types = "text",...) %>%tibble::as_tibble()
+  #variables<-read_conductor(taulavariables,...) %>%tibble::as_tibble()
   
   temp<-variables %>% dplyr::select(c("camp","rang_valid")) %>% dplyr::filter(!is.na(rang_valid))
   
@@ -596,19 +599,19 @@ recode_to_missings<-function(dt="dades",
 
 
 
-#' @title Genera dummis
-#' @description Recodificar Genera dummis (0/1) a partir d'una variable del data frame
-#' @param dt              xxx
-#' @param variable        xxx
-#' @param prefix          xxx
-#' @return  Retorna dummis
-#' @export  make_dummies
-#' @importFrom dplyr "%>%"
+#' @title                 Genera dummis
+#' @description           Recodificar. Genera dummis (0/1) a partir d'una variable del data frame
+#' @param dt              Base de dades
+#' @param variable        Variables
+#' @param prefix          Prefix
+#' @return                Retorna dummis
+#' @export                make_dummies
+#' @importFrom            dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#' 
+#' sexe_dummis<-make_dummies(dt_plana,"sexe",prefix="pref.")
+#' sexe_dummis
+#' 
 make_dummies <- function(dt,variable, prefix=" ") {
   
   # dt<-dades
@@ -625,19 +628,17 @@ make_dummies <- function(dt,variable, prefix=" ") {
 }
 
 
-#' @title  Comptar_valors
-#' @description Recodificar  Comptar_valors
-#' @param dt              xxx
-#' @param variables       xxx
-#' @param valor           xxx
-#' @return  Retorna valors
-#' @export comptar_valors
-#' @importFrom dplyr "%>%"
+#' @title                    Comptar_valors
+#' @description              Recodificar.Comptar valors
+#' @param dt                 Base de dades
+#' @param variables          Variables
+#' @param valor              Valor
+#' @return                   Retorna valors
+#' @export                   comptar_valors
+#' @importFrom               dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#' Comptar_D<-comptar_valors(dt_plana,variables=c("sexe"),valor="D")
+#' Comptar_D
 comptar_valors<-function(dt="dadesevents",variables=c("EV.TER.ARTER_PERIF","EV.TER.AVC"),valor="Yes"){
   
   # dt=dades
@@ -656,18 +657,15 @@ comptar_valors<-function(dt="dadesevents",variables=c("EV.TER.ARTER_PERIF","EV.T
 }
 
 
-#' @title  missings_to_level
-#' @description Recodificar  missings_to_level
-#' @param dades          xxx
-#' @param variable       xxx
-#' @return  Retorna missings
-#' @export missings_to_level
-#' @importFrom dplyr "%>%"
+#' @title                      Missings_to_level
+#' @description                Recodificar  missings_to_level
+#' @param dades                Base de dades
+#' @param variable             Variables
+#' @return                     Retorna missings
+#' @export                     missings_to_level
+#' @importFrom                 dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#' missings_to_level(dt_plana,variable="DG.HTA")
 missings_to_level<-function(dades,variable="popes") {
   
   # dades=temp
@@ -676,21 +674,15 @@ missings_to_level<-function(dades,variable="popes") {
   # Subset columnes de d
   d_temp<-dades %>% dplyr::select_("temp"=variable)
   
-  # names(dt)[names(dt)==variable]<-"variable_temporal"
-  # dt<-dt %>% rename_("variable_temporal_provisional"=variable)
-  
   levels_nous <- levels(d_temp$temp)
   levels_nous[length(levels_nous) + 1] <- "None"
   
   d_temp$temp<-factor(d_temp$temp,levels = levels_nous)
   d_temp$temp[is.na(d_temp$temp)]<-"None"
-  
   #
   dades <- dades %>% dplyr::select_(paste0("-",variable))
-  
   # Canviar el nom al origen 
   names(d_temp)[names(d_temp) == "temp"] <- variable
-  
   dades <-cbind(dades,d_temp)
   
 }
@@ -698,21 +690,18 @@ missings_to_level<-function(dades,variable="popes") {
 # 
 
 
-#' @title  Generar intervals
-#' @description Recodificar Generar intervals de valors amb variables continues
+#' @title                       Generar intervals
+#' @description                 Recodificar Generar intervals de valors amb variables continues
 #' @param dt                    xxx
 #' @param vars                  xxx
 #' @param taulavariables        xxx 
 #' @param missing               xxx 
 #' @param g                     xxx 
-#' @return  Retorna intervals
-#' @export  generar_intervals
-#' @importFrom dplyr "%>%"
+#' @return                      Retorna intervals
+#' @export                      generar_intervals
+#' @importFrom                  dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#' 
 generar_intervals<-function(dt="dades",vars="ajust4",taulavariables="conductor",missing="Unkown",g=3) {
   
   # dt=dades
