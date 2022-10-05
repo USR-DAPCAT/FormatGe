@@ -1,9 +1,9 @@
-#' @title Data Random entre dues dates 
-#' @description Data Random entre dues dates (dataini i datafi) 
-#' @param  dataini data inicial
-#' @param  datafi  data final
-#' @return una data random
-#' @export data.random
+#' @title              Data Random entre dues dates 
+#' @description        Data Random entre dues dates (dataini i datafi) 
+#' @param  dataini     Data inicial
+#' @param  datafi      Data final
+#' @return             Una data random
+#' @export             data.random
 #' @examples
 #' data<-data.random(20120101,20121231)
 #' data
@@ -21,11 +21,11 @@ data.random <- function(dataini=20120101, datafi=20121231) {
 }
 
 
-#' @title Retorna una data a STRING
-#' @description Retorna una data a STRING 
-#' @param  data una data     
-#' @return data a STRING 
-#' @export data.to.string
+#' @title                Retorna una data a STRING
+#' @description          Retorna una data a STRING 
+#' @param  data          una data     
+#' @return               Data a STRING 
+#' @export               data.to.string
 #' @examples
 #' A<-"27-09-2022"
 #' B<-data.to.string(A)
@@ -42,13 +42,13 @@ data.to.string<-function(data) {
 
 
 
-#' @title   Data R Lubridate a partir de data UTC
-#' @description Data R Lubridate a partir de data UTC 
-#' @param  x variablesde data
-#' @param  dt base de dades
-#' @return base de dades amb Data R Lubridate
-#' @export dataUTC_to_Rdata
-#' @importFrom dplyr "%>%"
+#' @title               Data R Lubridate a partir de data UTC
+#' @description         Data R Lubridate a partir de data UTC 
+#' @param  x            Variablesde data
+#' @param  dt           Base de dades
+#' @return              Base de dades amb Data R Lubridate
+#' @export              dataUTC_to_Rdata
+#' @importFrom          dplyr "%>%"
 #' @examples
 #'
 #'dt_plana
@@ -88,12 +88,12 @@ dataUTC_to_Rdata<-function(x,dt) {
 }
 
 
-#' @title Converteix data caracter () a una data ymd
-#' @description Converteix data caracter ("37712") a date ymd () "2003-04-01"
-#' @param  x data caracter
-#' @return data ymd
-#' @export data_convert_text
-#' @importFrom dplyr "%>%"
+#' @title                 Converteix data caracter () a una data ymd
+#' @description           Converteix data caracter ("37712") a date ymd () "2003-04-01"
+#' @param  x              Data caracter
+#' @return                Data ymd
+#' @export                data_convert_text
+#' @importFrom            dplyr "%>%"
 #' @examples
 #' k<-data_convert_text("37712")
 #' k
@@ -103,12 +103,12 @@ data_convert_text<-function(x){
 
  
 
-#' @title Funcio que converteix de una data numeric (15784) a Date
-#' @description Funcio que converteix de numeric (15784) a Date "2013-03-20" 
-#' @param  x data numeric
-#' @return Date "2013-03-20" 
-#' @export data_convert_numeric
-#' @importFrom dplyr "%>%"
+#' @title                Funcio que converteix de una data numeric (15784) a Date
+#' @description          Funcio que converteix de numeric (15784) a Date "2013-03-20" 
+#' @param  x             Data numeric
+#' @return               Date "2013-03-20" 
+#' @export               data_convert_numeric
+#' @importFrom           dplyr "%>%"
 #' @examples
 #'k<-data_convert_numeric(15784)
 #'k
@@ -117,11 +117,11 @@ data_convert_numeric<-function(x){ x<-as.Date(x, origin = "1970-01-01")}
 
 
 
-#' @title   Funcio que converteix UTC data a date ymd
-#' @description Funcio que converteix UTC data a date ymd 
-#' @param  x UTC data
-#' @return date ymd
-#' @export data_convert_UTC
+#' @title               Funcio que converteix UTC data a date ymd
+#' @description         Funcio que converteix UTC data a date ymd 
+#' @param  x            UTC data
+#' @return              Date ymd
+#' @export              data_convert_UTC
 #' @examples
 #'k<-data_convert_UTC("1970-01-01")
 #'k
@@ -132,14 +132,14 @@ data_convert_UTC<-function(x){
 
 
 
-#' @title Converteix format TEXT A DATA 
-#' @description Converteix format TEXT A DATA (Format text -> data)   
-#' @param  d                         base de dades
-#' @param  taulavariables            variables que volem canviar
-#' @param  campdata                  dates
-#' @return data
-#' @export convertir_dates
-#' @importFrom dplyr "%>%"
+#' @title                  Converteix format TEXT A DATA 
+#' @description            Converteix format TEXT A DATA (Format text -> data)   
+#' @param  d               Base de dades
+#' @param  taulavariables  Variables que volem canviar
+#' @param  campdata        dates
+#' @return                 Data
+#' @export                 convertir_dates
+#' @importFrom             dplyr "%>%"
 #' @examples
 #'camp=c("idp","dtindex","sexe","dnaix","situacio","entrada",
 #'       "sortida", "INCLUSIO.DM2","DG.HTA","DG.IC",
@@ -182,12 +182,12 @@ convertir_dates<-function(d="dt_plana",taulavariables="conductor",campdata="date
 
 
 
-#' @title   Passa data de SPSS a Rdata
-#' @description Passa data de SPSS a Rdata 
-#' @param  x data de SPSS
-#' @return data Rdata
-#' @export dataSPSS_to_Rdata
-#' @importFrom dplyr "%>%"
+#' @title               Passa data de SPSS a Rdata
+#' @description         Passa data de SPSS a Rdata 
+#' @param  x            Data de SPSS
+#' @return              Data Rdata
+#' @export              dataSPSS_to_Rdata
+#' @importFrom          dplyr "%>%"
 #' @examples
 #'k<-dataSPSS_to_Rdata(666)
 #'k

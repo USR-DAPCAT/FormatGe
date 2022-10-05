@@ -1,10 +1,10 @@
-#' @title Factoritzar FormatGe
-#' @description factoritza una llista de variables donades a la teva base de dades
-#' @param dt Base de dades plan
-#' @param variables vector  a on posem les variables a factoritzar
-#' @return la base de dades amb les variables factoritzades 
-#' @export factoritzar 
-#' @importFrom dplyr "%>%"
+#' @title              Factoritzar FormatGe
+#' @description        Factoritza una llista de variables donades a la teva base de dades
+#' @param dt           Base de dades plana
+#' @param variables    Vector  a on posem les variables a factoritzar
+#' @return             La base de dades amb les variables factoritzades 
+#' @export             factoritzar 
+#' @importFrom         dplyr "%>%"
 #' @examples
 #' 
 #' class(dt_plana$situacio)
@@ -25,15 +25,15 @@ factoritzar<-function(dt="dades",variables=c("grup","situacio")) {
 }
 
 
-#' @title Factoritzar (No/Yes).FormatGe
-#' @description A tots aquells valors dummis, el "0"-->"No" i "1"-->"Yes"  
-#' @param dt base de dades 
-#' @param columna La columna del conductor a on farem la factoritzacio    
-#' @param taulavariables Conductor
-#' @param ... altres funcions
-#' @return NO.YES  
-#' @export factoritzar.NO.YES 
-#' @importFrom dplyr "%>%"
+#' @title                 Factoritzar (No/Yes).FormatGe
+#' @description           A tots aquells valors dummis, el "0"-->"No" i "1"-->"Yes"  
+#' @param dt              Base de dades 
+#' @param columna         La columna del conductor a on farem la factoritzacio    
+#' @param taulavariables  Conductor
+#' @param ...             Altres funcions
+#' @return                NO.YES  
+#' @export                factoritzar.NO.YES 
+#' @importFrom            dplyr "%>%"
 #' @examples
 #' camp=c("idp","dtindex","sexe","dnaix","situacio","entrada",
 #' "sortida", "INCLUSIO.DM2","DG.HTA","DG.IC",
@@ -71,15 +71,15 @@ factoritzar.NO.YES<-function(dt="dadesDF",columna="factor",taulavariables="varia
 }
 
 
-#' @title Factoritzar (No/Si).FormatGe
-#' @description A tots aquells valors dummis, el "0"-->"No" i "1"-->"Si"  
-#' @param dt base de dades 
-#' @param columna La columna del conductor a on farem la factoritzacio  
-#' @param taulavariables Conductor
-#' @param ... altres funcions
-#' @return NO.Si  
-#' @export factoritzar.NO.SI 
-#' @importFrom dplyr "%>%"
+#' @title                         Factoritzar (No/Si).FormatGe
+#' @description                   A tots aquells valors dummis, el "0"-->"No" i "1"-->"Si"  
+#' @param dt                      Base de dades 
+#' @param columna                 La columna del conductor a on farem la factoritzacio  
+#' @param taulavariables          Conductor
+#' @param ...                     Altres funcions
+#' @return                        NO.Si  
+#' @export                        factoritzar.NO.SI 
+#' @importFrom                    dplyr "%>%"
 #' @examples
 #' 
 #' camp=c("idp","dtindex","sexe","dnaix","situacio","entrada","sortida", 

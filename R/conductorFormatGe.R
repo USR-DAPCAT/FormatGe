@@ -1,16 +1,65 @@
-#' @title read_conductor
-#' @description Llegir el fitxer conductor de diferents formats txt o rds o xls xlsx o data_frame tibble
-#' @param fitxer fitxer que el convertirem a tibble.
-#' @param ... altres funcions
-#' @return una taula tibble
-#' @export
-#' @importFrom dplyr "%>%"
+#' @title             Read_conductor
+#' @description       Llegir el fitxer conductor de diferents formats txt o rds o xls xlsx o data_frame tibble
+#' @param fitxer      Fitxer que el convertirem a tibble.
+#' @param ...         Altres funcions
+#' @return            Una taula tibble
+#' @export            read_conductor
+#' @importFrom        dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
-
+#'camp=c("idp",
+#'       "dtindex",
+#'       "sexe",
+#'       "dnaix",
+#'       "situacio",
+#'       "entrada",
+#'       "sortida", 
+#'       "INCLUSIO.DM2",
+#'       "DG.HTA",
+#'       "DG.IC",
+#'       "cHDL.valor",
+#'       "cLDL.valor",
+#'       "cT.valor",
+#'       "GLICADA.valor",
+#'       "IMC.valor")
+#'descripcio=c("Identificacio Pacient",
+#'             "data Index",
+#'             "Sexe",
+#'             "data Naixament",
+#'             "Situacio",
+#'             "Entrada",
+#'             "Sortida",
+#'             "Inclusio Diabetes Tipus 2",
+#'             "Hipertensió arterial",
+#'             "Insuficiencia Cardiaca",
+#'             "Colesterol HDL(mg/dL)",
+#'             "Colesterol LDL(mg/dL)",
+#'             "Colesterol Total(mg/dL)",
+#'             "HbA1c",
+#'             "IMC" )
+#'descripcio2=c("Identificacion Paciente",
+#'              "data Indice",
+#'              "Sexo",
+#'              "data Naicimiento",
+#'              "Situacion",
+#'              "Entrada",
+#'              "Salida",
+#'              "Inclusion Diabetes Tipus 2",
+#'              "Hipertensión arterial",
+#'              "Insuficiencia Cardiaca",
+#'              "Colesterol HDL(mg/dL)",
+#'              "Colesterol LDL(mg/dL)",
+#'              "Colesterol Total(mg/dL)",
+#'              "HbA1c",
+#'              "IMC" )
+#'factor=c("","","","","","","",1,1,1,"","","","","")
+#'dates=c("",1,"",1,"",1,1,"","","","","","","","")
+#'recode=c("","","","","","","","","","","","","","7.0","")
+#'taula1=c(1,1,"","","","","","","","","","","","","")
+#'var_nou=c("idp_nou","index_nou","","","","","","","","","","","","","")
+#'
+#'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates,recode,taula1,var_nou)
+#'k1<-read_conductor(conductor1)
+#'k1
 read_conductor<-function(fitxer,...) {
   # fitxer<-here::here(fitxer_cataleg)
   # Si el fitxer es un data_frame saltar

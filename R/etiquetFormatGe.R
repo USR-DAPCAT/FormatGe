@@ -1,12 +1,12 @@
-#' @title Etiquetar els noms de les variables
-#' @description Etiquetar les variables de les dades 
-#' @param d     Base de dades
+#' @title                 Etiquetar els noms de les variables
+#' @description           Etiquetar les variables de les dades 
+#' @param d               Base de dades
 #' @param taulavariables  conductor
-#' @param camp_descripcio  camp del conductor
-#' @param ... altres funcions
-#' @return Etiquetar
-#' @export etiquetar
-#' @importFrom dplyr "%>%"
+#' @param camp_descripcio camp del conductor
+#' @param ...             altres funcions
+#' @return                Etiquetar
+#' @export                etiquetar
+#' @importFrom            dplyr "%>%"
 #' @examples
 #'camp=c("idp",
 #'       "dtindex",
@@ -110,9 +110,9 @@ etiquetar<-function(d="dadestotal",
 #' @param missings           Missing
 #' @param new_vars           Nova variable
 #' @param sufix              Sufix 
-#' @return dataframe dades, conductor_variables
-#' @export etiquetar_valors
-#' @importFrom dplyr "%>%"
+#' @return                   Dataframe dades,  conductor_variables
+#' @export                   etiquetar_valors
+#' @importFrom               dplyr "%>%"
 #' @examples
 #' camp=c("sexe","sexe","situacio","situacio","situacio")
 #' valor=c("H","D","A","D","T")
@@ -362,12 +362,12 @@ etiquetar_vector<-function(vector="vector_variables",
 
 
 
-#' @title Llista Nomenada
-#' @description Retorna llista nomenada amb els mateixos noms dels objectes que inclou
-#' @param ... altres funcions
-#' @return Llista Nomenada
-#' @export llistaNomenada
-#' @importFrom dplyr "%>%"
+#' @title                  Llista Nomenada
+#' @description            Retorna llista nomenada amb els mateixos noms dels objectes que inclou
+#' @param ...              Altres funcions
+#' @return                 Llista Nomenada
+#' @export                 llistaNomenada
+#' @importFrom             dplyr "%>%"
 #' @examples
 
 llistaNomenada <- function(...) {

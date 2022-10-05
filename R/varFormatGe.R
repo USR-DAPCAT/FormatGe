@@ -1,17 +1,66 @@
-#' @title selectorvariables
-#' @description selectorvariables 
-#' @param  taula           xxx
-#' @param  taulavariables  xxx
-#' @param  dt              xxx
-#' @return variables
-#' @export selectorvariables
+#' @title                    Seleccionem les variables
+#' @description              Seleccionem les variables a partir d'un conductor
+#' @param  taula             Camp a on hi han les variables
+#' @param  taulavariables    Conductor
+#' @param  dt                Base de dades
+#' @return                   Base de dades amb les variables seleccionades
+#' @export                   selectorvariables
 #' @importFrom dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
-#' 
+#'camp=c("idp",
+#'       "dtindex",
+#'       "sexe",
+#'       "dnaix",
+#'       "situacio",
+#'       "entrada",
+#'       "sortida", 
+#'       "INCLUSIO.DM2",
+#'       "DG.HTA",
+#'       "DG.IC",
+#'       "cHDL.valor",
+#'       "cLDL.valor",
+#'       "cT.valor",
+#'       "GLICADA.valor",
+#'       "IMC.valor")
+#'descripcio=c("Identificacio Pacient",
+#'             "data Index",
+#'             "Sexe",
+#'             "data Naixament",
+#'             "Situacio",
+#'             "Entrada",
+#'             "Sortida",
+#'             "Inclusio Diabetes Tipus 2",
+#'             "Hipertensió arterial",
+#'             "Insuficiencia Cardiaca",
+#'             "Colesterol HDL(mg/dL)",
+#'             "Colesterol LDL(mg/dL)",
+#'             "Colesterol Total(mg/dL)",
+#'             "HbA1c",
+#'             "IMC" )
+#'descripcio2=c("Identificacion Paciente",
+#'              "data Indice",
+#'              "Sexo",
+#'              "data Naicimiento",
+#'              "Situacion",
+#'              "Entrada",
+#'              "Salida",
+#'              "Inclusion Diabetes Tipus 2",
+#'              "Hipertensión arterial",
+#'              "Insuficiencia Cardiaca",
+#'              "Colesterol HDL(mg/dL)",
+#'              "Colesterol LDL(mg/dL)",
+#'              "Colesterol Total(mg/dL)",
+#'              "HbA1c",
+#'              "IMC" )
+#'factor=c("","","","","","","",1,1,1,"","","","","")
+#'dates=c("",1,"",1,"",1,1,"","","","","","","","")
+#'recode=c("","","","","","","","","","","","","","7.0","")
+#'taula1=c(1,1,1,1,1,1,1,1,1,1,1,1,"","","")
+#'
+#'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates,recode,taula1)
+#'k<-selectorvariables(taula="taula1",taulavariables=conductor1,dt=dt_plana)
+#'               
+#'k
 selectorvariables<-function(taula="table1",
                             taulavariables="variables_R.xls",
                             dt="dadestotal") {
@@ -37,22 +86,73 @@ selectorvariables<-function(taula="table1",
 }
 
 
-#' @title Extreure.Variables
-#' @description Extreure.Variables: Selector de variables TAULA 
-#' @param  taula           xxx
-#' @param  taulavariables  xxx
-#' @param  variable_camp   xxx
-#' @param  dt              xxx 
-#' @param ... altres funcions
-#' @return extreure variable
-#' @export extreure.variables
-#' @importFrom dplyr "%>%"
+#' @title                       Extreure.Variables
+#' @description                 Extreure.Variables: Selector de variables TAULA 
+#' @param  taula                Camp a on hi han les variables
+#' @param  taulavariables       Conductor
+#' @param  variable_camp        Variable camp del Conductor
+#' @param  dt                   Base de dades
+#' @param                       ... altres funcions
+#' @return                      extreure variable
+#' @export                      extreure.variables
+#' @importFrom                  dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
-#' 
+#'camp=c("idp",
+#'       "dtindex",
+#'       "sexe",
+#'       "dnaix",
+#'       "situacio",
+#'       "entrada",
+#'       "sortida", 
+#'       "INCLUSIO.DM2",
+#'       "DG.HTA",
+#'       "DG.IC",
+#'       "cHDL.valor",
+#'       "cLDL.valor",
+#'       "cT.valor",
+#'       "GLICADA.valor",
+#'       "IMC.valor")
+#'descripcio=c("Identificacio Pacient",
+#'             "data Index",
+#'             "Sexe",
+#'             "data Naixament",
+#'             "Situacio",
+#'             "Entrada",
+#'             "Sortida",
+#'             "Inclusio Diabetes Tipus 2",
+#'             "Hipertensió arterial",
+#'             "Insuficiencia Cardiaca",
+#'             "Colesterol HDL(mg/dL)",
+#'             "Colesterol LDL(mg/dL)",
+#'             "Colesterol Total(mg/dL)",
+#'             "HbA1c",
+#'             "IMC" )
+#'descripcio2=c("Identificacion Paciente",
+#'              "data Indice",
+#'              "Sexo",
+#'              "data Naicimiento",
+#'              "Situacion",
+#'              "Entrada",
+#'              "Salida",
+#'              "Inclusion Diabetes Tipus 2",
+#'              "Hipertensión arterial",
+#'              "Insuficiencia Cardiaca",
+#'              "Colesterol HDL(mg/dL)",
+#'              "Colesterol LDL(mg/dL)",
+#'              "Colesterol Total(mg/dL)",
+#'              "HbA1c",
+#'              "IMC" )
+#'factor=c("","","","","","","",1,1,1,"","","","","")
+#'dates=c("",1,"",1,"",1,1,"","","","","","","","")
+#'recode=c("","","","","","","","","","","","","","7.0","")
+#'taula1=c(1,1,1,1,1,1,1,1,1,1,1,1,"","","")
+#'
+#'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates,recode,taula1)
+#'k1<-extreure.variables(taula="taula1",taulavariables=conductor1,variable_camp="camp",dt=NA)
+#'k2<-extreure.variables(taula="taula1",taulavariables=conductor1,variable_camp="camp",dt=dt_plana)               
+#'k1
+#'k2
+#'
 extreure.variables=function(taula="table1",
                             taulavariables="variables_R.xls",
                             variable_camp="camp",
@@ -85,21 +185,73 @@ extreure.variables=function(taula="table1",
 
 
 
-#' @title Funcio per canviar noms de variables del data frame
-#' @description Funcio per canviar noms de variables del data frame
-#' @param  dt              xxx
-#' @param  variable        xxx
-#' @param  nou_nom         xxx
-#' @param  conductor       xxx 
-#' @param ...              altres funcions
-#' @return extreure variable
-#' @export extreure.variables
-#' @importFrom dplyr "%>%"
+#' @title                             Canviar noms de les variables
+#' @description                       Canviar noms de variables del data frame
+#' @param  dt                         Base de dades
+#' @param  variable                   Variables escollides a partir del conductor
+#' @param  nou_nom                    Nom NOUS de les variables
+#' @param  conductor                  Conductor 
+#' @param ...                         Altres funcions
+#' @return                            canvi de noms de les variables escollides
+#' @export                            canvi_noms_variables
+#' @importFrom                        dplyr "%>%"
 #' @examples
-#' domini="farmacs_prescrits"
-#' cod=c("A10BB01","A10BD01","A10BD04","A10BA02","J01DD07")
-#' agr_Farmac=c("Sulfonilureas","Biguanidas","Tiazolidinadiones","Biguanidas","Antibioticos")
-#' dt_cataleg<-data.frame(domini=domini,cod=cod,agr_Farmac=agr_Farmac)
+#'camp=c("idp",
+#'       "dtindex",
+#'       "sexe",
+#'       "dnaix",
+#'       "situacio",
+#'       "entrada",
+#'       "sortida", 
+#'       "INCLUSIO.DM2",
+#'       "DG.HTA",
+#'       "DG.IC",
+#'       "cHDL.valor",
+#'       "cLDL.valor",
+#'       "cT.valor",
+#'       "GLICADA.valor",
+#'       "IMC.valor")
+#'descripcio=c("Identificacio Pacient",
+#'             "data Index",
+#'             "Sexe",
+#'             "data Naixament",
+#'             "Situacio",
+#'             "Entrada",
+#'             "Sortida",
+#'             "Inclusio Diabetes Tipus 2",
+#'             "Hipertensió arterial",
+#'             "Insuficiencia Cardiaca",
+#'             "Colesterol HDL(mg/dL)",
+#'             "Colesterol LDL(mg/dL)",
+#'             "Colesterol Total(mg/dL)",
+#'             "HbA1c",
+#'             "IMC" )
+#'descripcio2=c("Identificacion Paciente",
+#'              "data Indice",
+#'              "Sexo",
+#'              "data Naicimiento",
+#'              "Situacion",
+#'              "Entrada",
+#'              "Salida",
+#'              "Inclusion Diabetes Tipus 2",
+#'              "Hipertensión arterial",
+#'              "Insuficiencia Cardiaca",
+#'              "Colesterol HDL(mg/dL)",
+#'              "Colesterol LDL(mg/dL)",
+#'              "Colesterol Total(mg/dL)",
+#'              "HbA1c",
+#'              "IMC" )
+#'factor=c("","","","","","","",1,1,1,"","","","","")
+#'dates=c("",1,"",1,"",1,1,"","","","","","","","")
+#'recode=c("","","","","","","","","","","","","","7.0","")
+#'taula1=c(1,1,"","","","","","","","","","","","","")
+#'var_nou=c("idp_nou","index_nou","","","","","","","","","","","","","")
+#'
+#'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates,recode,taula1,var_nou)
+#'
+#'k1<-canvi_noms_variables(dt=dt_plana,variable="taula1",nou_nom="var_nou",conductor=conductor1)
+#'k1
+#'
 canvi_noms_variables<-function(dt="dt_temp",
                                variable="ajust2", 
                                nou_nom="descripcio",
@@ -125,7 +277,7 @@ canvi_noms_variables<-function(dt="dt_temp",
   
   # Canviar noms per etiqueta descripcio
   # setnames(dt, old = vars, new = etiquetes_noves)
-  dt<-dt %>%dplyr:: rename_at(vars(vars), ~ etiquetes_noves)
+  dt<-dt %>%dplyr::rename_at(dplyr::vars(vars), ~ etiquetes_noves)
   
 }
 

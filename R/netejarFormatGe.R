@@ -1,9 +1,9 @@
-#' @title Netejar els noms de les variables
-#' @description Netejar els noms de les variables
-#' @param dt base de dades
-#' @return base de dades amb la neteja de noms
-#' @export netejar.noms.variables
-#' @importFrom dplyr "%>%"
+#' @title         Netejar els noms de les variables
+#' @description   Netejar els noms de les variables
+#' @param dt      Base de dades
+#' @return        Base de dades amb la neteja de noms
+#' @export        netejar.noms.variables
+#' @importFrom    dplyr "%>%"
 #' @examples
 #' kk<-netejar.noms.variables(dt_plana)
 #' kk
@@ -32,12 +32,12 @@ netejar.noms.variables<-function(dt="hoolywod"){
 
 
 
-#' @title Elimina accents dels noms de les variables.
-#' @description Elimina accents dels noms de les variables
-#' @param dt base de dades
-#' @return base de dades  sense accents 
-#' @export netejar.accents.variables
-#' @importFrom dplyr "%>%"
+#' @title           Elimina accents dels noms de les variables.
+#' @description     Elimina accents dels noms de les variables
+#' @param dt        Base de dades
+#' @return          Base de dades  sense accents 
+#' @export          netejar.accents.variables
+#' @importFrom      dplyr "%>%"
 #' @examples
 #' kk<-netejar.accents.variables(dt_plana)
 #' kk
@@ -49,12 +49,12 @@ netejar.accents.variables <- function(dt="LIPOS_EORTEGA"){
 }
 
 
-#' @title Elimina espais dels noms de les variables.
-#' @description Elimina espais dels noms de les variables
-#' @param dt base de dades
-#' @return base de dades elimina espais
-#' @export netejar_espais
-#' @importFrom dplyr "%>%"
+#' @title          Elimina espais dels noms de les variables.
+#' @description    Elimina espais dels noms de les variables
+#' @param dt       Base de dades
+#' @return         Base de dades elimina espais
+#' @export         netejar_espais
+#' @importFrom     dplyr "%>%"
 #' @examples
 #' kk<-netejar_espais(dt_plana)
 #' kk

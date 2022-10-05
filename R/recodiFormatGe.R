@@ -691,18 +691,85 @@ missings_to_level<-function(dades,variable="popes") {
 
 
 #' @title                       Generar intervals
-#' @description                 Recodificar Generar intervals de valors amb variables continues
-#' @param dt                    xxx
-#' @param vars                  xxx
-#' @param taulavariables        xxx 
-#' @param missing               xxx 
-#' @param g                     xxx 
+#' @description                 Generar intervals a partir d'un conductor i un tall definit
+#' @param dt                    Base de dades
+#' @param vars                  Variables
+#' @param taulavariables        Conductor
+#' @param missing               Missing 
+#' @param g                     Numero de talls
 #' @return                      Retorna intervals
 #' @export                      generar_intervals
 #' @importFrom                  dplyr "%>%"
 #' @examples
-#' 
-generar_intervals<-function(dt="dades",vars="ajust4",taulavariables="conductor",missing="Unkown",g=3) {
+#'camp=c("idp",
+#'       "dtindex",
+#'       "sexe",
+#'       "dnaix",
+#'       "situacio",
+#'       "entrada",
+#'       "sortida", 
+#'       "INCLUSIO.DM2",
+#'       "DG.HTA",
+#'       "DG.IC",
+#'       "cHDL.valor",
+#'       "cLDL.valor",
+#'       "cT.valor",
+#'       "GLICADA.valor",
+#'       "IMC.valor")
+#'descripcio=c("Identificacio Pacient",
+#'             "data Index",
+#'             "Sexe",
+#'             "data Naixament",
+#'             "Situacio",
+#'             "Entrada",
+#'             "Sortida",
+#'             "Inclusio Diabetes Tipus 2",
+#'             "Hipertensió arterial",
+#'             "Insuficiencia Cardiaca",
+#'             "Colesterol HDL(mg/dL)",
+#'             "Colesterol LDL(mg/dL)",
+#'             "Colesterol Total(mg/dL)",
+#'             "HbA1c",
+#'             "IMC" )
+#'descripcio2=c("Identificacion Paciente",
+#'              "data Indice",
+#'              "Sexo",
+#'              "data Naicimiento",
+#'              "Situacion",
+#'              "Entrada",
+#'              "Salida",
+#'              "Inclusion Diabetes Tipus 2",
+#'              "Hipertensión arterial",
+#'              "Insuficiencia Cardiaca",
+#'              "Colesterol HDL(mg/dL)",
+#'              "Colesterol LDL(mg/dL)",
+#'              "Colesterol Total(mg/dL)",
+#'              "HbA1c",
+#'              "IMC" )
+#'factor= c("","","","","","","",1,1,1,"","","","","")
+#'dates=  c("",1,"",1,"",1,1,"","","","","","","","")
+#'recode=c("","","","","","","","","","","","","","7.0","")
+#'rang_valid=   c("","","","","","","","","","","","","","","15-100")
+#'ajust4=c("","","","","","","","","","","1","1","1","1","1")
+#'
+#'conductor1<-data.frame(camp,
+#'descripcio,
+#'descripcio2,
+#'factor,
+#'dates,
+#'recode,
+#'rang_valid,
+#'ajust4)
+#'
+#'conductor1
+#'dt_plana
+#'kk<-generar_intervals(dt=dt_plana,vars="ajust4",taulavariables=conductor1,missing="Unkown",g=2)
+#'kk
+generar_intervals<-function(dt="dades",
+                            vars="ajust4",
+                            taulavariables="conductor",
+                            missing="Unkown",
+                            g=3) {
   
   # dt=dades
   # vars="ajust4"
@@ -710,27 +777,41 @@ generar_intervals<-function(dt="dades",vars="ajust4",taulavariables="conductor",
   # missing="Unkown"
   # g=3
   
+  #vars_sym<-dplyr::sym(vars)
+  #!!camp_eval
+  #vars=!!vars
+  
+  
   # Actualitzar variables amb dades de quantis a categoritzar (Missings com a categoria)
   if (missing(vars)) {
     vars_fix<-names(dt)
     vars_fix_num<-dt %>% dplyr::select_if(is.numeric) %>% names()
   } else {
-    vars_fix<-extreure.variables("ajust4", taulavariables)
+    vars_fix<-extreure.variables(vars, taulavariables)
     vars_fix_num<-dt %>% dplyr::select(vars_fix) %>% dplyr::select_if(is.numeric) %>% names()
   }
   
+  ###############################################################################
+  # Actualitzar variables amb dades de quantis a categoritzar (Missings com a categoria)
+  #if (missing(vars)) {
+  #  vars_fix<-names(dt)
+  #  vars_fix_num<-dt %>% dplyr::select_if(is.numeric) %>% names()
+  #} else {
+  #  vars_fix<-extreure.variables("ajust4", taulavariables)
+  #  vars_fix_num<-dt %>% dplyr::select(vars_fix) %>% dplyr::select_if(is.numeric) %>% names()
+  #}
+  ###############################################################################
+  
+  
   # Generar intervals en categoriques 
   dt_temp<-dt %>% 
-    dplyr::mutate_at(vars_fix_num, ~cut2(.,g=g))
-  
-  # # Falta opcio de recode en funcio de criteris manuals
-  # dt %>% dplyr::select(vars_fix_num) %>% recodificar2(taulavariables = conductor,criteris = "recode",prefix="popetes",missings = F) %>% 
-  #   dplyr::select(ends_with(".popetes")) %>% rename()
+    dplyr::mutate_at(vars_fix_num, ~Hmisc::cut2(.,g=g))
   
   # Reemplaçar missings si cal
   if (!missing(missing)) {
     dt_temp<- dt_temp %>% dplyr::mutate_at(vars_fix,~replace(as.character(.), is.na(.), missing)) %>% 
       dplyr::mutate_at(vars_fix,as.factor)}
+  
   # Etiquetar
   dt_temp %>% etiquetar(taulavariables = taulavariables) 
   

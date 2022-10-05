@@ -17,4 +17,4 @@
 #' \item{GLICADA.valor}{GLICADA.valor (6.2--10.4)} 
 #' \item{IMC.valor}{IMC.valor (24.84--41.01)}
 #' }
-"dt_plana"
+"dt_plana"  
