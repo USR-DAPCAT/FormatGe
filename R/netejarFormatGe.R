@@ -1,12 +1,14 @@
 #' @title         Netejar els noms de les variables
-#' @description   Netejar els noms de les variables
+#' @description   Netejar els noms de les variables ["/","(",")","/"],-> ""  [" ","-"]-> "_" ,..
 #' @param dt      Base de dades
 #' @return        Base de dades amb la neteja de noms
 #' @export        netejar.noms.variables
 #' @importFrom    dplyr "%>%"
 #' @examples
+#' dt_plana$"var//"<-1
 #' kk<-netejar.noms.variables(dt_plana)
-#' kk
+#' stats::variable.names(dt_plana)
+#' stats::variable.names(kk)
 netejar.noms.variables<-function(dt="hoolywod"){
   
   paco<-names(dt) %>% 
@@ -32,15 +34,17 @@ netejar.noms.variables<-function(dt="hoolywod"){
 
 
 
-#' @title           Elimina accents dels noms de les variables.
+#' @title           Elimina accents dels noms de les variables
 #' @description     Elimina accents dels noms de les variables
 #' @param dt        Base de dades
 #' @return          Base de dades  sense accents 
 #' @export          netejar.accents.variables
 #' @importFrom      dplyr "%>%"
 #' @examples
+#' dt_plana$"sexé2"<-1
 #' kk<-netejar.accents.variables(dt_plana)
-#' kk
+#' stats::variable.names(dt_plana)
+#' stats::variable.names(kk)
 netejar.accents.variables <- function(dt="LIPOS_EORTEGA"){
   paco<-names(dt) %>%
     iconv(to="ASCII//TRANSLIT")
@@ -49,18 +53,26 @@ netejar.accents.variables <- function(dt="LIPOS_EORTEGA"){
 }
 
 
-#' @title          Elimina espais dels noms de les variables.
+#' @title          Elimina espais dels noms de les variables
 #' @description    Elimina espais dels noms de les variables
 #' @param dt       Base de dades
 #' @return         Base de dades elimina espais
 #' @export         netejar_espais
 #' @importFrom     dplyr "%>%"
 #' @examples
-#' kk<-netejar_espais(dt_plana)
-#' kk
+#' dt_plana$"  var3  "<-69
+#' kk<-netejar_espais(dt=dt_plana)
+#' stats::variable.names(dt_plana)
+#' stats::variable.names(kk)
 netejar_espais<-function(dt="dades") {
-  # dt=dt_total
-  dt<-dt %>% dplyr::mutate_if(is.character,stringr::str_trim)
+  paco<-names(dt) %>% 
+    stringr::str_trim()
+    
+  names(dt)<-paco
+  dt
+  
+  #dt=dt_total
+  #dt<-dt%>% dplyr::mutate_if(is.character,stringr::str_trim)
+  
 }
-
 

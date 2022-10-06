@@ -1,8 +1,8 @@
 #' @title              Data Random entre dues dates 
-#' @description        Data Random entre dues dates (dataini i datafi) 
+#' @description        Data Random entre dues dates (dataini = 20120101, datafi = 20121231) 
 #' @param  dataini     Data inicial
 #' @param  datafi      Data final
-#' @return             Una data random
+#' @return             Una data random tiupus "2012-10-23 20:57:28 CEST"
 #' @export             data.random
 #' @examples
 #' data<-data.random(20120101,20121231)
@@ -22,8 +22,8 @@ data.random <- function(dataini=20120101, datafi=20121231) {
 
 
 #' @title                Retorna una data a STRING
-#' @description          Retorna una data a STRING 
-#' @param  data          una data     
+#' @description          Retorna una data: "27-09-2022"  a STRING 
+#' @param  data          una data   tipus  "27-09-2022" 
 #' @return               Data a STRING 
 #' @export               data.to.string
 #' @examples
@@ -42,7 +42,7 @@ data.to.string<-function(data) {
 
 
 
-#' @title               Data R Lubridate a partir de data UTC
+#' @title               Data R Lubridate a partir de data UTC 
 #' @description         Data R Lubridate a partir de data UTC 
 #' @param  x            Variablesde data
 #' @param  dt           Base de dades
@@ -56,6 +56,8 @@ data.to.string<-function(data) {
 #'dataUTC_to_Rdata(x,dt_plana)
 dataUTC_to_Rdata<-function(x,dt) {
   
+  #dt<-dt_plana
+  #x=c("dtindex","dnaix","entrada","sortida", "INCLUSIO.DM2")
   # dt<-dades
   # x=c("data_inici_HD","ANT1_ARTER_PERI","ANT2_ARTE_PERI","ANT1_CI")
   
@@ -80,7 +82,6 @@ dataUTC_to_Rdata<-function(x,dt) {
   
   # Aplicar conversions als dos tipos de dates
   dt<-dt %>% purrr::modify_at(x_UTC,~data_convert_UTC(.x))   # UTC ->date
-  
   dt<-dt %>% purrr::modify_at(x_text,~data_convert_text(.x))   # text->date
   
   dt
@@ -106,7 +107,7 @@ data_convert_text<-function(x){
 #' @title                Funcio que converteix de una data numeric (15784) a Date
 #' @description          Funcio que converteix de numeric (15784) a Date "2013-03-20" 
 #' @param  x             Data numeric
-#' @return               Date "2013-03-20" 
+#' @return               Data "2013-03-20" 
 #' @export               data_convert_numeric
 #' @importFrom           dplyr "%>%"
 #' @examples
@@ -133,7 +134,7 @@ data_convert_UTC<-function(x){
 
 
 #' @title                  Converteix format TEXT A DATA 
-#' @description            Converteix format TEXT A DATA (Format text -> data)   
+#' @description            Converteix format TEXT A DATA ("19722207"->"1972-02-22")   
 #' @param  d               Base de dades
 #' @param  taulavariables  Variables que volem canviar
 #' @param  campdata        dates
@@ -147,7 +148,7 @@ data_convert_UTC<-function(x){
 #'factor=c("","","","","","","",1,1,1,"","","","","",1)
 #'dates=c("","","","","","","","","","","","","","","",1)
 #'conductor<-data.frame(camp,factor,dates)
-#'dt_plana$data2<-"19722202"
+#'dt_plana$data2<-"19722207"
 #'K<-convertir_dates(d=dt_plana,taulavariables=conductor,campdata="dates")
 #'K
 convertir_dates<-function(d="dt_plana",taulavariables="conductor",campdata="dates")

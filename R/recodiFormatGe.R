@@ -1,10 +1,10 @@
 #' @title                       Recodificar les variables que escollim
-#' @description                 Recodificar en funció d'un Conductor
+#' @description                 Recodificar les variabñes que escollim a partir del parametre "criteris"
 #' @param dt                    Base de dades
 #' @param taulavariables        Conductor
-#' @param criteris              Criteris
+#' @param criteris              Criteris ex:: 1/3/5
 #' @param missings              Missing
-#' @param prefix                Prefix
+#' @param prefix                Posar un prefix a la nova variable
 #' @param ...                   Altres funcions
 #' @return                      Retorna les dades amb la recodificacio 
 #' @export                      recodificar
@@ -58,7 +58,9 @@
 #'factor=c("","","","","","","",1,1,1,"","","","","")
 #'dates=c("",1,"",1,"",1,1,"","","","","","","","")
 #'recode=c("","","","","","","","","","","","","","7.0","")
+#'
 #'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates,recode)
+#'
 #'k<-recodificar(dt=dt_plana, 
 #'               taulavariables=conductor1,
 #'               criteris="recode",
@@ -141,10 +143,10 @@ recodificar<-function(dt="dades",
 
 
 #' @title                       Recodificar les variables que escollim
-#' @description                 Recodifico en funció d'un Conductor
+#' @description                 Recodificar a partir del parametre "criteris"+criteris_labels( NO: auto)
 #' @param dt                    Base de dades
 #' @param taulavariables        Conductor
-#' @param criteris              Criteris
+#' @param criteris              Criteris ex:: 1/3/5
 #' @param missings              Missing
 #' @param prefix                Prefix
 #' @param criteris_labels       Criteris labels
@@ -202,13 +204,7 @@ recodificar<-function(dt="dades",
 #'dates=c("",1,"",1,"",1,1,"","","","","","","","")
 #'recode=c("","","","","","","","","","","","","","7.0","")
 #'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates,recode)
-#'k2<-recodificar(dt=dt_plana, 
-#'               taulavariables=conductor1,
-#'               criteris="recode",
-#'               missings=FALSE,
-#'               prefix="_recode_")
-#'               
-#'k2
+#'
 recodificar2<-function(dt="dt_plana",
                        taulavariables ="conductor",
                        criteris = "recode",
@@ -438,7 +434,7 @@ recodificar2<-function(dt="dt_plana",
       
       #canvi!!**(6.5.2020)**(data.frame!!!)
       dt%>%dplyr::group_by_at( dplyr::vars(!!nomrecode))%>%dplyr::summarise_at( dplyr::vars(!!nomcamp),
-                                                         list(min=~(min(.,na.rm=T)),max=~(max(.,na.rm=T)),freq=~n()))%>%dplyr::ungroup()%>%as.data.frame()%>%print()
+                                                         list(min=~(min(.,na.rm=T)),max=~(max(.,na.rm=T)),freq=~dplyr::n()))%>%dplyr::ungroup()%>%as.data.frame()%>%print()
       #-----------------#
     }
     

@@ -1,5 +1,5 @@
 #' @title                 Etiquetar els noms de les variables
-#' @description           Etiquetar les variables de les dades 
+#' @description           Etiquetar les variables de les dades a partir d'un conductor. 
 #' @param d               Base de dades
 #' @param taulavariables  conductor
 #' @param camp_descripcio camp del conductor
@@ -102,7 +102,7 @@ etiquetar<-function(d="dadestotal",
 
 
 #' @title                    Etiquetar valors de les variables
-#' @description              Retorna Data frame etiquetat en funció d'un conductor
+#' @description              Etiquetar valors de les variables a partir d'un conductor -pestanya etiquetes-
 #' @param dt                 Base de dades
 #' @param variables_factors  Conductor
 #' @param fulla              Si tenim el conductor a una pestanya
@@ -122,6 +122,7 @@ etiquetar<-function(d="dadestotal",
 #'
 #' 
 #'table(dt_plana$sexe) 
+#'
 #'dades_valors_etiquet<-etiquetar_valors(
 #'dt=dt_plana,
 #'variables_factors=conductor2,
@@ -130,7 +131,6 @@ etiquetar<-function(d="dadestotal",
 #'missings=FALSE, 
 #'new_vars=FALSE,
 #'sufix=".2")
-#'
 #'
 #'table(dades_valors_etiquet$sexe) 
 #'

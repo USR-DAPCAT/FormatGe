@@ -24,4 +24,5 @@ Imports:
       tibble,
       data.table,
       lubridate,
-      purrr
+      purrr,
+      stats

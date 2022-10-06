@@ -1,5 +1,5 @@
 #' @title             Read_conductor
-#' @description       Llegir el fitxer conductor de diferents formats txt o rds o xls xlsx o data_frame tibble
+#' @description       Llegeix el fitxer conductor de diferents formats txt o rds o xls xlsx o data_frame tibble
 #' @param fitxer      Fitxer que el convertirem a tibble.
 #' @param ...         Altres funcions
 #' @return            Una taula tibble

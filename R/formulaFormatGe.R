@@ -1,5 +1,5 @@
-#' @title                Formula FormatGe.
-#' @description          Retorna Data.frame or tibble with labeled variables
+#' @title                Formula Text.
+#' @description          Retorna Data.frame or tibble amb
 #' @param x              Indicador de cadena del camp del fitxer extern amb indicador de la posició de la fórmula (1,2....) 
 #' @param y              Indicador de resposta de cadena (default "."): ". ~ x1 +x2 + x3 "
 #' @param eliminar       Caracter que indica si alguna variable ha de ser eliminada
@@ -13,12 +13,13 @@
 #' 
 #' Hmisc::label(iris)
 #' conductor_iris<-data.frame(camp=names(iris),formu=c(1,2,3,4,5))
-#' formula_iris1<-formula_text("formu",taulavariables = conductor_iris)
+#' formula_iris1<-formula_text(x="formu",y="RESPOSTA",taulavariables = conductor_iris)
 #' formula_iris1
 
 formula_text<-function(x="taula1",y="resposta",eliminar=c("IDP"), a="",taulavariables,dt=NA) {
   
-  variables<-read_conductor(conductor_iris)
+  #variables<-read_conductor(conductor_iris)
+  variables<-read_conductor(taulavariables)
   # variables <- data.frame(readxl::read_excel(taulavariables))
   # variables[is.na(variables)]<- 0
   x_sym<-rlang::sym(x)
@@ -49,7 +50,7 @@ formula_text<-function(x="taula1",y="resposta",eliminar=c("IDP"), a="",taulavari
 
 
 
-#' @title                   Formula_table1.
+#' @title                   Formula Table.
 #' @description             Retorna formula per table1::table1 segons llista de varibles
 #' @param x                 Indicador de cadena del camp del fitxer extern amb indicador de la posició de la fórmula (1,2....) 
 #' @param y                 Indicador de resposta de cadena (default "."): ". ~ x1 +x2 + x3 "
@@ -66,12 +67,7 @@ formula_text<-function(x="taula1",y="resposta",eliminar=c("IDP"), a="",taulavari
 #' conductor_iris<-data.frame(camp=names(iris),formu=c(1,2,3,4,5))
 #' formula_iris2<-formula_table1("formu",taulavariables = conductor_iris)
 #' formula_iris2
-formula_table1<-function(x="taula1",
-                         y="",
-                         eliminar=c("IDP"), 
-                         a="",
-                         taulavariables='variables.xls',
-                         dt=NA,...) {
+formula_table1<-function(x="taula1",y="",eliminar=c("IDP"),a="",taulavariables='variables.xls',dt=NA,...) {
   
   # x="taula_basal"
   # y="Species"
@@ -112,7 +108,7 @@ formula_table1<-function(x="taula1",
 
 
 #' @title               Formula_vector.
-#' @description         Formula_vector, vector amb les variables ,y, vector caracter a elimina)
+#' @description         Formula_vector, vector amb les variables i y
 #' @param vector        Vector amb les variables
 #' @param y             Variable dependents
 #' @param logit         Logit

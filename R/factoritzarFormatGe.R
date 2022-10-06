@@ -25,7 +25,7 @@ factoritzar<-function(dt="dades",variables=c("grup","situacio")) {
 }
 
 
-#' @title                 Factoritzar (No/Yes).FormatGe
+#' @title                 Factoritzar (No/Yes).
 #' @description           A tots aquells valors dummis, el "0"-->"No" i "1"-->"Yes"  
 #' @param dt              Base de dades 
 #' @param columna         La columna del conductor a on farem la factoritzacio    
@@ -71,7 +71,7 @@ factoritzar.NO.YES<-function(dt="dadesDF",columna="factor",taulavariables="varia
 }
 
 
-#' @title                         Factoritzar (No/Si).FormatGe
+#' @title                         Factoritzar (No/Si)
 #' @description                   A tots aquells valors dummis, el "0"-->"No" i "1"-->"Si"  
 #' @param dt                      Base de dades 
 #' @param columna                 La columna del conductor a on farem la factoritzacio  
