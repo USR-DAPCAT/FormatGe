@@ -76,3 +76,49 @@ netejar_espais<-function(dt="dades") {
   
 }
 
+#' @title                             Canviar noms de les variables 
+#' @description                       Canviar noms de variables  de la nostra b.d a prtir d un conductor
+#' @param  dt                         Base de dades
+#' @param  variable                   Variables escollides a partir del conductor
+#' @param  nou_nom                    Nom NOUS de les variables
+#' @param  conductor                  Conductor 
+#' @param ...                         Altres funcions
+#' @return                            canvi de noms de les variables escollides
+#' @export                            canvi_noms_variables
+#' @importFrom                        dplyr "%>%"
+#' @examples
+#'taula2=c(1,1,"","","","","","","","","","","","","")
+#'conductor1<-data.frame(conductor,taula2)
+#'k1<-canvi_noms_variables(dt=dt_plana,variable="taula2",nou_nom="var_nou",conductor=conductor1)
+#'dt_plana
+#'k1
+#'
+canvi_noms_variables<-function(dt="dt_temp",
+                               variable="ajust2", 
+                               nou_nom="descripcio",
+                               conductor="conductor_variables",
+                               ...) {
+  
+  # dt=dades_TAI
+  # variable="camp"
+  # nou_nom = "camp2"
+  # conductor = conductor_variables
+  # sheet="rename_SG"
+  
+  # dt=dt_temp
+  # variable="ajust2"
+  # conductor=conductor_variables  
+  # etiqueta="descripcio"
+  
+  # extreure variables
+  vars<-extreure.variables(variable,conductor,...)
+  
+  # Extreure etiquetes 
+  etiquetes_noves<-extreure.variables(variable,conductor,variable_camp=nou_nom,...)
+  
+  # Canviar noms per etiqueta descripcio
+  # setnames(dt, old = vars, new = etiquetes_noves)
+  dt<-dt %>%dplyr::rename_at(dplyr::vars(vars), ~ etiquetes_noves)
+  
+}
+

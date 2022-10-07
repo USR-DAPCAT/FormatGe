@@ -10,59 +10,8 @@
 #' @export                      recodificar
 #' @importFrom                  dplyr "%>%"
 #' @examples
-#'camp=c("idp",
-#'       "dtindex",
-#'       "sexe",
-#'       "dnaix",
-#'       "situacio",
-#'       "entrada",
-#'       "sortida", 
-#'       "INCLUSIO.DM2",
-#'       "DG.HTA",
-#'       "DG.IC",
-#'       "cHDL.valor",
-#'       "cLDL.valor",
-#'       "cT.valor",
-#'       "GLICADA.valor",
-#'       "IMC.valor")
-#'descripcio=c("Identificacio Pacient",
-#'             "data Index",
-#'             "Sexe",
-#'             "data Naixament",
-#'             "Situacio",
-#'             "Entrada",
-#'             "Sortida",
-#'             "Inclusio Diabetes Tipus 2",
-#'             "Hipertensió arterial",
-#'             "Insuficiencia Cardiaca",
-#'             "Colesterol HDL(mg/dL)",
-#'             "Colesterol LDL(mg/dL)",
-#'             "Colesterol Total(mg/dL)",
-#'             "HbA1c",
-#'             "IMC" )
-#'descripcio2=c("Identificacion Paciente",
-#'              "data Indice",
-#'              "Sexo",
-#'              "data Naicimiento",
-#'              "Situacion",
-#'              "Entrada",
-#'              "Salida",
-#'              "Inclusion Diabetes Tipus 2",
-#'              "Hipertensión arterial",
-#'              "Insuficiencia Cardiaca",
-#'              "Colesterol HDL(mg/dL)",
-#'              "Colesterol LDL(mg/dL)",
-#'              "Colesterol Total(mg/dL)",
-#'              "HbA1c",
-#'              "IMC" )
-#'factor=c("","","","","","","",1,1,1,"","","","","")
-#'dates=c("",1,"",1,"",1,1,"","","","","","","","")
-#'recode=c("","","","","","","","","","","","","","7.0","")
-#'
-#'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates,recode)
-#'
 #'k<-recodificar(dt=dt_plana, 
-#'               taulavariables=conductor1,
+#'               taulavariables=conductor,
 #'               criteris="recode",
 #'               missings=FALSE,
 #'               prefix="_recode_")
@@ -142,390 +91,22 @@ recodificar<-function(dt="dades",
 
 
 
-#' @title                       Recodificar les variables que escollim
-#' @description                 Recodificar a partir del parametre "criteris"+criteris_labels( NO: auto)
-#' @param dt                    Base de dades
-#' @param taulavariables        Conductor
-#' @param criteris              Criteris ex:: 1/3/5
-#' @param missings              Missing
-#' @param prefix                Prefix
-#' @param criteris_labels       Criteris labels
-#' @param ...                   Altres funcions
-#' @return                      Retorna les dades amb la recodificacio
-#' @export                      recodificar2
-#' @importFrom                  dplyr "%>%"
-#' @examples
-#'camp=c("idp",
-#'       "dtindex",
-#'       "sexe",
-#'       "dnaix",
-#'       "situacio",
-#'       "entrada",
-#'       "sortida", 
-#'       "INCLUSIO.DM2",
-#'       "DG.HTA",
-#'       "DG.IC",
-#'       "cHDL.valor",
-#'       "cLDL.valor",
-#'       "cT.valor",
-#'       "GLICADA.valor",
-#'       "IMC.valor")
-#'descripcio=c("Identificacio Pacient",
-#'             "data Index",
-#'             "Sexe",
-#'             "data Naixament",
-#'             "Situacio",
-#'             "Entrada",
-#'             "Sortida",
-#'             "Inclusio Diabetes Tipus 2",
-#'             "Hipertensió arterial",
-#'             "Insuficiencia Cardiaca",
-#'             "Colesterol HDL(mg/dL)",
-#'             "Colesterol LDL(mg/dL)",
-#'             "Colesterol Total(mg/dL)",
-#'             "HbA1c",
-#'             "IMC" )
-#'descripcio2=c("Identificacion Paciente",
-#'              "data Indice",
-#'              "Sexo",
-#'              "data Naicimiento",
-#'              "Situacion",
-#'              "Entrada",
-#'              "Salida",
-#'              "Inclusion Diabetes Tipus 2",
-#'              "Hipertensión arterial",
-#'              "Insuficiencia Cardiaca",
-#'              "Colesterol HDL(mg/dL)",
-#'              "Colesterol LDL(mg/dL)",
-#'              "Colesterol Total(mg/dL)",
-#'              "HbA1c",
-#'              "IMC" )
-#'factor=c("","","","","","","",1,1,1,"","","","","")
-#'dates=c("",1,"",1,"",1,1,"","","","","","","","")
-#'recode=c("","","","","","","","","","","","","","7.0","")
-#'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates,recode)
-#'
-recodificar2<-function(dt="dt_plana",
-                       taulavariables ="conductor",
-                       criteris = "recode",
-                       missings=T,
-                       prefix=NA,
-                       criteris_labels = FALSE,...)
-  
-  
-{
-  
-  
-  #Els  criteris_labels: [N0,AUTO, o els "nostres labels"]
-  
-  #[NO  : en aquesta variable no hi ha lables]
-  #[AUTO: posa els intervals automaticament de manera correlativa posant un Enter (1,2,3,4,5.....)]  
-  #["Els nostres labels": si no coincideixen amb els talls+1, tindrem un ERROR, i no farà la funció!]
-  
-  #Per defecte, actua com la Funcio :  recodificar!.
-  
-  #Eps: ... heredem mètodes de la "funció cut" :  (right=F, etc)
-  
-  #cut:...
-  
-  #        [x]              :   a numeric vector which is to be converted to a factor by cutting.
-  #        [breaks]         :   either a numeric vector of two or more unique cut points or a single number
-  #                             (greater than or equal to 2) giving the number 
-  #                             of intervals into which x is to be cut.
-  #        [labels]         :   labels for the levels of the resulting category. By default, labels are constructed using "(a,b]" interval notation.
-  #                             If labels = FALSE, simple integer codes are returned instead of a factor.  
-  #        [include.lowest] :   logical, indicating if an ‘x[i]’ equal to the lowest 
-  #                             (or highest, for right = FALSE) ‘breaks’ value should be included.
-  #        [right]          :   logical, indicating if the intervals should be closed on the right 
-  #                             (and open on the left) or vice versa.
-  #        [dig.lab]        :   integer which is used when labels are not given. 
-  #                             It determines the number of digits used in formatting the break numbers.
-  #        [ordered_result] :   logical: should the result be an ordered factor?
-  #------------------------------#  
-  #dt=dt_plana
-  #taulavariables =conductor
-  #criteris = "recode"
-  #missings=T
-  #prefix="cat"
-  #criteris_labels = "recode_labels"
-  #------------------------------#
-  
-  # si hi ha [criteris_labels], apliquem aquest if.
-  
-  if (criteris_labels!=is.na(criteris_labels)){
-    
-    ##  Llegeix criteris de variables 
-    
-    variables<-read_conductor(taulavariables,...) %>% dplyr::select(camp,!!criteris) %>%dplyr:: mutate_all(as.character)
-    criteris_sym<-rlang::sym(criteris)
-    variables<-variables %>% dplyr::filter(!is.na(!!criteris_sym))
-    
-    #variables
-    
-    ##  0. Filtro taula variables només variables implicades en el filtre i el genero 
-    caracter_quartil<-"Q"
-    maco<-variables %>% 
-      dplyr::select(camp,criteris) %>% 
-      dplyr::filter(!stringr::str_detect(eval(parse(text=criteris)), caracter_quartil))
-    
-    ## Generar recodificació en base info
-    maco_lista<-maco %>% base::split(list(.$camp))
-    
-    
-    #8.5.2020#
-    ##  Llegeix criteris_labels de variables 
-    variables2 <- read_conductor(taulavariables,...) %>% dplyr::select(camp,!!criteris_labels)
-    
-    criteris_sym2<-rlang::sym(criteris_labels)
-    variables2<-variables2 %>% dplyr::filter(!is.na(!!criteris_sym2))
-    
-    #8.5.2020#
-    ##  Filtro taula variables només variables implicades en el filtre i el genero (criteris_labels)
-    maco2<-variables2 %>% 
-      dplyr::select(camp,criteris_labels) %>% 
-      dplyr::filter(!stringr::str_detect(eval(parse(text=criteris_labels)), caracter_quartil))
-    
-    #8.5.2020#
-    ## Generar recodificació en base info
-    maco_lista2<-maco2 %>% base::split(list(.$camp))
-    
-    
-    #8.5.2020#
-    num_recodes<-length(maco_lista)
-    
-    # Assignar a primer element (A partir d'aquí fer un for)
-    
-    for (i in 1:num_recodes) {
-      
-      #i<-1
-      
-      maco<-maco_lista[[i]]
-      
-      mamon<-stringr::str_split(maco[criteris],"/") %>% 
-        unlist() %>% 
-        as.numeric()
-      
-      mamon<-c(-Inf,mamon,Inf)
-      
-      
-      #8.5.2020#
-      maco2<-maco_lista2[[i]]
-      mamon2<-stringr::str_split(maco2[criteris_labels],"/") %>% unlist()
-      
-      ##### Fer la recodificació en base el rang generat 
-      nomcamp<-maco["camp"] %>% as.character()
-      
-      nomrecode<-paste0(nomcamp,".cat",length(mamon))
-      
-      #canvi!!#8.5.2020#
-      if (!is.na(prefix)) {nomrecode<-paste0(nomcamp,".",prefix) }
-      
-      # Si la variables ja existeix la elimino i la sobrescric
-      if (nomrecode%in%names(dt)) {dt<-dt %>% dplyr::select_(paste0("-",nomrecode))}
-      
-      dt<-dt %>% dplyr::mutate_(camp=nomcamp)
-      
-      #8.5.2020#
-      
-      if (mamon2=="NO"){dt<-dt %>% dplyr::mutate(popes=cut(camp,breaks = mamon,...) %>% as.factor)}
-      else if  (mamon2=="AUTO"){dt<-dt %>% dplyr::mutate(popes=cut(camp,breaks = mamon,labels=FALSE,...) %>% as.factor)}
-      else{
-        
-        if (length(mamon)!=length(mamon2)+1) {return(print(paste0("ERROR!!!,Algun dels talls dels Criteris del recode, no coincideixen amb els Criteris labels, de la variable  : ",nomcamp)))} 
-        
-        dt<-dt %>% dplyr::mutate(popes=cut(camp,breaks = mamon,labels = mamon2,...) %>% as.factor) }
-      
-      # Si missings --> generar a una categoria missing
-      if (missings==T) {dt<-missings_to_level(dt,"popes")}
-      colnames(dt)[colnames(dt)=="popes"] <- nomrecode
-      dt<-dt %>% dplyr::select(-camp)
-      
-      
-      print(paste0("Generada: ",nomrecode))
-      #-----------------#
-      #
-      # Validació :
-      #
-      #-----------------#
-      
-      #canvi!!**(6.5.2020)**(data.frame!!!)
-      dt%>%dplyr::group_by_at( dplyr::vars(!!nomrecode))%>%dplyr::summarise_at( dplyr::vars(!!nomcamp),
-                                                         list(min=~(min(.,na.rm=T)),max=~(max(.,na.rm=T)),freq=~n()))%>%
-        dplyr::ungroup()%>%
-        as.data.frame()%>%print()
-      
-    }
-    
-  }
-  
-  
-  # si no hi ha [criteris_labels], apliquem aquest if. (igual que Recode , antic!!!) 
-  
-  else  
-    
-  {
-    
-    
-    
-    {##  Llegeix criteris de variables 
-      
-      # variables <- readxl::read_excel(taulavariables) %>% tidyr::as_tibble() %>% dplyr::select(camp,!!criteris)
-      variables <- read_conductor(taulavariables,...) %>% dplyr::select(camp,!!criteris) %>%dplyr:: mutate_all(as.character)
-      criteris_sym<-rlang::sym(criteris)
-      variables<-variables %>% dplyr::filter(!is.na(!!criteris_sym))   }
-    
-    #variables
-    
-    ##  0. Filtro taula variables només variables implicades en el filtre i el genero 
-    caracter_quartil<-"Q"
-    maco<-variables %>% 
-      dplyr::select(camp,criteris) %>% 
-      dplyr::filter(!stringr::str_detect(eval(parse(text=criteris)), caracter_quartil))
-    
-    ## Generar recodificació en base info
-    maco_lista<-maco %>% base::split(list(.$camp))
-    
-    #7.5.2020
-    num_recodes<-length(maco_lista)
-    
-    
-    for (i in 1:num_recodes) {
-      
-      #i<-1
-      
-      maco<-maco_lista[[i]]
-      
-      mamon<-stringr::str_split(maco[criteris],"/") %>% 
-        unlist() %>% 
-        as.numeric()
-      
-      mamon<-c(-Inf,mamon,Inf)
-      
-      ##### Fer la recodificació en base el rang generat 
-      nomcamp<-maco["camp"] %>% as.character()
-      
-      nomrecode<-paste0(nomcamp,".cat",length(mamon))
-      
-      #canvi!!**(5.5.2020)**
-      if (!is.na(prefix)) {nomrecode<-paste0(nomcamp,".",prefix) }
-      
-      # Si la variables ja existeix la elimino i la sobrescric
-      if (nomrecode%in%names(dt)) {dt<-dt %>% dplyr::select_(paste0("-",nomrecode))}
-      
-      dt<-dt %>% dplyr::mutate_(camp=nomcamp)
-      
-      dt<-dt %>% dplyr::mutate(popes=cut(camp,breaks = mamon,...) %>% as.factor)
-      
-      # Si missings --> generar a una categoria missing
-      if (missings==T) {dt<-missings_to_level(dt,"popes")}
-      
-      colnames(dt)[colnames(dt)=="popes"] <- nomrecode
-      
-      dt<-dt %>% dplyr::select(-camp)
-      
-      
-      print(paste0("Generada: ",nomrecode))
-      
-      #-----------------#
-      #
-      # Validació :
-      #
-      #-----------------#
-      
-      #canvi!!**(6.5.2020)**(data.frame!!!)
-      dt%>%dplyr::group_by_at( dplyr::vars(!!nomrecode))%>%dplyr::summarise_at( dplyr::vars(!!nomcamp),
-                                                         list(min=~(min(.,na.rm=T)),max=~(max(.,na.rm=T)),freq=~dplyr::n()))%>%dplyr::ungroup()%>%as.data.frame()%>%print()
-      #-----------------#
-    }
-    
-    
-  }
-  
-  
-  
-  # la nostra funció té la sortida , la base de dades, amb les noves variables recodificades!
-  
-  dt 
-  
-  # fi de la funció!
-}  
-
-
-
 
 
 #' @title                       Recodificar missings
-#' @description                 Recodificar rangs de valors que cauen fora interva a missings
+#' @description                 Recodificar rangs de valors que cauen fora de interval es transforman en missings
 #' @param dt                    Base de dades
 #' @param taulavariables        Conductor
 #' @param rang                  Rang
-#' @param data_long             Data
+#' @param data_long             Data Long
 #' @param ...                   Altres funcions
-#' @return                      Retorna dades amb la recodificacio 
+#' @return                      Retorna dades amb la recodificacio de missings
 #' @export                      recode_to_missings
 #' @importFrom                  dplyr "%>%"
 #' @examples
-#'camp=c("idp",
-#'       "dtindex",
-#'       "sexe",
-#'       "dnaix",
-#'       "situacio",
-#'       "entrada",
-#'       "sortida", 
-#'       "INCLUSIO.DM2",
-#'       "DG.HTA",
-#'       "DG.IC",
-#'       "cHDL.valor",
-#'       "cLDL.valor",
-#'       "cT.valor",
-#'       "GLICADA.valor",
-#'       "IMC.valor")
-#'descripcio=c("Identificacio Pacient",
-#'             "data Index",
-#'             "Sexe",
-#'             "data Naixament",
-#'             "Situacio",
-#'             "Entrada",
-#'             "Sortida",
-#'             "Inclusio Diabetes Tipus 2",
-#'             "Hipertensió arterial",
-#'             "Insuficiencia Cardiaca",
-#'             "Colesterol HDL(mg/dL)",
-#'             "Colesterol LDL(mg/dL)",
-#'             "Colesterol Total(mg/dL)",
-#'             "HbA1c",
-#'             "IMC" )
-#'descripcio2=c("Identificacion Paciente",
-#'              "data Indice",
-#'              "Sexo",
-#'              "data Naicimiento",
-#'              "Situacion",
-#'              "Entrada",
-#'              "Salida",
-#'              "Inclusion Diabetes Tipus 2",
-#'              "Hipertensión arterial",
-#'              "Insuficiencia Cardiaca",
-#'              "Colesterol HDL(mg/dL)",
-#'              "Colesterol LDL(mg/dL)",
-#'              "Colesterol Total(mg/dL)",
-#'              "HbA1c",
-#'              "IMC" )
-#'factor= c("","","","","","","",1,1,1,"","","","","")
-#'dates=  c("",1,"",1,"",1,1,"","","","","","","","")
-#'recode=c("","","","","","","","","","","","","","7.0","")
-#'rang_valid=   c("","","","","","","","","","","","","","","15-100")
-#'
-#'conductor1<-data.frame(camp,
-#'descripcio,
-#'descripcio2,
-#'factor,
-#'dates,
-#'recode,
-#'rang_valid)
-#'
-#'conductor1
+#'conductor
 #'dt_plana
-#'kk<-recode_to_missings(dt=dt_plana,taulavariables=conductor1,rang="rang_valid")
+#'kk<-recode_to_missings(dt=dt_plana,taulavariables=conductor,rang="rang_valid")
 #'kk
 recode_to_missings<-function(dt="dades",
                              taulavariables="conductor_variables",
@@ -624,8 +205,8 @@ make_dummies <- function(dt,variable, prefix=" ") {
 }
 
 
-#' @title                    Comptar_valors
-#' @description              Recodificar.Comptar valors
+#' @title                    Comptar valors
+#' @description              Comptar un valor concret d un conjunt de variables de la nostra B.D
 #' @param dt                 Base de dades
 #' @param variables          Variables
 #' @param valor              Valor
@@ -633,7 +214,7 @@ make_dummies <- function(dt,variable, prefix=" ") {
 #' @export                   comptar_valors
 #' @importFrom               dplyr "%>%"
 #' @examples
-#' Comptar_D<-comptar_valors(dt_plana,variables=c("sexe"),valor="D")
+#' Comptar_D<-comptar_valors(dt_plana,variables=c("DG.HTA","DG.IC","GLICADA.valor"),valor="NA")
 #' Comptar_D
 comptar_valors<-function(dt="dadesevents",variables=c("EV.TER.ARTER_PERIF","EV.TER.AVC"),valor="Yes"){
   
@@ -661,11 +242,12 @@ comptar_valors<-function(dt="dadesevents",variables=c("EV.TER.ARTER_PERIF","EV.T
 #' @export                     missings_to_level
 #' @importFrom                 dplyr "%>%"
 #' @examples
-#' missings_to_level(dt_plana,variable="DG.HTA")
+#' k1<-missings_to_level(dt_plana,variable="DG.HTA")
+#' k1
 missings_to_level<-function(dades,variable="popes") {
   
-  # dades=temp
-  # variable="val_CKDEPI.cat5"
+  #dades=dt_plana
+  #variable="DG.HTA"
   
   # Subset columnes de d
   d_temp<-dades %>% dplyr::select_("temp"=variable)
@@ -686,7 +268,7 @@ missings_to_level<-function(dades,variable="popes") {
 # 
 
 
-#' @title                       Generar intervals
+#' @title                       Generar intervals amb talls a variables continues
 #' @description                 Generar intervals a partir d'un conductor i un tall definit
 #' @param dt                    Base de dades
 #' @param vars                  Variables
@@ -697,69 +279,19 @@ missings_to_level<-function(dades,variable="popes") {
 #' @export                      generar_intervals
 #' @importFrom                  dplyr "%>%"
 #' @examples
-#'camp=c("idp",
-#'       "dtindex",
-#'       "sexe",
-#'       "dnaix",
-#'       "situacio",
-#'       "entrada",
-#'       "sortida", 
-#'       "INCLUSIO.DM2",
-#'       "DG.HTA",
-#'       "DG.IC",
-#'       "cHDL.valor",
-#'       "cLDL.valor",
-#'       "cT.valor",
-#'       "GLICADA.valor",
-#'       "IMC.valor")
-#'descripcio=c("Identificacio Pacient",
-#'             "data Index",
-#'             "Sexe",
-#'             "data Naixament",
-#'             "Situacio",
-#'             "Entrada",
-#'             "Sortida",
-#'             "Inclusio Diabetes Tipus 2",
-#'             "Hipertensió arterial",
-#'             "Insuficiencia Cardiaca",
-#'             "Colesterol HDL(mg/dL)",
-#'             "Colesterol LDL(mg/dL)",
-#'             "Colesterol Total(mg/dL)",
-#'             "HbA1c",
-#'             "IMC" )
-#'descripcio2=c("Identificacion Paciente",
-#'              "data Indice",
-#'              "Sexo",
-#'              "data Naicimiento",
-#'              "Situacion",
-#'              "Entrada",
-#'              "Salida",
-#'              "Inclusion Diabetes Tipus 2",
-#'              "Hipertensión arterial",
-#'              "Insuficiencia Cardiaca",
-#'              "Colesterol HDL(mg/dL)",
-#'              "Colesterol LDL(mg/dL)",
-#'              "Colesterol Total(mg/dL)",
-#'              "HbA1c",
-#'              "IMC" )
-#'factor= c("","","","","","","",1,1,1,"","","","","")
-#'dates=  c("",1,"",1,"",1,1,"","","","","","","","")
-#'recode=c("","","","","","","","","","","","","","7.0","")
-#'rang_valid=   c("","","","","","","","","","","","","","","15-100")
 #'ajust4=c("","","","","","","","","","","1","1","1","1","1")
 #'
-#'conductor1<-data.frame(camp,
-#'descripcio,
-#'descripcio2,
-#'factor,
-#'dates,
-#'recode,
-#'rang_valid,
-#'ajust4)
+#'conductor1<-data.frame(conductor,ajust4)
 #'
 #'conductor1
 #'dt_plana
-#'kk<-generar_intervals(dt=dt_plana,vars="ajust4",taulavariables=conductor1,missing="Unkown",g=2)
+#'
+#'kk<-generar_intervals(dt=dt_plana,
+#'vars="ajust4",
+#'taulavariables=conductor1,
+#'missing="Unkown",
+#'g=2)
+#'
 #'kk
 generar_intervals<-function(dt="dades",
                             vars="ajust4",
@@ -797,17 +329,17 @@ generar_intervals<-function(dt="dades",
   #  vars_fix_num<-dt %>% dplyr::select(vars_fix) %>% dplyr::select_if(is.numeric) %>% names()
   #}
   ###############################################################################
-  
-  
+  #
+  #
   # Generar intervals en categoriques 
   dt_temp<-dt %>% 
     dplyr::mutate_at(vars_fix_num, ~Hmisc::cut2(.,g=g))
-  
+  #
   # Reemplaçar missings si cal
   if (!missing(missing)) {
     dt_temp<- dt_temp %>% dplyr::mutate_at(vars_fix,~replace(as.character(.), is.na(.), missing)) %>% 
       dplyr::mutate_at(vars_fix,as.factor)}
-  
+  #
   # Etiquetar
   dt_temp %>% etiquetar(taulavariables = taulavariables) 
   

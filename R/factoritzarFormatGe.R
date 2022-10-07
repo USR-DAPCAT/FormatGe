@@ -35,12 +35,6 @@ factoritzar<-function(dt="dades",variables=c("grup","situacio")) {
 #' @export                factoritzar.NO.YES 
 #' @importFrom            dplyr "%>%"
 #' @examples
-#' camp=c("idp","dtindex","sexe","dnaix","situacio","entrada",
-#' "sortida", "INCLUSIO.DM2","DG.HTA","DG.IC",
-#' "cHDL.valor","cLDL.valor","cT.valor","GLICADA.valor","IMC.valor")
-#' factor=c("","","","","","","",1,1,1,"","","","","")
-#' dates=c("",1,"",1,"",1,1,"","","","","","","","")
-#' conductor<-data.frame(camp,factor,dates)
 #'dt_plana2<-dplyr::mutate_at(dt_plana, dplyr::vars(  dplyr::starts_with("DG.") ),  
 #'dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
 #'dt_plana2<-dplyr::mutate_at(dt_plana2, dplyr::vars(  dplyr::starts_with("INCLUSIO.") ),
@@ -82,13 +76,6 @@ factoritzar.NO.YES<-function(dt="dadesDF",columna="factor",taulavariables="varia
 #' @importFrom                    dplyr "%>%"
 #' @examples
 #' 
-#' camp=c("idp","dtindex","sexe","dnaix","situacio","entrada","sortida", 
-#' "INCLUSIO.DM2","DG.HTA","DG.IC",
-#' "cHDL.valor","cLDL.valor","cT.valor",
-#' "GLICADA.valor","IMC.valor")
-#' factor=c("","","","","","","",1,1,1,"","","","","")
-#' dates=c("",1,"",1,"",1,1,"","","","","","","","")
-#' conductor<-data.frame(camp,factor,dates)
 #'dt_plana2<-dplyr::mutate_at(dt_plana, dplyr::vars(  dplyr::starts_with("DG.") ),  
 #'dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
 #'dt_plana2<-dplyr::mutate_at(dt_plana2, dplyr::vars(  dplyr::starts_with("INCLUSIO.") ), 

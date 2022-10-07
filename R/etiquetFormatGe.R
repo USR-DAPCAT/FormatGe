@@ -8,58 +8,7 @@
 #' @export                etiquetar
 #' @importFrom            dplyr "%>%"
 #' @examples
-#'camp=c("idp",
-#'       "dtindex",
-#'       "sexe",
-#'       "dnaix",
-#'       "situacio",
-#'       "entrada",
-#'       "sortida", 
-#'       "INCLUSIO.DM2",
-#'       "DG.HTA",
-#'       "DG.IC",
-#'       "cHDL.valor",
-#'       "cLDL.valor",
-#'       "cT.valor",
-#'       "GLICADA.valor",
-#'       "IMC.valor")
-#'descripcio=c("Identificacio Pacient",
-#'             "data Index",
-#'             "Sexe",
-#'             "data Naixament",
-#'             "Situacio",
-#'             "Entrada",
-#'             "Sortida",
-#'             "Inclusio Diabetes Tipus 2",
-#'             "Hipertensió arterial",
-#'             "Insuficiencia Cardiaca",
-#'             "Colesterol HDL(mg/dL)",
-#'             "Colesterol LDL(mg/dL)",
-#'             "Colesterol Total(mg/dL)",
-#'             "HbA1c",
-#'             "IMC" )
-#'descripcio2=c("Identificacion Paciente",
-#'              "data Indice",
-#'              "Sexo",
-#'              "data Naicimiento",
-#'              "Situacion",
-#'              "Entrada",
-#'              "Salida",
-#'              "Inclusion Diabetes Tipus 2",
-#'              "Hipertensión arterial",
-#'              "Insuficiencia Cardiaca",
-#'              "Colesterol HDL(mg/dL)",
-#'              "Colesterol LDL(mg/dL)",
-#'              "Colesterol Total(mg/dL)",
-#'              "HbA1c",
-#'              "IMC" )
-#'factor=c("","","","","","","",1,1,1,"","","","","")
-#'dates=c("",1,"",1,"",1,1,"","","","","","","","")
-#'
-#'
-#'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates)
-#' 
-#' dades_etiquet<-etiquetar(dt_plana,conductor1, "descripcio")
+#' dades_etiquet<-etiquetar(dt_plana,conductor, "descripcio")
 #' Hmisc::label(dt_plana)
 #' Hmisc::label(dades_etiquet)
 
@@ -272,59 +221,12 @@ etiquetar_taula<-function(taula="resumtotal",
 #' @export                  etiquetar_vector
 #' @importFrom              dplyr "%>%"
 #' @examples
-#'camp=c("idp",
-#'       "dtindex",
-#'       "sexe",
-#'       "dnaix",
-#'       "situacio",
-#'       "entrada",
-#'       "sortida", 
-#'       "INCLUSIO.DM2",
-#'       "DG.HTA",
-#'       "DG.IC",
-#'       "cHDL.valor",
-#'       "cLDL.valor",
-#'       "cT.valor",
-#'       "GLICADA.valor",
-#'       "IMC.valor")
-#'descripcio=c("Identificacio Pacient",
-#'             "data Index",
-#'             "Sexe",
-#'             "data Naixament",
-#'             "Situacio",
-#'             "Entrada",
-#'             "Sortida",
-#'             "Inclusio Diabetes Tipus 2",
-#'             "Hipertensió arterial",
-#'             "Insuficiencia Cardiaca",
-#'             "Colesterol HDL(mg/dL)",
-#'             "Colesterol LDL(mg/dL)",
-#'             "Colesterol Total(mg/dL)",
-#'             "HbA1c",
-#'             "IMC" )
-#'descripcio2=c("Identificacion Paciente",
-#'              "data Indice",
-#'              "Sexo",
-#'              "data Naicimiento",
-#'              "Situacion",
-#'              "Entrada",
-#'              "Salida",
-#'              "Inclusion Diabetes Tipus 2",
-#'              "Hipertensión arterial",
-#'              "Insuficiencia Cardiaca",
-#'              "Colesterol HDL(mg/dL)",
-#'              "Colesterol LDL(mg/dL)",
-#'              "Colesterol Total(mg/dL)",
-#'              "HbA1c",
-#'              "IMC" )
-#'factor=c("","","","","","","",1,1,1,"","","","","")
-#'dates=c("",1,"",1,"",1,1,"","","","","","","","")
+#' 
 #'
-#'
-#'conductor1<-data.frame(camp,descripcio,descripcio2,factor,dates)
 #'v1<-c("idp","dtindex","sexe","dnaix","situacio","entrada")
+#'
 #'v1_etiq<-etiquetar_vector(vector=v1,
-#'                          taulavariables=conductor1,
+#'                          taulavariables=conductor,
 #'                          camp="camp",
 #'                          camp_descripcio="descripcio")
 #'
