@@ -87,8 +87,7 @@ netejar_espais<-function(dt="dades") {
 #' @export                            canvi_noms_variables
 #' @importFrom                        dplyr "%>%"
 #' @examples
-#'taula2=c(1,1,"","","","","","","","","","","","","")
-#'conductor1<-data.frame(conductor,taula2)
+
 #'k1<-canvi_noms_variables(dt=dt_plana,variable="taula2",nou_nom="var_nou",conductor=conductor1)
 #'dt_plana
 #'k1

@@ -40,7 +40,7 @@ factoritzar<-function(dt="dades",variables=c("grup","situacio")) {
 #'dt_plana2<-dplyr::mutate_at(dt_plana2, dplyr::vars(  dplyr::starts_with("INCLUSIO.") ),
 #'dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
 #'dt_plana2
-#'dt_plana2<-factoritzar.NO.YES(dt_plana2,"factor",conductor)
+#'dt_plana2<-factoritzar.NO.YES(dt_plana2,"factor",conductor1)
 #'dt_plana2
 #' 
 factoritzar.NO.YES<-function(dt="dadesDF",columna="factor",taulavariables="variables_FELIPE.xls",...){
@@ -81,7 +81,7 @@ factoritzar.NO.YES<-function(dt="dadesDF",columna="factor",taulavariables="varia
 #'dt_plana2<-dplyr::mutate_at(dt_plana2, dplyr::vars(  dplyr::starts_with("INCLUSIO.") ), 
 #' dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
 #'dt_plana2
-#'dt_plana2<-factoritzar.NO.SI(dt_plana2,"factor",conductor)
+#'dt_plana2<-factoritzar.NO.SI(dt_plana2,"factor",conductor1)
 #'dt_plana2
 #' 
 factoritzar.NO.SI<-function(dt="dadesDF",columna="factor",taulavariables="variables_FELIPE.xls",...){

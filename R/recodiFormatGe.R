@@ -11,7 +11,7 @@
 #' @importFrom                  dplyr "%>%"
 #' @examples
 #'k<-recodificar(dt=dt_plana, 
-#'               taulavariables=conductor,
+#'               taulavariables=conductor1,
 #'               criteris="recode",
 #'               missings=FALSE,
 #'               prefix="_recode_")
@@ -104,9 +104,9 @@ recodificar<-function(dt="dades",
 #' @export                      recode_to_missings
 #' @importFrom                  dplyr "%>%"
 #' @examples
-#'conductor
+#'conductor1
 #'dt_plana
-#'kk<-recode_to_missings(dt=dt_plana,taulavariables=conductor,rang="rang_valid")
+#'kk<-recode_to_missings(dt=dt_plana,taulavariables=conductor1,rang="rang_valid")
 #'kk
 recode_to_missings<-function(dt="dades",
                              taulavariables="conductor_variables",
@@ -279,12 +279,7 @@ missings_to_level<-function(dades,variable="popes") {
 #' @export                      generar_intervals
 #' @importFrom                  dplyr "%>%"
 #' @examples
-#'ajust4=c("","","","","","","","","","","1","1","1","1","1")
-#'
-#'conductor1<-data.frame(conductor,ajust4)
-#'
-#'conductor1
-#'dt_plana
+
 #'
 #'kk<-generar_intervals(dt=dt_plana,
 #'vars="ajust4",
@@ -295,7 +290,7 @@ missings_to_level<-function(dades,variable="popes") {
 #'kk
 generar_intervals<-function(dt="dades",
                             vars="ajust4",
-                            taulavariables="conductor",
+                            taulavariables="conductor1",
                             missing="Unkown",
                             g=3) {
   
