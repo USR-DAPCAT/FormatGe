@@ -186,7 +186,7 @@ selectorvariables<-function(taula="table1",
 #'k1
 #'k2
 #'
-extreure.variables=function(taula="table1",
+extreure.variables<-function(taula="table1",
                             taulavariables="variables_R.xls",
                             variable_camp="camp",
                             dt=NA,...) {
