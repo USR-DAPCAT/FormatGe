@@ -2,18 +2,22 @@
 % Please edit documentation in R/conductorFormatGe.R
 \name{read_conductor}
 \alias{read_conductor}
-\title{read_conductor}
+\title{Read_conductor}
 \usage{
 read_conductor(fitxer, ...)
 }
 \arguments{
-\item{fitxer}{fitxer que el convertirem a tibble.}
+\item{fitxer}{Fitxer que el convertirem a tibble.}
 
-\item{...}{altres funcions}
+\item{...}{Altres funcions}
 }
 \value{
-una taula tibble
+Una taula tibble
 }
 \description{
-Llegir el fitxer conductor de diferents formats txt o rds o xls xlsx o data_frame tibble
+Llegeix el fitxer conductor de diferents formats txt o rds o xls xlsx o data_frame tibble
+}
+\examples{
+k1<-read_conductor(conductor1)
+k1
 }
