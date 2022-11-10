@@ -23,14 +23,15 @@ recodificar<-function(dt="dades",
                       missings=F, 
                       prefix=NA,...){
   
-  # dt=iris
-  # taulavariables = etiquetes_iris
+  # dt=dt_plana
+  # taulavariables = conductor1
   # criteris = "recode"
   # missings=F
   # prefix=NA
   
   ##  Llegeix criteris de variables 
   variables<-read_conductor(taulavariables,...) %>% dplyr::select(camp,!!criteris) %>% dplyr::mutate_all(as.character)
+  # variables<-read_conductor(taulavariables) %>% dplyr::select(camp,!!criteris) %>% dplyr::mutate_all(as.character)
   criteris_sym<-rlang::sym(criteris)
   variables<-variables %>% dplyr::filter(!is.na(!!criteris_sym) & !!criteris_sym!="")
   
@@ -49,7 +50,7 @@ recodificar<-function(dt="dades",
   
   for (i in 1:num_recodes) {
     
-    # i<-2
+    # i<-1
     
     maco<-maco_lista[[i]]
     
@@ -71,6 +72,12 @@ recodificar<-function(dt="dades",
     
     dt<-dt %>% dplyr::mutate_(camp=nomcamp)
     dt<-dt %>% dplyr::mutate(popes=cut(camp,breaks = mamon) %>% as.factor)
+    
+    # Renoms -Inf i +Inf
+    renoms_Inf<-levels(dt$popes) %>% 
+      stringr::str_replace("-Inf","Min") %>% 
+      stringr::str_replace("Inf","Max")
+    levels(dt$popes)<-renoms_Inf
     
     # Si missings --> generar a una categoria missing
     if (missings==T) {dt<-missings_to_level(dt,"popes")}
