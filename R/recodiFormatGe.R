@@ -62,7 +62,9 @@ recodificar<-function(dt="dades",
     nomcamp<-maco["camp"] %>% as.character()
     nomrecode<-paste0(nomcamp,".cat",length(mamon))
     
-    if (!is.na(prefix)) {nomrecode<-paste0(nomcamp,".cat",prefix,length(mamon)) }
+    # if (!is.na(prefix)) {nomrecode<-paste0(nomcamp,".cat",prefix,length(mamon)) }
+    #canvi!!#10.11.2022#
+    if (!is.na(prefix)) {nomrecode<-paste0(nomcamp,prefix) }
     
     # Si la variables ja existeix la elimino i la sobrescric
     if (nomrecode%in%names(dt)) {dt<-dt %>%dplyr:: select_(paste0("-",nomrecode))}
