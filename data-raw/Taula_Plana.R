@@ -1,3 +1,3 @@
-## code to prepare `Taula_Plana` dataset goes here
+## code to prepare `Taula_plana` dataset goes here
 
-usethis::use_data(Taula_Plana, overwrite = TRUE)
+usethis::use_data(Taula_plana, overwrite = TRUE)
