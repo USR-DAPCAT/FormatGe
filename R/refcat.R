@@ -50,7 +50,7 @@ refcat<-function(DF="iris",conductor="conductor_iris",ref="ref_cat",...){
     DF[llista_vars]<-pp[llista_vars]
     DF
     
-    # ara falta ordenar-ho ....
+    # ara falta ordenar-ho ....ex::conductor_HTG [HTG_Cohort]
     
   
 }
