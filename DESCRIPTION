@@ -25,4 +25,5 @@ Imports:
       data.table,
       lubridate,
       purrr,
-      stats
+      stats,
+      forcats
