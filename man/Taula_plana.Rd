@@ -5,7 +5,7 @@
 \alias{Taula_plana}
 \title{Bases de dades de Poblacio}
 \format{
-Una data frame amb 30 files i 194 variables
+Una data frame amb 30 files i 165 variables
 \describe{
 \item{idp}{idp (1--30)}
 \item{dtindex}{dtindex ()}
