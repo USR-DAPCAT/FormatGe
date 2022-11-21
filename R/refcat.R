@@ -76,7 +76,7 @@ refcat<-function(DF="iris",conductor="conductor_iris",ref="ref_cat",...){
     llista_refcat<-conductor_df %>% dplyr::pull(!!ref) 
     
     # Faig el relevel a les comlumnes seleccionades
-    pp<-purrr::map2_df(DF %>% dplyr::select(llista_vars),  llista_refcat, ~ forcats::fct_relevel(stats::relevel(.x, .y)),sort)
+    pp<-purrr::map2_df(DF %>% dplyr::select(llista_vars),  llista_refcat, ~ (stats::relevel(.x, .y)),sort)
     
     # Ara intercanviar columnes 2 a 2 de
     DF[llista_vars]<-pp[llista_vars]

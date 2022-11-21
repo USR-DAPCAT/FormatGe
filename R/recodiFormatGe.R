@@ -23,11 +23,11 @@ recodificar<-function(dt="dades",
                       missings=F, 
                       prefix=NA,...){
   
-  # dt=dt_plana
-  # taulavariables = conductor1
-  # criteris = "recode"
-  # missings=F
-  # prefix=NA
+  #dt=dt_plana
+  #taulavariables = conductor1
+  #criteris = "recode"
+  #missings=F
+  #prefix=NA
   
   ##  Llegeix criteris de variables 
   variables<-read_conductor(taulavariables,...) %>% dplyr::select(camp,!!criteris) %>% dplyr::mutate_all(as.character)
@@ -84,6 +84,7 @@ recodificar<-function(dt="dades",
     
     colnames(dt)[colnames(dt)=="popes"] <- nomrecode
     dt<-dt %>% dplyr::select(-camp)
+    #forcats::fct_relevel--> fer-ho
     
     print(paste0("Generada: ",nomrecode))
     # Validació
