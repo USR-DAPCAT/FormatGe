@@ -27,3 +27,7 @@ Imports:
       purrr,
       stats,
       forcats
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
