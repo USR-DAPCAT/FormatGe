@@ -341,8 +341,6 @@ dt_plana<-dt_plana%>%mutate(cLDL.valor_CAT=case_when(COLLDL.valor        <70~ "C
 ## 1f. Recodificacions de zeros i uns nous+dates
 ```{r recodificacions6}
 
-dades<-dt_plana
-
 #Etquetem (Si/No)  a partir del Conductor!
 dt_plana<- dt_plana%>% mutate_at(vars(starts_with("DG.")), ~if_else(.==1,"Yes","No",missing = "No")) 
 dt_plana<- dt_plana %>% mutate_at(vars(starts_with("EVENT.")), ~if_else(.==1,"Yes","No",missing = "No")) 
@@ -358,7 +356,8 @@ dt_plana<-dt_plana%>% mutate_at(c("dtindex","dnaix","entrada","sortida" ),ymd)
 
 # important aplicar package compareGroups
 
-descrTable(dt_plana)
+library("compareGroups")
+compareGroups::descrTable(dt_plana)
 
 
 
