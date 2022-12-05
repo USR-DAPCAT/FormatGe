@@ -26,7 +26,8 @@ Imports:
       lubridate,
       purrr,
       stats,
-      forcats
+      forcats,
+      compareGroups
 Suggests: 
     knitr,
     rmarkdown

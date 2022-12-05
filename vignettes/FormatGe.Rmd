@@ -50,7 +50,7 @@ library("dplyr")
 library("lubridate")
 library("compareGroups")
 library("FormatGe")
-library("ggflowchart2")
+#library("ggflowchart2")
 
 
 dt_plana<-Taula_plana
@@ -344,23 +344,21 @@ dt_plana<-dt_plana%>%mutate(cLDL.valor_CAT=case_when(COLLDL.valor        <70~ "C
 dades<-dt_plana
 
 #Etquetem (Si/No)  a partir del Conductor!
-dades<- dades%>% mutate_at(vars(starts_with("DG.")), ~if_else(.==1,"Yes","No",missing = "No")) 
-dades<- dades %>% mutate_at(vars(starts_with("EVENT.")), ~if_else(.==1,"Yes","No",missing = "No")) 
-dades<- dades %>% mutate_at(vars(starts_with("FF.")), ~if_else(.==1,"Yes","No",missing = "No")) 
-dades<- dades %>% mutate_at(vars(starts_with("FP.")), ~if_else(.==1,"Yes","No",missing = "No")) 
+dt_plana<- dt_plana%>% mutate_at(vars(starts_with("DG.")), ~if_else(.==1,"Yes","No",missing = "No")) 
+dt_plana<- dt_plana %>% mutate_at(vars(starts_with("EVENT.")), ~if_else(.==1,"Yes","No",missing = "No")) 
+dt_plana<- dt_plana %>% mutate_at(vars(starts_with("FF.")), ~if_else(.==1,"Yes","No",missing = "No")) 
+dt_plana<- dt_plana %>% mutate_at(vars(starts_with("FP.")), ~if_else(.==1,"Yes","No",missing = "No")) 
 
-dades<-dades%>% mutate_at(c("dtindex","dnaix","entrada","sortida" ),ymd)
-
-
-
-dades<-dades%>% mutate_at(c("dnaix","entrada","sortida" ),ymd)
+#Dates
+dt_plana<-dt_plana%>% mutate_at(c("dtindex","dnaix","entrada","sortida" ),ymd)
 
 ```
 ## 2. Fase Analsis
 ```{r analisis2}
 
+# important aplicar package compareGroups
 
-descrTable(dades)
+descrTable(dt_plana)
 
 
 
