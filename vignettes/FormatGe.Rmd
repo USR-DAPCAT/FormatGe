@@ -33,9 +33,6 @@ knitr::include_graphics(c("logos_css/logo_bio.jpg"))
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, include=TRUE,size="huge")
 
-
-
-
 gc()
 # libreries i funcions
 #rm(list=ls())
@@ -52,7 +49,9 @@ library("compareGroups")
 library("FormatGe")
 #library("ggflowchart2")
 
-
+```
+## 1a. Recodificaciones  de Na a dummies
+```{r recodificacions1a }
 dt_plana<-Taula_plana
 
 #########################################################################################
@@ -183,9 +182,11 @@ dt_plana<-Taula_plana
 #
 #########################################################################################
 
+
 ```
-## 1a. Recodificaciones  de Na a dummies
-```{r recodificacions2 }
+
+## 1b. Recodificaciones  de Na a dummies
+```{r recodificacions1b }
 
 # Convertim les variables categòriques  Na o 0 --> 0, la resta 1  !!!!! ( no hi haurà missings!!)
 
@@ -198,8 +199,8 @@ dt_plana<-mutate_at(dt_plana, vars( starts_with("FF.") ), funs( if_else(.==0  | 
 dt_plana<-mutate_at(dt_plana, vars( starts_with("FP.") ), funs( if_else(.==0  | is.na(.)  ,0,1)))
 
 ```
-## 1b. Recodificacions i calculs [Part demografica: dt_poblacio,dt_tabaquisme]
-```{r recodificacions1 }
+## 1c. Recodificacions i calculs [Part demografica: dt_poblacio,dt_tabaquisme]
+```{r recodificacionsc }
 
 
 #general
@@ -248,8 +249,8 @@ dt_plana<-dt_plana%>% mutate(situacio2=case_when(situacio=="A"~"1.Activo",
                                               situacio=="T"~"3.Traslado"))
 
 ```
-## 1c. Recodificacions i calculs [Part FARMACS: dt_facturacio,dt_prescripcio]
-```{r recodificacions3}
+## 1d. Recodificacions i calculs [Part FARMACS: dt_facturacio,dt_prescripcio]
+```{r recodificacions1d}
 
 ## FARMACS:: Tractaments##
 
@@ -284,8 +285,8 @@ dt_plana<-dt_plana%>% mutate(situacio2=case_when(situacio=="A"~"1.Activo",
 
 
 ```
-## 1d. Recodificacions i calculs [Part dt_variables: dt_analitiques,dt_cliniques]
-```{r recodificacions4}
+## 1e. Recodificacions i calculs [Part dt_variables: dt_analitiques,dt_cliniques]
+```{r recodificacions1e}
 ###V.Analitiques+V.Cliniques.##
 
 #CANVIAR-HO i arreglar dt_plana!
@@ -331,15 +332,15 @@ dt_plana<-dt_plana%>%mutate(cLDL.valor_CAT=case_when(COLLDL.valor        <70~ "C
                                                      COLLDL.valor        >=130  ~ "COLLDL.valor        >=130"))
 
 ```
-## 1e. Recodificacions i calculs [combinacions:Part Diagnostics+Part FARMACS+Part dt_variables]
-```{r recodificacions5}
+## 1f. Recodificacions i calculs [combinacions:Part Diagnostics+Part FARMACS+Part dt_variables]
+```{r recodificacions1f}
 ## Combinacions ##
 
 #dt_plana<-dt_plana%>%mutate(DG.HTA2=ifelse(DG.HTA==1  | FF.Hipotensores==1 ,1,0)) 
 
 ```
-## 1f. Recodificacions de zeros i uns nous+dates
-```{r recodificacions6}
+## 1g. Recodificacions de zeros i uns nous+dates
+```{r recodificacions1g}
 
 #Etquetem (Si/No)  a partir del Conductor!
 dt_plana<- dt_plana%>% mutate_at(vars(starts_with("DG.")), ~if_else(.==1,"Yes","No",missing = "No")) 
