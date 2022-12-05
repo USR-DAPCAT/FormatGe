@@ -351,7 +351,7 @@ dt_plana<- dt_plana %>% mutate_at(vars(starts_with("FP.")), ~if_else(.==1,"Yes",
 dt_plana<-dt_plana%>% mutate_at(c("dtindex","dnaix","entrada","sortida" ),ymd)
 
 ```
-## 2. Fase Analsis
+## 2. Fase Analisi
 ```{r analisis2}
 
 # important aplicar package compareGroups
