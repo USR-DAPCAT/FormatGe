@@ -33,7 +33,7 @@ knitr::include_graphics(c("logos_css/logo_bio.jpg"))
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, include=TRUE,size="huge")
 
-library(FormatGe)
+
 
 
 gc()
@@ -49,8 +49,6 @@ gc()
 library("dplyr")
 library("lubridate")
 library("compareGroups")
-
-
 library("FormatGe")
 library("ggflowchart2")
 
@@ -343,13 +341,26 @@ dt_plana<-dt_plana%>%mutate(cLDL.valor_CAT=case_when(COLLDL.valor        <70~ "C
 ## 1f. Recodificacions de zeros i uns nous+dates
 ```{r recodificacions6}
 
-dt_plana<-dt_plana%>% mutate_at(c("dnaix","entrada","sortida" ),ymd)
+dades<-dt_plana
+
+#Etquetem (Si/No)  a partir del Conductor!
+dades<- dades%>% mutate_at(vars(starts_with("DG.")), ~if_else(.==1,"Yes","No",missing = "No")) 
+dades<- dades %>% mutate_at(vars(starts_with("EVENT.")), ~if_else(.==1,"Yes","No",missing = "No")) 
+dades<- dades %>% mutate_at(vars(starts_with("FF.")), ~if_else(.==1,"Yes","No",missing = "No")) 
+dades<- dades %>% mutate_at(vars(starts_with("FP.")), ~if_else(.==1,"Yes","No",missing = "No")) 
+
+dades<-dades%>% mutate_at(c("dtindex","dnaix","entrada","sortida" ),ymd)
+
+
+
+dades<-dades%>% mutate_at(c("dnaix","entrada","sortida" ),ymd)
 
 ```
 ## 2. Fase Analsis
 ```{r analisis2}
 
-descrTable(dt_plana)
+
+descrTable(dades)
 
 
 
