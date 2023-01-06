@@ -30,8 +30,9 @@ canvi de noms de les variables escollides
 Canviar noms de variables  de la nostra b.d a prtir d un conductor
 }
 \examples{
-k1<-canvi_noms_variables(dt=dt_plana,variable="taula2",nou_nom="var_nou",conductor=conductor1)
-dt_plana
+k1<-canvi_noms_variables(dt=dt_plana_test,variable="taula2",
+nou_nom="var_nou",conductor=conductor1_test)
+dt_plana_test
 k1
 
 }

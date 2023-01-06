@@ -43,10 +43,10 @@ etiqueta2=c("1.Mujer","2.Hombre","1.Activo","2.Difunto","3.Traslado")
 conductor2<-data.frame(camp,valor,etiqueta1,etiqueta2)
 
 
-table(dt_plana$sexe) 
+table(dt_plana_test$sexe) 
 
 dades_valors_etiquet<-etiquetar_valors(
-dt=dt_plana,
+dt=dt_plana_test,
 variables_factors=conductor2,
 fulla="etiquetes",
 camp_etiqueta="etiqueta1",

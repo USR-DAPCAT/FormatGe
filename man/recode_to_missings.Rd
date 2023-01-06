@@ -30,8 +30,8 @@ Retorna dades amb la recodificacio de missings
 Recodificar rangs de valors que cauen fora de interval es transforman en missings
 }
 \examples{
-conductor1
-dt_plana
-kk<-recode_to_missings(dt=dt_plana,taulavariables=conductor1,rang="rang_valid")
+conductor1_test
+dt_plana_test
+kk<-recode_to_missings(dt=dt_plana_test,taulavariables=conductor1_test,rang="rang_valid")
 kk
 }

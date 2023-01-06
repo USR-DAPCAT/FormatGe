@@ -35,7 +35,7 @@ Etiquetar un vector a partir d'un conductor
 v1<-c("idp","dtindex","sexe","dnaix","situacio","entrada")
 
 v1_etiq<-etiquetar_vector(vector=v1,
-                         taulavariables=conductor1,
+                         taulavariables=conductor1_test,
                          camp="camp",
                          camp_descripcio="descripcio")
 

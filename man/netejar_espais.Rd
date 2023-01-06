@@ -16,8 +16,8 @@ Base de dades elimina espais
 Elimina espais dels noms de les variables
 }
 \examples{
-dt_plana$"  var3  "<-69
-kk<-netejar_espais(dt=dt_plana)
-stats::variable.names(dt_plana)
+dt_plana_test$"  var3  "<-69
+kk<-netejar_espais(dt=dt_plana_test)
+stats::variable.names(dt_plana_test)
 stats::variable.names(kk)
 }

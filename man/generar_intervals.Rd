@@ -31,9 +31,9 @@ Generar intervals a partir d'un conductor i un tall definit
 }
 \examples{
 
-kk<-generar_intervals(dt=dt_plana,
+kk<-generar_intervals(dt=dt_plana_test,
 vars="ajust4",
-taulavariables=conductor1,
+taulavariables=conductor1_test,
 missing="Unkown",
 g=2)
 

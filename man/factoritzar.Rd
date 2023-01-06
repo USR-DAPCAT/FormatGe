@@ -19,8 +19,8 @@ Factoritza una llista de variables donades a la teva base de dades
 }
 \examples{
 
-class(dt_plana$situacio)
-dt_plana2<-factoritzar(dt_plana,variables=c("grup","situacio"))
+class(dt_plana_test$situacio)
+dt_plana2<-factoritzar(dt_plana_test,variables=c("grup","situacio"))
 class(dt_plana2$situacio)
 
 }

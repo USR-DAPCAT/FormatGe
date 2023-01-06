@@ -7,8 +7,8 @@
 #' @importFrom         dplyr "%>%"
 #' @examples
 #' 
-#' class(dt_plana$situacio)
-#' dt_plana2<-factoritzar(dt_plana,variables=c("grup","situacio"))
+#' class(dt_plana_test$situacio)
+#' dt_plana2<-factoritzar(dt_plana_test,variables=c("grup","situacio"))
 #' class(dt_plana2$situacio)
 #' 
 factoritzar<-function(dt="dades",variables=c("grup","situacio")) {
@@ -35,12 +35,12 @@ factoritzar<-function(dt="dades",variables=c("grup","situacio")) {
 #' @export                factoritzar.NO.YES 
 #' @importFrom            dplyr "%>%"
 #' @examples
-#'dt_plana2<-dplyr::mutate_at(dt_plana, dplyr::vars(  dplyr::starts_with("DG.") ),  
+#'dt_plana2<-dplyr::mutate_at(dt_plana_test, dplyr::vars(  dplyr::starts_with("DG.") ),  
 #'dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
 #'dt_plana2<-dplyr::mutate_at(dt_plana2, dplyr::vars(  dplyr::starts_with("INCLUSIO.") ),
 #'dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
 #'dt_plana2
-#'dt_plana2<-factoritzar.NO.YES(dt_plana2,"factor",conductor1)
+#'dt_plana2<-factoritzar.NO.YES(dt_plana2,"factor",conductor1_test)
 #'dt_plana2
 #' 
 factoritzar.NO.YES<-function(dt="dadesDF",columna="factor",taulavariables="variables_FELIPE.xls",...){
@@ -76,12 +76,12 @@ factoritzar.NO.YES<-function(dt="dadesDF",columna="factor",taulavariables="varia
 #' @importFrom                    dplyr "%>%"
 #' @examples
 #' 
-#'dt_plana2<-dplyr::mutate_at(dt_plana, dplyr::vars(  dplyr::starts_with("DG.") ),  
+#'dt_plana2<-dplyr::mutate_at(dt_plana_test, dplyr::vars(  dplyr::starts_with("DG.") ),  
 #'dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
 #'dt_plana2<-dplyr::mutate_at(dt_plana2, dplyr::vars(  dplyr::starts_with("INCLUSIO.") ), 
 #' dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
 #'dt_plana2
-#'dt_plana2<-factoritzar.NO.SI(dt_plana2,"factor",conductor1)
+#'dt_plana2<-factoritzar.NO.SI(dt_plana2,"factor",conductor1_test)
 #'dt_plana2
 #' 
 factoritzar.NO.SI<-function(dt="dadesDF",columna="factor",taulavariables="variables_FELIPE.xls",...){

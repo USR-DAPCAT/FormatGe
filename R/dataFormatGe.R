@@ -51,9 +51,9 @@ data.to.string<-function(data) {
 #' @importFrom          dplyr "%>%"
 #' @examples
 #'
-#'dt_plana
+#'dt_plana_test
 #'x=c("dtindex","dnaix","entrada","sortida", "INCLUSIO.DM2")
-#'dataUTC_to_Rdata(x,dt_plana)
+#'dataUTC_to_Rdata(x,dt_plana_test)
 dataUTC_to_Rdata<-function(x,dt) {
   
   #dt<-dt_plana
@@ -148,8 +148,8 @@ data_convert_UTC<-function(x){
 #'factor=c("","","","","","","",1,1,1,"","","","","",1)
 #'dates=c("","","","","","","","","","","","","","","",1)
 #'conductor<-data.frame(camp,factor,dates)
-#'dt_plana$data2<-"19722207"
-#'K<-convertir_dates(d=dt_plana,taulavariables=conductor,campdata="dates")
+#'dt_plana_test$data2<-"19722207"
+#'K<-convertir_dates(d=dt_plana_test,taulavariables=conductor,campdata="dates")
 #'K
 convertir_dates<-function(d="dt_plana",taulavariables="conductor",campdata="dates")
 

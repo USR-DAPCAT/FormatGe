@@ -16,8 +16,8 @@ Base de dades amb la neteja de noms
 Netejar els noms de les variables ["/","(",")","/"],-> ""  [" ","-"]-> "_" ,..
 }
 \examples{
-dt_plana$"var//"<-1
-kk<-netejar.noms.variables(dt_plana)
-stats::variable.names(dt_plana)
+dt_plana_test$"var//"<-1
+kk<-netejar.noms.variables(dt_plana_test)
+stats::variable.names(dt_plana_test)
 stats::variable.names(kk)
 }

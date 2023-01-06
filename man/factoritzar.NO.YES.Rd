@@ -27,12 +27,12 @@ NO.YES
 A tots aquells valors dummis, el "0"-->"No" i "1"-->"Yes"
 }
 \examples{
-dt_plana2<-dplyr::mutate_at(dt_plana, dplyr::vars(  dplyr::starts_with("DG.") ),  
+dt_plana2<-dplyr::mutate_at(dt_plana_test, dplyr::vars(  dplyr::starts_with("DG.") ),  
 dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
 dt_plana2<-dplyr::mutate_at(dt_plana2, dplyr::vars(  dplyr::starts_with("INCLUSIO.") ),
 dplyr::funs( dplyr::if_else(.==0  | is.na(.)  ,0,1)))
 dt_plana2
-dt_plana2<-factoritzar.NO.YES(dt_plana2,"factor",conductor1)
+dt_plana2<-factoritzar.NO.YES(dt_plana2,"factor",conductor1_test)
 dt_plana2
 
 }

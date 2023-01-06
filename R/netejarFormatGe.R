@@ -5,9 +5,9 @@
 #' @export        netejar.noms.variables
 #' @importFrom    dplyr "%>%"
 #' @examples
-#' dt_plana$"var//"<-1
-#' kk<-netejar.noms.variables(dt_plana)
-#' stats::variable.names(dt_plana)
+#' dt_plana_test$"var//"<-1
+#' kk<-netejar.noms.variables(dt_plana_test)
+#' stats::variable.names(dt_plana_test)
 #' stats::variable.names(kk)
 netejar.noms.variables<-function(dt="hoolywod"){
   
@@ -41,9 +41,9 @@ netejar.noms.variables<-function(dt="hoolywod"){
 #' @export          netejar.accents.variables
 #' @importFrom      dplyr "%>%"
 #' @examples
-#' dt_plana$"sexé2"<-1
-#' kk<-netejar.accents.variables(dt_plana)
-#' stats::variable.names(dt_plana)
+#' dt_plana_test$"sexé2"<-1
+#' kk<-netejar.accents.variables(dt_plana_test)
+#' stats::variable.names(dt_plana_test)
 #' stats::variable.names(kk)
 netejar.accents.variables <- function(dt="LIPOS_EORTEGA"){
   paco<-names(dt) %>%
@@ -60,9 +60,9 @@ netejar.accents.variables <- function(dt="LIPOS_EORTEGA"){
 #' @export         netejar_espais
 #' @importFrom     dplyr "%>%"
 #' @examples
-#' dt_plana$"  var3  "<-69
-#' kk<-netejar_espais(dt=dt_plana)
-#' stats::variable.names(dt_plana)
+#' dt_plana_test$"  var3  "<-69
+#' kk<-netejar_espais(dt=dt_plana_test)
+#' stats::variable.names(dt_plana_test)
 #' stats::variable.names(kk)
 netejar_espais<-function(dt="dades") {
   paco<-names(dt) %>% 
@@ -88,8 +88,9 @@ netejar_espais<-function(dt="dades") {
 #' @importFrom                        dplyr "%>%"
 #' @examples
 
-#'k1<-canvi_noms_variables(dt=dt_plana,variable="taula2",nou_nom="var_nou",conductor=conductor1)
-#'dt_plana
+#'k1<-canvi_noms_variables(dt=dt_plana_test,variable="taula2",
+#'nou_nom="var_nou",conductor=conductor1_test)
+#'dt_plana_test
 #'k1
 #'
 canvi_noms_variables<-function(dt="dt_temp",

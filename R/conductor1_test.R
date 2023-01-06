@@ -13,4 +13,4 @@
 #' \item{taula2}{taula2}
 #' \item{ajust4}{ajust4} 
 #' }
-"conductor1"  
+"conductor1_test"  

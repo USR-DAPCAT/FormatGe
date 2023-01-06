@@ -141,8 +141,8 @@ formula_vector<-function(vector=c("sex","age","age"),y="y",logit=F,eliminar=NA){
 #' @importFrom dplyr "%>%"
 #' @examples
 
-#'k<-selectorvariables(taula="taula1",taulavariables=conductor1,dt=dt_plana)
-#'dt_plana               
+#'k<-selectorvariables(taula="taula1",taulavariables=conductor1_test,dt=dt_plana_test)
+#'dt_plana_test               
 #'k
 selectorvariables<-function(taula="table1",
                             taulavariables="variables_R.xls",
@@ -181,8 +181,9 @@ selectorvariables<-function(taula="table1",
 #' @importFrom                  dplyr "%>%"
 #' @examples
 #' 
-#'k1<-extreure.variables(taula="taula1",taulavariables=conductor1,variable_camp="camp",dt=NA)
-#'k2<-extreure.variables(taula="taula1",taulavariables=conductor1,variable_camp="camp",dt=dt_plana)               
+#'k1<-extreure.variables(taula="taula1",taulavariables=conductor1_test,variable_camp="camp",dt=NA)
+#'k2<-extreure.variables(taula="taula1",taulavariables=conductor1_test,variable_camp="camp",
+#'dt=dt_plana_test)               
 #'k1
 #'k2
 #'

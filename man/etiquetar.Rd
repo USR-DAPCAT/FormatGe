@@ -27,7 +27,7 @@ Etiquetar
 Etiquetar les variables de les dades a partir d'un conductor.
 }
 \examples{
-dades_etiquet<-etiquetar(dt_plana,conductor1, "descripcio")
-Hmisc::label(dt_plana)
+dades_etiquet<-etiquetar(dt_plana_test,conductor1_test, "descripcio")
+Hmisc::label(dt_plana_test)
 Hmisc::label(dades_etiquet)
 }

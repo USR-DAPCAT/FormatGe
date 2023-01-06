@@ -19,7 +19,7 @@ Data R Lubridate a partir de data UTC
 }
 \examples{
 
-dt_plana
+dt_plana_test
 x=c("dtindex","dnaix","entrada","sortida", "INCLUSIO.DM2")
-dataUTC_to_Rdata(x,dt_plana)
+dataUTC_to_Rdata(x,dt_plana_test)
 }

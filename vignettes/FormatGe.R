@@ -1,22 +1,10 @@
----
-title: "The FormatGe Package"
-author: "Ray Puig & Jordi Real"
-output:  rmarkdown::html_vignette
-date: '2022-12-05'
-vignette: >
-  %\VignetteIndexEntry{FormatGe}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r, include = FALSE}
+## ---- include = FALSE---------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-```
 
-```{r fig_caption,include = TRUE,fig.show = "hold",out.width="30%",fig.align = 'center',echo=FALSE}
+## ----fig_caption,include = TRUE,fig.show = "hold",out.width="30%",fig.align = 'center',echo=FALSE----
 
 knitr::include_graphics(c("logos_css/logo_bio.jpg"))
 
@@ -26,11 +14,8 @@ knitr::include_graphics(c("logos_css/logo_bio.jpg"))
 #knitr::include_graphics("https://discourse-cdn-sjc1.com/business4/uploads/default/original/2X/5/521809ca3e81d798ffa7af902a4e06a9b9f27d39.jpeg")
 
 
-```
 
-## Fase Preparacio
-
-```{r setup, include = FALSE}
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, include=TRUE,size="huge")
 
 gc()
@@ -49,9 +34,8 @@ library("compareGroups")
 library("FormatGe")
 #library("ggflowchart2")
 
-```
-## 1a. Recodificaciones  de Na a dummies
-```{r recodificacions1a }
+
+## ----recodificacions1a--------------------------------------------------------
 dt_plana<-Taula_plana_test2
 
 #########################################################################################
@@ -183,10 +167,8 @@ dt_plana<-Taula_plana_test2
 #########################################################################################
 
 
-```
 
-## 1b. Recodificaciones  de Na a dummies
-```{r recodificacions1b }
+## ----recodificacions1b--------------------------------------------------------
 
 # Convertim les variables categòriques  Na o 0 --> 0, la resta 1  !!!!! ( no hi haurà missings!!)
 
@@ -198,9 +180,8 @@ dt_plana<-mutate_at(dt_plana, vars( starts_with("EVENT.") ), funs( if_else(.==0 
 dt_plana<-mutate_at(dt_plana, vars( starts_with("FF.") ), funs( if_else(.==0  | is.na(.)  ,0,1)))
 dt_plana<-mutate_at(dt_plana, vars( starts_with("FP.") ), funs( if_else(.==0  | is.na(.)  ,0,1)))
 
-```
-## 1c. Recodificacions i calculs [Part demografica: dt_poblacio,dt_tabaquisme]
-```{r recodificacionsc }
+
+## ----recodificacionsc---------------------------------------------------------
 
 
 #general
@@ -248,9 +229,8 @@ dt_plana<-dt_plana%>% mutate(situacio2=case_when(situacio=="A"~"1.Activo",
                                               situacio=="D"~"2.Difunto",
                                               situacio=="T"~"3.Traslado"))
 
-```
-## 1d. Recodificacions i calculs [Part FARMACS: dt_facturacio,dt_prescripcio]
-```{r recodificacions1d}
+
+## ----recodificacions1d--------------------------------------------------------
 
 ## FARMACS:: Tractaments##
 
@@ -284,9 +264,8 @@ dt_plana<-dt_plana%>% mutate(situacio2=case_when(situacio=="A"~"1.Activo",
 #2.     ii)    INSULINAS
 
 
-```
-## 1e. Recodificacions i calculs [Part dt_variables: dt_analitiques,dt_cliniques]
-```{r recodificacions1e}
+
+## ----recodificacions1e--------------------------------------------------------
 ###V.Analitiques+V.Cliniques.##
 
 #CANVIAR-HO i arreglar dt_plana!
@@ -331,16 +310,14 @@ dt_plana<-dt_plana%>%mutate(cLDL.valor_CAT=case_when(COLLDL.valor        <70~ "C
                                                      COLLDL.valor      <130",  
                                                      COLLDL.valor        >=130  ~ "COLLDL.valor        >=130"))
 
-```
-## 1f. Recodificacions i calculs [combinacions:Part Diagnostics+Part FARMACS+Part dt_variables]
-```{r recodificacions1f}
+
+## ----recodificacions1f--------------------------------------------------------
 ## Combinacions ##
 
 #dt_plana<-dt_plana%>%mutate(DG.HTA2=ifelse(DG.HTA==1  | FF.Hipotensores==1 ,1,0)) 
 
-```
-## 1g. Recodificacions de zeros i uns nous+dates
-```{r recodificacions1g}
+
+## ----recodificacions1g--------------------------------------------------------
 
 #Etquetem (Si/No)  a partir del Conductor!
 dt_plana<- dt_plana%>% mutate_at(vars(starts_with("DG.")), ~if_else(.==1,"Yes","No",missing = "No")) 
@@ -351,9 +328,8 @@ dt_plana<- dt_plana %>% mutate_at(vars(starts_with("FP.")), ~if_else(.==1,"Yes",
 #Dates
 dt_plana<-dt_plana%>% mutate_at(c("dtindex","dnaix","entrada","sortida" ),ymd)
 
-```
-## 2. Fase Analisi
-```{r analisis2}
+
+## ----analisis2----------------------------------------------------------------
 
 # important aplicar package compareGroups
 
@@ -362,14 +338,9 @@ compareGroups::descrTable(dt_plana)
 
 
 
-```
 
-## 3. Salvar tabla plana
-
-```{r salvar}
+## ----salvar-------------------------------------------------------------------
 
 #saveRDS(dt_plana, file=here::here(params$dir_dades_desti,"dt_plana2.rds"))
-
-```
 
 

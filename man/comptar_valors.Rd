@@ -24,6 +24,6 @@ Retorna valors
 Comptar un valor concret d un conjunt de variables de la nostra B.D
 }
 \examples{
-Comptar_D<-comptar_valors(dt_plana,variables=c("DG.HTA","DG.IC","GLICADA.valor"),valor="NA")
+Comptar_D<-comptar_valors(dt_plana_test,variables=c("DG.HTA","DG.IC","GLICADA.valor"),valor="NA")
 Comptar_D
 }

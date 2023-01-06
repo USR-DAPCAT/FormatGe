@@ -16,8 +16,8 @@ Base de dades  sense accents
 Elimina accents dels noms de les variables
 }
 \examples{
-dt_plana$"sexé2"<-1
-kk<-netejar.accents.variables(dt_plana)
-stats::variable.names(dt_plana)
+dt_plana_test$"sexé2"<-1
+kk<-netejar.accents.variables(dt_plana_test)
+stats::variable.names(dt_plana_test)
 stats::variable.names(kk)
 }

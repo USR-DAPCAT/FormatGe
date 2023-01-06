@@ -18,6 +18,6 @@ Retorna missings
 Recodificar  missings_to_level
 }
 \examples{
-k1<-missings_to_level(dt_plana,variable="DG.HTA")
+k1<-missings_to_level(dt_plana_test,variable="DG.HTA")
 k1
 }

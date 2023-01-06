@@ -8,8 +8,8 @@
 #' @export                etiquetar
 #' @importFrom            dplyr "%>%"
 #' @examples
-#' dades_etiquet<-etiquetar(dt_plana,conductor1, "descripcio")
-#' Hmisc::label(dt_plana)
+#' dades_etiquet<-etiquetar(dt_plana_test,conductor1_test, "descripcio")
+#' Hmisc::label(dt_plana_test)
 #' Hmisc::label(dades_etiquet)
 
 etiquetar<-function(d="dadestotal",
@@ -70,10 +70,10 @@ etiquetar<-function(d="dadestotal",
 #' conductor2<-data.frame(camp,valor,etiqueta1,etiqueta2)
 #'
 #' 
-#'table(dt_plana$sexe) 
+#'table(dt_plana_test$sexe) 
 #'
 #'dades_valors_etiquet<-etiquetar_valors(
-#'dt=dt_plana,
+#'dt=dt_plana_test,
 #'variables_factors=conductor2,
 #'fulla="etiquetes",
 #'camp_etiqueta="etiqueta1",
@@ -226,7 +226,7 @@ etiquetar_taula<-function(taula="resumtotal",
 #'v1<-c("idp","dtindex","sexe","dnaix","situacio","entrada")
 #'
 #'v1_etiq<-etiquetar_vector(vector=v1,
-#'                          taulavariables=conductor1,
+#'                          taulavariables=conductor1_test,
 #'                          camp="camp",
 #'                          camp_descripcio="descripcio")
 #'

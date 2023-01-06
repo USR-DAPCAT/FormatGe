@@ -33,8 +33,8 @@ Retorna les dades amb la recodificacio
 Recodificar les variabñes que escollim a partir del parametre "criteris"
 }
 \examples{
-k<-recodificar(dt=dt_plana, 
-              taulavariables=conductor1,
+k<-recodificar(dt=dt_plana_test, 
+              taulavariables=conductor1_test,
               criteris="recode",
               missings=FALSE,
               prefix="_recode_")

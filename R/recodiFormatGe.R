@@ -10,8 +10,8 @@
 #' @export                      recodificar
 #' @importFrom                  dplyr "%>%"
 #' @examples
-#'k<-recodificar(dt=dt_plana, 
-#'               taulavariables=conductor1,
+#'k<-recodificar(dt=dt_plana_test, 
+#'               taulavariables=conductor1_test,
 #'               criteris="recode",
 #'               missings=FALSE,
 #'               prefix="_recode_")
@@ -114,9 +114,9 @@ recodificar<-function(dt="dades",
 #' @export                      recode_to_missings
 #' @importFrom                  dplyr "%>%"
 #' @examples
-#'conductor1
-#'dt_plana
-#'kk<-recode_to_missings(dt=dt_plana,taulavariables=conductor1,rang="rang_valid")
+#'conductor1_test
+#'dt_plana_test
+#'kk<-recode_to_missings(dt=dt_plana_test,taulavariables=conductor1_test,rang="rang_valid")
 #'kk
 recode_to_missings<-function(dt="dades",
                              taulavariables="conductor_variables",
@@ -196,7 +196,7 @@ recode_to_missings<-function(dt="dades",
 #' @importFrom            dplyr "%>%"
 #' @examples
 #' 
-#' sexe_dummis<-make_dummies(dt_plana,"sexe",prefix="pref.")
+#' sexe_dummis<-make_dummies(dt_plana_test,"sexe",prefix="pref.")
 #' sexe_dummis
 #' 
 make_dummies <- function(dt,variable, prefix=" ") {
@@ -224,7 +224,7 @@ make_dummies <- function(dt,variable, prefix=" ") {
 #' @export                   comptar_valors
 #' @importFrom               dplyr "%>%"
 #' @examples
-#' Comptar_D<-comptar_valors(dt_plana,variables=c("DG.HTA","DG.IC","GLICADA.valor"),valor="NA")
+#' Comptar_D<-comptar_valors(dt_plana_test,variables=c("DG.HTA","DG.IC","GLICADA.valor"),valor="NA")
 #' Comptar_D
 comptar_valors<-function(dt="dadesevents",variables=c("EV.TER.ARTER_PERIF","EV.TER.AVC"),valor="Yes"){
   
@@ -252,7 +252,7 @@ comptar_valors<-function(dt="dadesevents",variables=c("EV.TER.ARTER_PERIF","EV.T
 #' @export                     missings_to_level
 #' @importFrom                 dplyr "%>%"
 #' @examples
-#' k1<-missings_to_level(dt_plana,variable="DG.HTA")
+#' k1<-missings_to_level(dt_plana_test,variable="DG.HTA")
 #' k1
 missings_to_level<-function(dades,variable="popes") {
   
@@ -291,9 +291,9 @@ missings_to_level<-function(dades,variable="popes") {
 #' @examples
 
 #'
-#'kk<-generar_intervals(dt=dt_plana,
+#'kk<-generar_intervals(dt=dt_plana_test,
 #'vars="ajust4",
-#'taulavariables=conductor1,
+#'taulavariables=conductor1_test,
 #'missing="Unkown",
 #'g=2)
 #'

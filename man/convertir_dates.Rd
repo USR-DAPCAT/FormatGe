@@ -30,7 +30,7 @@ camp=c("idp","dtindex","sexe","dnaix","situacio","entrada",
 factor=c("","","","","","","",1,1,1,"","","","","",1)
 dates=c("","","","","","","","","","","","","","","",1)
 conductor<-data.frame(camp,factor,dates)
-dt_plana$data2<-"19722207"
-K<-convertir_dates(d=dt_plana,taulavariables=conductor,campdata="dates")
+dt_plana_test$data2<-"19722207"
+K<-convertir_dates(d=dt_plana_test,taulavariables=conductor,campdata="dates")
 K
 }
