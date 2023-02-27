@@ -38,7 +38,7 @@ formula_text<-function(x="taula1",y="resposta",eliminar=c("IDP"), a="",taulavari
   pepito<-paste("as.vector(variables[variables$",x,">0,]$camp)[!as.vector(variables[variables$",x,">0,]$camp)%in%eliminar]",sep="")
   
   llistataula<-eval(parse(text=pepito))
-  if (a!="") llistataula<-c(a,llistataula,a)
+  llistataula<-c(a,llistataula) %>% unique()
   
   y<-paste(y, paste(llistataula, collapse=" + "), sep=" ~ ")
   
