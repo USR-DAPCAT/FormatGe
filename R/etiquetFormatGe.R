@@ -305,7 +305,9 @@ generar_dt_conductor_labels<-
     vect_seleccio <- dt_select_choices %>% dplyr::pull(!!dplyr::sym(text_opcions))
     # Generar dt_frame amb opcions
     pp<-vect_seleccio %>% stringr::str_split(paste0("\\","|")) %>% unlist() 
-    dt_choices<-read.table(text=pp,sep = ",", col.names = c("valor", "etiqueta"), strip.white = TRUE, stringsAsFactors = FALSE)
+    
+    pp_mod<-sub(",", "|", pp)
+    dt_choices<-read.table(text=pp_mod,sep = "|", col.names = c("valor", "etiqueta"), strip.white = TRUE, stringsAsFactors = FALSE)
     dt_choices<-dt_choices %>% dplyr::mutate(camp=chart_camp)
     return(dt_choices)}
 
