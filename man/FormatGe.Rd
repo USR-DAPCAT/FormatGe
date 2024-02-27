@@ -2,6 +2,7 @@
 % Please edit documentation in R/FormatGe.R
 \docType{package}
 \name{FormatGe}
+\alias{FormatGe-package}
 \alias{FormatGe}
 \title{FormatGe Package}
 \description{

@@ -285,16 +285,14 @@ llistaNomenada <- function(...) {
 #' @param chart_camp        Camp
 #' @param path_conductor    Conductor
 #' @param text_opcions      de la columna referent al text on hi ha valors i etiquetes
-#' @param text_opcions      Descripcio del camp
 #' @param sep               Separador ("|")
 #' @param ...               altres funcions exemple fulla del conductor
 #' @return                 tibble
 #' @export                 generar_dt_conductor_labels
 #' @importFrom             dplyr "%>%"
-#' @examples
 
 generar_dt_conductor_labels<-
-  function(chart_camp="rb_grupo", path_conductor=path_conductor,text_opcions="select_choices_or_calculations",sep="|",...){
+  function(chart_camp="rb_grupo", path_conductor,text_opcions="select_choices_or_calculations",sep="|",...){
     
     # x="rb_grupo"
     # sep="|"
@@ -303,35 +301,32 @@ generar_dt_conductor_labels<-
     
     dt_conductor<-read_conductor(path_conductor)
     
-    dt_select_choices<-dt_conductor %>% filter(camp==chart_camp) %>% select(!!text_opcions) %>% filter(row_number()==1) 
-    vect_seleccio <- dt_select_choices %>% pull(select_choices_or_calculations)
+    dt_select_choices<-dt_conductor %>% dplyr::filter(camp==chart_camp) %>% dplyr::select(!!text_opcions) %>% dplyr::filter(dplyr::row_number()==1) 
+    vect_seleccio <- dt_select_choices %>% dplyr::pull(!!dplyr::sym(text_opcions))
     # Generar dt_frame amb opcions
     pp<-vect_seleccio %>% stringr::str_split(paste0("\\","|")) %>% unlist() 
     dt_choices<-read.table(text=pp,sep = ",", col.names = c("valor", "etiqueta"), strip.white = TRUE, stringsAsFactors = FALSE)
-    dt_choices<-dt_choices %>% mutate(camp=chart_camp)
+    dt_choices<-dt_choices %>% dplyr::mutate(camp=chart_camp)
     return(dt_choices)}
 
 
 #' @title                  Etiquetar valors de camps dun data frame
-#' @description            Donat conductor amb etiquetes amb patró (amb un separador entre valor i etiqueta: 
-#'  Ex "valor1, etiqueta1 | valor2, etiqueta 2) retorna tibble camps recodificats (valor, etiqueta) corresponent a info separada per un caracter sep ("|")
+#' @description            Donat conductor amb patró (valor i etiqueta:  Ex "valor1, etiqueta1 | valor2, etiqueta 2) retorna tibble camps recodificats (valor, etiqueta) corresponent a info separada per un caracter sep ("|")
 #' @param dt                Data frame 
 #' @param taulavariables    Conductor
 #' @param text_opcions      de la columna referent al text on hi ha valors i etiquetes
-#' @param text_opcions      Descripcio del camp
 #' @param sep               Separador ("|")
 #' @param ...              altres funcions exemple fulla del conductor
 #' @return                 tibble
 #' @export                 etiquetar_valors_patro
-#' @importFrom             dplyr "%>%" purrr
-#' @examples
+#' @importFrom             dplyr "%>%"
 
 
 # Donat un conductor que hi hagi determinat patro amb un separador entre valor i etiqueta: 
 # Ex "valor1, etiqueta1 | valor2, etiqueta 2 ....| valor_i etiqueta_i
 
-etiquetar_valors_patro<-function(dt=dt_temp,
-                                 taulavariables=path_conductor,
+etiquetar_valors_patro<-function(dt,
+                                 taulavariables,
                                  text_opcions="select_choices_or_calculations",
                                  sep="|", ...) 
 {
@@ -341,7 +336,7 @@ etiquetar_valors_patro<-function(dt=dt_temp,
   # sep="|"
   
   # obro conductor
-  dt_conductor<-read_conductor(taulavariables,...) %>% distinct(camp,!!sym(text_opcions)) %>% na.omit()
+  dt_conductor<-read_conductor(taulavariables,...) %>% dplyr::distinct(camp,!!dplyr::sym(text_opcions)) %>% stats::na.omit()
   # dt_conductor<-read_conductor(path_conductor,sheet="value_labels") %>% distinct(camp,!!sym(text_opcions)) %>% na.omit()
   
   # Elimino camps que no existeixen en dades
@@ -361,6 +356,7 @@ etiquetar_valors_patro<-function(dt=dt_temp,
   dt
   
 }
+
 
 
 
